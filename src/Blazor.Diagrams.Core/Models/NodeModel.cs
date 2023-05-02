@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Blazor.Diagrams.Core.Models
 {
-    public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
+    public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable, IResizable
     {
         private readonly List<PortModel> _ports = new();
         private readonly List<BaseLinkModel> _links = new();
@@ -42,6 +42,8 @@ namespace Blazor.Diagrams.Core.Models
         public IReadOnlyList<PortModel> Ports => _ports;
         public IReadOnlyList<BaseLinkModel> Links => _links;
         public IEnumerable<BaseLinkModel> PortLinks => Ports.SelectMany(p => p.Links);
+
+        public bool ResizingEnabled { get; set; } = false;
 
         #region Ports
 

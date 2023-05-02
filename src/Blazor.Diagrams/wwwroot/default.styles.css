@@ -127,4 +127,13 @@ g.group.default.selected > rect {
     transform: translate(-50%, -50%);
 }
 
+default-resizer {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: pink;
+    border: 3px solid green;
+    position: absolute;
+}
+
 /*# sourceMappingURL=wwwroot\default.styles.css.map */

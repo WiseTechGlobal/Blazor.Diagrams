@@ -93,4 +93,34 @@ div.control {
     cursor: pointer;
 }
 
+.resizers {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.resizers .top-left {
+    left: -5px;
+    top: -5px;
+    cursor: nwse-resize;
+}
+
+.resizers .top-right {
+    right: -5px;
+    top: -5px;
+    cursor: nesw-resize;
+}
+
+.resizers .bottom-left {
+    left: -5px;
+    bottom: -5px;
+    cursor: nesw-resize;
+}
+
+.resizers .bottom-right {
+    right: -5px;
+    bottom: -5px;
+    cursor: nwse-resize;
+}
+
 /*# sourceMappingURL=wwwroot\style.css.map */
