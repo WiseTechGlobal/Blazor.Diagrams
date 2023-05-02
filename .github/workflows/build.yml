@@ -7,7 +7,12 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build - ${{ matrix.configuration }}
+  
+    strategy:
+      matrix:
+        configuration: [ Debug, Release ]
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +25,10 @@ jobs:
           9
     - name: Install dependencies
       run: dotnet restore
+
     - name: Build
-      run: dotnet build
-    - name: Test with the dotnet CLI
-      run: dotnet test
+      run: dotnet build --configuration ${{ matrix.configuration }}
+
+    - name: Test
+      if: matrix.configuration == 'Debug'
+      run: dotnet test --no-build
