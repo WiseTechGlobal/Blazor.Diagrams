@@ -127,12 +127,12 @@ g.group.default.selected > rect {
     transform: translate(-50%, -50%);
 }
 
-default-resizer {
+.default-resizer {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: pink;
-    border: 3px solid green;
+    background-color: #f5f5f5;
+    border: 1px solid #6e9fd4;
     position: absolute;
 }
 
