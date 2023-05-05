@@ -13,10 +13,7 @@ internal interface IResizable
     public double OriginalWidth { get; set; }
     public double OriginalHeight { get; set; }
 
-    public double CurrentWidth { get; set; }
-    public double CurrentHeight { get; set; }
     public Size MinimumDimensions { get; set; }
-
 }
 
 public enum ResizerPosition

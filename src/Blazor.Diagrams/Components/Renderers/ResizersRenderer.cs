@@ -20,8 +20,7 @@ public class ResizersRenderer : ComponentBase, IDisposable
 
     [CascadingParameter] public BlazorDiagram BlazorDiagram { get; set; } = null!;
     [Parameter] public NodeModel Node { get; set; } = null!;
-    [Parameter] public Size ResizableSize { get; set; }
-    [Parameter] public string? ResizerClass { get; set; } = "default-resizer";
+    [Parameter] public string ResizerClass { get; set; } = "default-resizer";
     string ResizersClass = "resizers";
 
     [Parameter] public Action<Size>? OnSizeChange { get; set; }
