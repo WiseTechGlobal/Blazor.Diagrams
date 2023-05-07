@@ -177,5 +177,113 @@ namespace Blazor.Diagrams.Tests.Components.Renderers
             node.Size.Width.Should().Be(110);
             node.Size.Height.Should().Be(215);
         }
+
+        [Fact]
+        public void ShouldStopResizingSmallerThanMinimumSize()
+        {
+            // setup
+            using var ctx = new TestContext();
+            var node = new NodeModel();
+            node.ResizingEnabled = true;
+            node.Selected = true;
+            node.Size = new Size(100, 200);
+            var diagram = new BlazorDiagram();
+
+            // before resize
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(100);
+            node.Size.Height.Should().Be(200);
+
+            // resize
+            var component = ctx.RenderComponent<ResizersRenderer>(parameters => parameters
+                .Add(n => n.Node, node)
+                .Add(n => n.ResizerClass, "my-resizer")
+                .Add(n => n.BlazorDiagram, diagram));
+            var resizer = component.Find(".top-left");
+            resizer.PointerDown();
+            var eventArgs = new PointerEventArgs(300, 300, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            diagram.TriggerPointerMove(null, eventArgs);
+
+            // after resize
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(node.MinimumDimensions.Width);
+            node.Size.Height.Should().Be(node.MinimumDimensions.Height);
+        }
+
+        [Fact]
+        public void NodeShouldNotResizeByDefault()
+        {
+            // setup
+            using var ctx = new TestContext();
+            var node = new NodeModel();
+            node.Selected = true;
+            node.Size = new Size(100, 200);
+            var diagram = new BlazorDiagram();
+
+            // before 'resize'
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(100);
+            node.Size.Height.Should().Be(200);
+            
+            // 'resize'
+            var component = ctx.RenderComponent<ResizersRenderer>(parameters => parameters
+                .Add(n => n.Node, node)
+                .Add(n => n.ResizerClass, "my-resizer")
+                .Add(n => n.BlazorDiagram, diagram));
+            var resizer = component.Find(".top-left");
+            resizer.PointerDown();
+            var eventArgs = new PointerEventArgs(10, 15, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            diagram.TriggerPointerMove(null, eventArgs);
+
+            // no change after 'resize'
+            node.ResizingEnabled.Should().BeFalse();
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(100);
+            node.Size.Height.Should().Be(200);
+        }
+
+        [Fact]
+        public void ShouldStopResizeOnPointerUp()
+        {
+            // setup
+            using var ctx = new TestContext();
+            var node = new NodeModel();
+            node.ResizingEnabled = true;
+            node.Selected = true;
+            node.Size = new Size(100, 200);
+            var diagram = new BlazorDiagram();
+
+            // resize
+            var component = ctx.RenderComponent<ResizersRenderer>(parameters => parameters
+                .Add(n => n.Node, node)
+                .Add(n => n.ResizerClass, "my-resizer")
+                .Add(n => n.BlazorDiagram, diagram));
+            var resizer = component.Find(".top-left");
+            resizer.PointerDown();
+            var eventArgs = new PointerEventArgs(10, 15, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            diagram.TriggerPointerMove(null, eventArgs);
+
+            // after resize
+            node.Position.X.Should().Be(10);
+            node.Position.Y.Should().Be(15);
+            node.Size.Width.Should().Be(90);
+            node.Size.Height.Should().Be(185);
+
+            diagram.TriggerPointerUp(null, eventArgs);
+
+            // mouve pointer after pointer up
+            eventArgs = new PointerEventArgs(30, 50, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            diagram.TriggerPointerMove(null, eventArgs);
+
+            // should be no change
+            node.Position.X.Should().Be(10);
+            node.Position.Y.Should().Be(15);
+            node.Size.Width.Should().Be(90);
+            node.Size.Height.Should().Be(185);
+        }
     }
 }
