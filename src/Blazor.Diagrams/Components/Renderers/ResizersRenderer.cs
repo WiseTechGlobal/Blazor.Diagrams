@@ -25,8 +25,22 @@ public class ResizersRenderer : ComponentBase, IDisposable
 
     [Parameter] public Action<Size>? OnSizeChange { get; set; }
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Node.SelectionChanged += OnSelectionChanged;
+    }
+
+    void OnSelectionChanged(SelectableModel m)
+    {
+        _shouldRender = true;
+        StateHasChanged();
+    }
+
     public void Dispose()
     {
+        Node.SelectionChanged -= OnSelectionChanged;
     }
 
     protected override bool ShouldRender()
@@ -45,6 +59,10 @@ public class ResizersRenderer : ComponentBase, IDisposable
 
         builder.OpenElement(0, "div");
         builder.AddAttribute(1, "class", ResizersClass);
+        if (!Node.Selected)
+        {
+            builder.AddAttribute(2, "style", "visibility: hidden;");
+        }
 
         builder.OpenElement(0, "div");
         builder.AddAttribute(1, "class", $"top-left {ResizerClass}");
