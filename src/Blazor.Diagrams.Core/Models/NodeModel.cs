@@ -46,8 +46,8 @@ namespace Blazor.Diagrams.Core.Models
         public bool ResizingEnabled { get; set; } = false;
         public bool OnlyResizeWhenSelected { get; set; } = true;
         public ResizerPosition CurrentResizer { get; set; }
-        public Point OriginalPosition { get; set; }
-        public Point OriginalMousePosition { get; set; }
+        public Point OriginalPosition { get; set; } = new Point(0, 0);
+        public Point OriginalMousePosition { get; set; } = new Point(0,0);
         public double OriginalWidth { get; set; }
         public double OriginalHeight { get; set; }
         public Size MinimumDimensions { get; set; } = new Size(20,20);

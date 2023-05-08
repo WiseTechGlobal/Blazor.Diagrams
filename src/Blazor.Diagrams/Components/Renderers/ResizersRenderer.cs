@@ -64,28 +64,28 @@ public class ResizersRenderer : ComponentBase, IDisposable
             builder.AddAttribute(2, "style", "visibility: hidden;");
         }
 
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", $"top-left {ResizerClass}");
-        builder.AddAttribute(2, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.TopLeft, args)));
-        builder.AddEventStopPropagationAttribute(3, "onpointerdown", true);
+        builder.OpenElement(3, "div");
+        builder.AddAttribute(4, "class", $"top-left {ResizerClass}");
+        builder.AddAttribute(5, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.TopLeft, args)));
+        builder.AddEventStopPropagationAttribute(6, "onpointerdown", true);
         builder.CloseElement();
 
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", $"top-right {ResizerClass}");
-        builder.AddAttribute(2, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.TopRight, args)));
-        builder.AddEventStopPropagationAttribute(3, "onpointerdown", true);
+        builder.OpenElement(7, "div");
+        builder.AddAttribute(8, "class", $"top-right {ResizerClass}");
+        builder.AddAttribute(9, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.TopRight, args)));
+        builder.AddEventStopPropagationAttribute(10, "onpointerdown", true);
         builder.CloseElement();
 
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", $"bottom-left {ResizerClass}");
-        builder.AddAttribute(2, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.BottomLeft, args)));
-        builder.AddEventStopPropagationAttribute(3, "onpointerdown", true);
+        builder.OpenElement(11, "div");
+        builder.AddAttribute(12, "class", $"bottom-left {ResizerClass}");
+        builder.AddAttribute(13, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.BottomLeft, args)));
+        builder.AddEventStopPropagationAttribute(14, "onpointerdown", true);
         builder.CloseElement();
 
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", $"bottom-right {ResizerClass}");
-        builder.AddAttribute(2, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.BottomRight, args)));
-        builder.AddEventStopPropagationAttribute(3, "onpointerdown", true);
+        builder.OpenElement(15, "div");
+        builder.AddAttribute(16, "class", $"bottom-right {ResizerClass}");
+        builder.AddAttribute(17, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, (args) => OnPointerDown(ResizerPosition.BottomRight, args)));
+        builder.AddEventStopPropagationAttribute(18, "onpointerdown", true);
         builder.CloseElement();
 
         builder.CloseElement();
