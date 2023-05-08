@@ -215,35 +215,19 @@ namespace Blazor.Diagrams.Tests.Components.Renderers
         [Fact]
         public void NodeShouldNotResizeByDefault()
         {
-            // setup
             using var ctx = new TestContext();
             var node = new NodeModel();
             node.Selected = true;
             node.Size = new Size(100, 200);
             var diagram = new BlazorDiagram();
 
-            // before 'resize'
-            node.Position.X.Should().Be(0);
-            node.Position.Y.Should().Be(0);
-            node.Size.Width.Should().Be(100);
-            node.Size.Height.Should().Be(200);
-            
-            // 'resize'
             var component = ctx.RenderComponent<ResizersRenderer>(parameters => parameters
                 .Add(n => n.Node, node)
                 .Add(n => n.ResizerClass, "my-resizer")
                 .Add(n => n.BlazorDiagram, diagram));
-            var resizer = component.Find(".top-left");
-            resizer.PointerDown();
-            var eventArgs = new PointerEventArgs(10, 15, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
-            diagram.TriggerPointerMove(null, eventArgs);
 
-            // no change after 'resize'
-            node.ResizingEnabled.Should().BeFalse();
-            node.Position.X.Should().Be(0);
-            node.Position.Y.Should().Be(0);
-            node.Size.Width.Should().Be(100);
-            node.Size.Height.Should().Be(200);
+            // can't resize if there are no resizers
+            component.FindAll(".my-resizer").Count.Should().Be(0);
         }
 
         [Fact]

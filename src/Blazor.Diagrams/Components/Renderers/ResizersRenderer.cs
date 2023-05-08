@@ -93,7 +93,6 @@ public class ResizersRenderer : ComponentBase, IDisposable
 
     private void OnPointerDown(ResizerPosition resizerPosition, PointerEventArgs e)
     {
-        Node.IsCurrentlyResizing = true;
         Node.CurrentResizer = resizerPosition;
         Node.OriginalPosition = new Point(Node.Position.X, Node.Position.Y);
         Node.OriginalMousePosition = new Point(e.ClientX, e.ClientY);
