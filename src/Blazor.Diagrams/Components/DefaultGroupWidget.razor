@@ -3,8 +3,28 @@
     [Parameter]
     public GroupModel Group { get; set; } = null!;
 
+    string Style = String.Empty;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Group.Size != null)
+        {
+            Style = GenerateStyle(Group.Size.Width, Group.Size.Height);
+        }
+    }
+
+    private void OnSizeChange(Size size)
+    {
+        Style = GenerateStyle(size.Width, size.Height);
+    }
+
+    private static string GenerateStyle(double width, double height)
+    {
+        return FormattableString.Invariant($"width: {width}px; height: {height}px");
+    }
 }
 
+<ResizersRenderer Node=Group OnSizeChange=OnSizeChange></ResizersRenderer>
 <GroupNodes Group="Group"/>
 
 @foreach (var port in Group.Ports)

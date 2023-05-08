@@ -121,6 +121,29 @@ namespace Blazor.Diagrams.Core.Models
 
             var bounds = Children.GetBounds();
 
+            var width = bounds.Width + Padding * 2;
+            var height = bounds.Height + Padding * 2;
+
+            MinimumDimensions = new Size(width, height);
+
+            if (Size?.Width > MinimumDimensions.Width)
+            {
+                width = Size.Width;
+            }
+            if (Size?.Height > MinimumDimensions.Height)
+            {
+                height = Size.Height;
+            }
+
+            if (ResizingEnabled)
+            {
+                Size = new Size(width, height);
+            }
+            else
+            {
+                Size = MinimumDimensions;
+            }
+
             var newPosition = new Point(bounds.Left - Padding, bounds.Top - Padding);
             if (!Position.Equals(newPosition))
             {
@@ -128,7 +151,6 @@ namespace Blazor.Diagrams.Core.Models
                 TriggerMoving();
             }
 
-            Size = new Size(bounds.Width + Padding * 2, bounds.Height + Padding * 2);
             return true;
         }
     }
