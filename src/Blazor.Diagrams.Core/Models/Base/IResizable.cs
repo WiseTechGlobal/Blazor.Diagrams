@@ -5,6 +5,7 @@ namespace Blazor.Diagrams.Core.Models.Base;
 internal interface IResizable
 {
     public bool ResizingEnabled { get; set; }
+    public bool OnlyResizeWhenSelected { get; set; }
     public ResizerPosition CurrentResizer { get; set; }
 
     public Point OriginalPosition { get; set; }

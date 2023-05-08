@@ -44,6 +44,7 @@ namespace Blazor.Diagrams.Core.Models
         public IEnumerable<BaseLinkModel> PortLinks => Ports.SelectMany(p => p.Links);
 
         public bool ResizingEnabled { get; set; } = false;
+        public bool OnlyResizeWhenSelected { get; set; } = true;
         public ResizerPosition CurrentResizer { get; set; }
         public Point OriginalPosition { get; set; }
         public Point OriginalMousePosition { get; set; }

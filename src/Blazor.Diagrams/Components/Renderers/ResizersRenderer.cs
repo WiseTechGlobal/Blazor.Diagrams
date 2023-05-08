@@ -59,7 +59,7 @@ public class ResizersRenderer : ComponentBase, IDisposable
 
         builder.OpenElement(0, "div");
         builder.AddAttribute(1, "class", ResizersClass);
-        if (!Node.Selected)
+        if (Node.OnlyResizeWhenSelected && !Node.Selected)
         {
             builder.AddAttribute(2, "style", "visibility: hidden;");
         }
