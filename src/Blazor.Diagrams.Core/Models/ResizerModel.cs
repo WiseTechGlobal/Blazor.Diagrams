@@ -10,6 +10,7 @@ public class ResizerModel : Model
     {
         Parent = parent;
         Alignment = alignment;
+        MinimumDimensions = new Size(0, 0);
     }
 
     public NodeModel Parent { get; }
