@@ -6,10 +6,11 @@ using System.Linq;
 
 namespace Blazor.Diagrams.Core.Models
 {
-    public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable, IResizable
+    public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
     {
         private readonly List<PortModel> _ports = new();
         private readonly List<BaseLinkModel> _links = new();
+        private readonly List<ResizerModel> _resizers = new();
         private Size? _size;
 
         public event Action<NodeModel>? SizeChanged;
@@ -42,16 +43,21 @@ namespace Blazor.Diagrams.Core.Models
         public IReadOnlyList<PortModel> Ports => _ports;
         public IReadOnlyList<BaseLinkModel> Links => _links;
         public IEnumerable<BaseLinkModel> PortLinks => Ports.SelectMany(p => p.Links);
+        public IReadOnlyList<ResizerModel> Resizers => _resizers;
 
-        public bool ResizingEnabled { get; set; } = false;
-        public bool OnlyResizeWhenSelected { get; set; } = true;
-        public ResizerPosition CurrentResizer { get; set; }
-        public Point OriginalPosition { get; set; } = new Point(0, 0);
-        public Point OriginalMousePosition { get; set; } = new Point(0,0);
-        public double OriginalWidth { get; set; }
-        public double OriginalHeight { get; set; }
-        public Size MinimumDimensions { get; set; } = new Size(20,20);
+        public Size MinimumDimensions { get; set; } = new Size(0, 0);
+        public Action<Size>? SizeChange { get; set; }
 
+        public ResizerModel AddResizer(ResizerPosition alignment)
+            => AddResizer(new ResizerModel(this, alignment));
+
+        public ResizerModel AddResizer(ResizerModel model)
+        {
+            _resizers.Add(model);
+            return model;
+        }
+
+        public bool RemoveResizer(ResizerModel model) => _resizers.Remove(model);
 
         #region Ports
 

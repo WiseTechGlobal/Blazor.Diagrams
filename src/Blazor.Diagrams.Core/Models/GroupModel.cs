@@ -135,7 +135,7 @@ namespace Blazor.Diagrams.Core.Models
                 height = Size.Height;
             }
 
-            if (ResizingEnabled)
+            if (Resizers.Count > 0) // if resizable
             {
                 Size = new Size(width, height);
             }

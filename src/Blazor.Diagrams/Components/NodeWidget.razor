@@ -2,11 +2,14 @@
     class="default-node @(Node.Group != null ? "grouped" : "") @(Node.Selected ? "selected" : "")"
     style=@Style
 >
-    <ResizersRenderer Node=Node OnSizeChange=OnSizeChange></ResizersRenderer>
     @(Node.Title ?? "Title")
     @foreach (var port in Node.Ports)
     {
         <PortRenderer @key="port" Port="port" Class="default"></PortRenderer>
+    }
+    @foreach (var resizer in Node.Resizers)
+    {
+        <ResizerRenderer @key="resizer" Resizer="resizer"></ResizerRenderer>
     }
 </div>
 
@@ -19,6 +22,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        Node.SizeChange += OnSizeChange;
         if (Node.Size != null)
         {
             Style = GenerateStyle(Node.Size.Width, Node.Size.Height);
