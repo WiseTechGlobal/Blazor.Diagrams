@@ -1,16 +1,9 @@
-﻿using Blazor.Diagrams.Core.Events;
-using Blazor.Diagrams.Core.Geometry;
-using Blazor.Diagrams.Core.Models;
-using Blazor.Diagrams.Core.Models.Base;
+﻿using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PointerEventArgs = Microsoft.AspNetCore.Components.Web.PointerEventArgs;
 
 namespace Blazor.Diagrams.Components.Renderers;

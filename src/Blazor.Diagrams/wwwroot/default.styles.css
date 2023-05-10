@@ -133,30 +133,35 @@ g.group.default.selected > rect {
     background-color: #f5f5f5;
     border: 1px solid #6e9fd4;
     position: absolute;
+    visibility: hidden;
 }
 
 .resizer.topleft {
-        left: -5px;
-        top: -5px;
-        cursor: nwse-resize;
-    }
+    left: -5px;
+    top: -5px;
+    cursor: nwse-resize;
+}
 
 .resizer.topright {
-        right: -5px;
-        top: -5px;
-        cursor: nesw-resize;
-    }
+    right: -5px;
+    top: -5px;
+    cursor: nesw-resize;
+}
 
 .resizer.bottomleft {
-        left: -5px;
-        bottom: -5px;
-        cursor: nesw-resize;
-    }
+    left: -5px;
+    bottom: -5px;
+    cursor: nesw-resize;
+}
 
 .resizer.bottomright {
-        right: -5px;
-        bottom: -5px;
-        cursor: nwse-resize;
-    }
+    right: -5px;
+    bottom: -5px;
+    cursor: nwse-resize;
+}
+
+.default-node.selected .resizer {
+    visibility: visible;
+}
 
 /*# sourceMappingURL=wwwroot\default.styles.css.map */
