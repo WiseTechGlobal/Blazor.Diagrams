@@ -160,6 +160,30 @@ g.group.default.selected > rect {
     cursor: nwse-resize;
 }
 
+.resizer.left {
+    left: -5px;
+    top: 50%;
+    cursor: w-resize;
+}
+
+.resizer.right {
+    right: -5px;
+    top: 50%;
+    cursor: w-resize;
+}
+
+.resizer.bottom {
+    left: 50%;
+    bottom: -5px;
+    cursor: n-resize;
+}
+
+.resizer.top {
+    left: 50%;
+    top: -5px;
+    cursor: n-resize;
+}
+
 .default-node.selected .resizer {
     visibility: visible;
 }
