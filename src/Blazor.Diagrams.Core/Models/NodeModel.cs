@@ -48,7 +48,7 @@ namespace Blazor.Diagrams.Core.Models
         public Size MinimumDimensions { get; set; } = new Size(0, 0);
         public Action<Size>? SizeChange { get; set; }
 
-        public ResizerModel AddResizer(ResizerPosition alignment)
+        public ResizerModel AddResizer(PortAlignment alignment)
             => AddResizer(new ResizerModel(this, alignment));
 
         public ResizerModel AddResizer(ResizerModel model)

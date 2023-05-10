@@ -19,7 +19,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.TopLeft);
+            var resizer = node.AddResizer(PortAlignment.TopLeft);
 
             // before resize
             node.Position.X.Should().Be(0);
@@ -49,7 +49,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.TopRight);
+            var resizer = node.AddResizer(PortAlignment.TopRight);
 
             // before resize
             node.Position.X.Should().Be(0);
@@ -78,7 +78,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.BottomLeft);
+            var resizer = node.AddResizer(PortAlignment.BottomLeft);
 
             // before resize
             node.Position.X.Should().Be(0);
@@ -107,7 +107,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.BottomRight);
+            var resizer = node.AddResizer(PortAlignment.BottomRight);
 
             // before resize
             node.Position.X.Should().Be(0);
@@ -136,7 +136,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.TopLeft);
+            var resizer = node.AddResizer(PortAlignment.TopLeft);
 
             // before resize
             node.Position.X.Should().Be(0);
@@ -165,7 +165,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
             var node = new NodeModel(position: new Point(0, 0));
             node.Size = new Size(100, 200);
-            var resizer = node.AddResizer(ResizerPosition.TopLeft);
+            var resizer = node.AddResizer(PortAlignment.TopLeft);
 
             // resize
             var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);

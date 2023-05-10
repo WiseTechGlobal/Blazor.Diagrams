@@ -45,14 +45,14 @@ namespace Blazor.Diagrams.Core.Behaviors
             _resizer = null;
         }
 
-        void Resize(ResizerPosition resizerAlignment, NodeModel model, PointerEventArgs args)
+        void Resize(PortAlignment resizerAlignment, NodeModel model, PointerEventArgs args)
         {
             var width = _originalWidth;
             var height = _originalHeight;
             var positionX = model.Position.X;
             var positionY = model.Position.Y;
 
-            if (resizerAlignment == ResizerPosition.TopLeft)
+            if (resizerAlignment == PortAlignment.TopLeft)
             {
                 height = _originalHeight - (args.ClientY - _originalMousePosition.Y);
                 width = _originalWidth - (args.ClientX - _originalMousePosition.X);
@@ -60,7 +60,7 @@ namespace Blazor.Diagrams.Core.Behaviors
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
-            else if (resizerAlignment == ResizerPosition.TopRight)
+            else if (resizerAlignment == PortAlignment.TopRight)
             {
                 height = _originalHeight - (args.ClientY - _originalMousePosition.Y);
                 width = _originalWidth + (args.ClientX - _originalMousePosition.X);
@@ -68,7 +68,7 @@ namespace Blazor.Diagrams.Core.Behaviors
                 positionX = _originalPosition.X;
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
-            else if (resizerAlignment == ResizerPosition.BottomLeft)
+            else if (resizerAlignment == PortAlignment.BottomLeft)
             {
                 height = _originalHeight + (args.ClientY - _originalMousePosition.Y);
                 width = _originalWidth - (args.ClientX - _originalMousePosition.X);
@@ -76,7 +76,7 @@ namespace Blazor.Diagrams.Core.Behaviors
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
                 positionY = _originalPosition.Y;
             }
-            else if (resizerAlignment == ResizerPosition.BottomRight)
+            else if (resizerAlignment == PortAlignment.BottomRight)
             {
                 height = _originalHeight + (args.ClientY - _originalMousePosition.Y);
                 width = _originalWidth + (args.ClientX - _originalMousePosition.X);
