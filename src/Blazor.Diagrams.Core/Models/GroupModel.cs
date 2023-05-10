@@ -125,18 +125,49 @@ namespace Blazor.Diagrams.Core.Models
             var height = bounds.Height + Padding * 2;
 
             MinimumDimensions = new Size(width, height);
-
-            if (Size?.Width > MinimumDimensions.Width)
-            {
-                width = Size.Width;
-            }
-            if (Size?.Height > MinimumDimensions.Height)
-            {
-                height = Size.Height;
-            }
+            var newLeft = bounds.Left - Padding;
+            var newTop = bounds.Top - Padding;
 
             if (Resizers.Count > 0) // if resizable
             {
+                if (Position.X < newLeft)
+                {
+                    newLeft = Position.X;
+                }
+                if (Position.Y < newTop)
+                {
+                    newTop = Position.Y;
+                }
+
+                var newMinWidth = bounds.Right - newLeft + Padding * 2;
+                if (Size?.Width > newMinWidth)
+                {
+                    width = Size.Width;
+                }
+                else
+                {
+                    width = newMinWidth;
+                }
+
+                var newMinHeight = bounds.Bottom - newTop + Padding * 2;
+                if (Size?.Height > newMinHeight)
+                {
+                    height = Size.Height;
+                } 
+                else
+                {
+                    height = newMinHeight;
+                }
+
+                if (newLeft < Position.X)
+                {
+                    width += Position.X - newLeft;
+                }
+                if (newTop < Position.Y)
+                {
+                    height += Position.Y - newTop;
+                }
+
                 Size = new Size(width, height);
             }
             else
@@ -144,7 +175,7 @@ namespace Blazor.Diagrams.Core.Models
                 Size = MinimumDimensions;
             }
 
-            var newPosition = new Point(bounds.Left - Padding, bounds.Top - Padding);
+            var newPosition = new Point(newLeft, newTop);
             if (!Position.Equals(newPosition))
             {
                 Position = newPosition;

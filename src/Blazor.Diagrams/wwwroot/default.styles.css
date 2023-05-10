@@ -164,4 +164,8 @@ g.group.default.selected > rect {
     visibility: visible;
 }
 
+.group.selected > .resizer {
+    visibility: visible;
+}
+
 /*# sourceMappingURL=wwwroot\default.styles.css.map */
