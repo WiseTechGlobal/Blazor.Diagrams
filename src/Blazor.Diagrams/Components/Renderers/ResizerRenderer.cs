@@ -10,16 +10,9 @@ namespace Blazor.Diagrams.Components.Renderers;
 
 public class ResizerRenderer : ComponentBase, IDisposable
 {
-    private bool _shouldRender = true;
-
     [CascadingParameter] public BlazorDiagram BlazorDiagram { get; set; } = null!;
     [Parameter] public ResizerModel Resizer { get; set; } = null!;
     [Parameter] public string ResizerClass { get; set; } = "resizer";
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
 
     public void Dispose()
     {
@@ -27,11 +20,7 @@ public class ResizerRenderer : ComponentBase, IDisposable
 
     protected override bool ShouldRender()
     {
-        if (!_shouldRender)
-            return false;
-
-        _shouldRender = false;
-        return true;
+        return false;
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

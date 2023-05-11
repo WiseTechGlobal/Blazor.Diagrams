@@ -181,7 +181,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
 
             diagram.TriggerPointerUp(null, eventArgs);
 
-            // mouve pointer after pointer up
+            // move pointer after pointer up
             eventArgs = new PointerEventArgs(30, 50, 1, 1, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
             diagram.TriggerPointerMove(null, eventArgs);
 

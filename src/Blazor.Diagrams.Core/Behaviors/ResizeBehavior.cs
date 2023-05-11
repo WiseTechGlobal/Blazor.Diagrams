@@ -116,7 +116,6 @@ namespace Blazor.Diagrams.Core.Behaviors
             model.SetPosition(positionX, positionY);
             model.Size = new Size(width, height);
 
-            model.SizeChange?.Invoke(model.Size);
             model.Refresh();
         }
 

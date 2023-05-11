@@ -1,6 +1,6 @@
 ﻿<div 
     class="default-node @(Node.Group != null ? "grouped" : "") @(Node.Selected ? "selected" : "")"
-    style=@Style
+    style=@GenerateStyle()
 >
     @(Node.Title ?? "Title")
     @foreach (var port in Node.Ports)
@@ -18,24 +18,12 @@
     [Parameter]
     public NodeModel Node { get; set; } = null!;
 
-    string Style = String.Empty;
-    protected override void OnInitialized()
+    private string GenerateStyle()
     {
-        base.OnInitialized();
-        Node.SizeChange += OnSizeChange;
-        if (Node.Size != null)
+        if (Node.Size is not null)
         {
-            Style = GenerateStyle(Node.Size.Width, Node.Size.Height);
+            return FormattableString.Invariant($"width: {Node.Size.Width}px; height: {Node.Size.Height}px");
         }
-    }
-
-    private void OnSizeChange(Size size)
-    {
-        Style = GenerateStyle(size.Width, size.Height);
-    }
-
-    private static string GenerateStyle(double width, double height)
-    {
-        return FormattableString.Invariant($"width: {width}px; height: {height}px");
+        return string.Empty;
     }
 }
