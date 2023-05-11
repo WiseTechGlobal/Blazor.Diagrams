@@ -8,8 +8,7 @@ namespace Blazor.Diagrams.Core.Behaviors
 {
     public class ResizeBehavior : Behavior
     {
-        private double _originalWidth;
-        private double _originalHeight;
+        private Size _originalSize;
         private Point _originalPosition = null!;
         private Point _originalMousePosition = null!;
         private ResizerModel? _resizer = null;
@@ -29,8 +28,7 @@ namespace Blazor.Diagrams.Core.Behaviors
             _resizer = (ResizerModel)model;
             _originalPosition = new Point(_resizer.Parent.Position.X, _resizer.Parent.Position.Y);
             _originalMousePosition = new Point(e.ClientX, e.ClientY);
-            _originalWidth = _resizer.Parent.Size!.Width;
-            _originalHeight = _resizer.Parent.Size!.Height;
+            _originalSize = _resizer.Parent.Size!;
         }
         
         private void OnPointerMove(Model? model, PointerEventArgs args)
@@ -47,59 +45,59 @@ namespace Blazor.Diagrams.Core.Behaviors
 
         void Resize(PortAlignment resizerAlignment, NodeModel model, PointerEventArgs args)
         {
-            var width = _originalWidth;
-            var height = _originalHeight;
+            var width = _originalSize.Width;
+            var height = _originalSize.Height;
             var positionX = model.Position.X;
             var positionY = model.Position.Y;
 
             if (resizerAlignment == PortAlignment.TopLeft)
             {
-                height = _originalHeight - (args.ClientY - _originalMousePosition.Y);
-                width = _originalWidth - (args.ClientX - _originalMousePosition.X);
+                height = _originalSize.Height - (args.ClientY - _originalMousePosition.Y);
+                width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
 
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
             else if (resizerAlignment == PortAlignment.TopRight)
             {
-                height = _originalHeight - (args.ClientY - _originalMousePosition.Y);
-                width = _originalWidth + (args.ClientX - _originalMousePosition.X);
+                height = _originalSize.Height - (args.ClientY - _originalMousePosition.Y);
+                width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
 
                 positionX = _originalPosition.X;
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
             else if (resizerAlignment == PortAlignment.BottomLeft)
             {
-                height = _originalHeight + (args.ClientY - _originalMousePosition.Y);
-                width = _originalWidth - (args.ClientX - _originalMousePosition.X);
+                height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
+                width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
 
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
                 positionY = _originalPosition.Y;
             }
             else if (resizerAlignment == PortAlignment.BottomRight)
             {
-                height = _originalHeight + (args.ClientY - _originalMousePosition.Y);
-                width = _originalWidth + (args.ClientX - _originalMousePosition.X);
+                height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
+                width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
             }
             else if (resizerAlignment == PortAlignment.Top)
             {
-                height = _originalHeight - (args.ClientY - _originalMousePosition.Y);
+                height = _originalSize.Height - (args.ClientY - _originalMousePosition.Y);
 
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
             else if (resizerAlignment == PortAlignment.Right)
             {
-                width = _originalWidth + (args.ClientX - _originalMousePosition.X);
+                width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
             }
             else if (resizerAlignment == PortAlignment.Left)
             {
-                width = _originalWidth - (args.ClientX - _originalMousePosition.X);
+                width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
 
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
             }
             else if (resizerAlignment == PortAlignment.Bottom)
             {
-                height = _originalHeight + (args.ClientY - _originalMousePosition.Y);
+                height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
             }
 
             if (width < model.MinimumDimensions.Width)
