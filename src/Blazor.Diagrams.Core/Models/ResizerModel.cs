@@ -21,5 +21,9 @@ public enum ResizerPosition
     TopRight,
     TopLeft,
     BottomRight,
-    BottomLeft
+    BottomLeft,
+    Top,
+    Bottom,
+    Left,
+    Right
 }

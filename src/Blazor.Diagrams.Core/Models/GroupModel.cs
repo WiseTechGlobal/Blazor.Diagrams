@@ -90,9 +90,6 @@ namespace Blazor.Diagrams.Core.Models
             _children.Clear();
         }
 
-        public override ResizerModel AddResizer(PortAlignment alignment)
-            => throw new NotImplementedException();
-
         public override ResizerModel AddResizer(ResizerModel model) => throw new NotImplementedException();
 
         public override bool RemoveResizer(ResizerModel model) => throw new NotImplementedException();

@@ -79,23 +79,23 @@ namespace Blazor.Diagrams.Core.Behaviors
                 height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
                 width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
             }
-            else if (resizerAlignment == PortAlignment.Top)
+            else if (resizerAlignment == ResizerPosition.Top)
             {
                 height = _originalSize.Height - (args.ClientY - _originalMousePosition.Y);
 
                 positionY = _originalPosition.Y + (args.ClientY - _originalMousePosition.Y);
             }
-            else if (resizerAlignment == PortAlignment.Right)
+            else if (resizerAlignment == ResizerPosition.Right)
             {
                 width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
             }
-            else if (resizerAlignment == PortAlignment.Left)
+            else if (resizerAlignment == ResizerPosition.Left)
             {
                 width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
 
                 positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
             }
-            else if (resizerAlignment == PortAlignment.Bottom)
+            else if (resizerAlignment == ResizerPosition.Bottom)
             {
                 height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
             }
