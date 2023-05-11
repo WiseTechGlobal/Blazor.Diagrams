@@ -15,7 +15,7 @@ namespace Blazor.Diagrams.Tests.Components.Renderers
         {
             using var ctx = new TestContext();
             var node = new NodeModel();
-            var resizer = new ResizerModel(node, PortAlignment.TopLeft);
+            var resizer = new ResizerModel(node, ResizerPosition.TopLeft);
 
             var component = ctx.RenderComponent<ResizerRenderer>(parameters => parameters
                 .Add(n => n.Resizer, resizer)

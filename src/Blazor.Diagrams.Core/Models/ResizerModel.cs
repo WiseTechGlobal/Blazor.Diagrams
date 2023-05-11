@@ -6,12 +6,20 @@ namespace Blazor.Diagrams.Core.Models;
 
 public class ResizerModel : Model
 {
-    public ResizerModel(NodeModel parent, PortAlignment alignment)
+    public ResizerModel(NodeModel parent, ResizerPosition alignment)
     {
         Parent = parent;
         Alignment = alignment;
     }
 
     public NodeModel Parent { get; }
-    public PortAlignment Alignment { get; }
+    public ResizerPosition Alignment { get; }
+}
+
+public enum ResizerPosition
+{
+    TopRight,
+    TopLeft,
+    BottomRight,
+    BottomLeft
 }
