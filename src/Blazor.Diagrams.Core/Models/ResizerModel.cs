@@ -15,15 +15,3 @@ public class ResizerModel : Model
     public NodeModel Parent { get; }
     public ResizerPosition Alignment { get; }
 }
-
-public enum ResizerPosition
-{
-    TopRight,
-    TopLeft,
-    BottomRight,
-    BottomLeft,
-    Top,
-    Bottom,
-    Left,
-    Right
-}
