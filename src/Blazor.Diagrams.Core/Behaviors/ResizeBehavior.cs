@@ -8,7 +8,7 @@ namespace Blazor.Diagrams.Core.Behaviors
 {
     public class ResizeBehavior : Behavior
     {
-        private Size _originalSize;
+        private Size _originalSize = null!;
         private Point _originalPosition = null!;
         private Point _originalMousePosition = null!;
         private ResizerModel? _resizer = null;

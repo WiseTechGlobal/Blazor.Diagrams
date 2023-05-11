@@ -90,6 +90,13 @@ namespace Blazor.Diagrams.Core.Models
             _children.Clear();
         }
 
+        public override ResizerModel AddResizer(PortAlignment alignment)
+            => throw new NotImplementedException();
+
+        public override ResizerModel AddResizer(ResizerModel model) => throw new NotImplementedException();
+
+        public override bool RemoveResizer(ResizerModel model) => throw new NotImplementedException();
+
         private void Initialize(IEnumerable<NodeModel> children)
         {
             foreach (var child in children)
@@ -121,67 +128,14 @@ namespace Blazor.Diagrams.Core.Models
 
             var bounds = Children.GetBounds();
 
-            var width = bounds.Width + Padding * 2;
-            var height = bounds.Height + Padding * 2;
-
-            MinimumDimensions = new Size(width, height);
-            var newLeft = bounds.Left - Padding;
-            var newTop = bounds.Top - Padding;
-
-            if (Resizers.Count > 0) // if resizable
-            {
-                if (Position.X < newLeft)
-                {
-                    newLeft = Position.X;
-                }
-                if (Position.Y < newTop)
-                {
-                    newTop = Position.Y;
-                }
-
-                var newMinWidth = bounds.Right - newLeft + Padding * 2;
-                if (Size?.Width > newMinWidth)
-                {
-                    width = Size.Width;
-                }
-                else
-                {
-                    width = newMinWidth;
-                }
-
-                var newMinHeight = bounds.Bottom - newTop + Padding * 2;
-                if (Size?.Height > newMinHeight)
-                {
-                    height = Size.Height;
-                } 
-                else
-                {
-                    height = newMinHeight;
-                }
-
-                if (newLeft < Position.X)
-                {
-                    width += Position.X - newLeft;
-                }
-                if (newTop < Position.Y)
-                {
-                    height += Position.Y - newTop;
-                }
-
-                Size = new Size(width, height);
-            }
-            else
-            {
-                Size = MinimumDimensions;
-            }
-
-            var newPosition = new Point(newLeft, newTop);
+            var newPosition = new Point(bounds.Left - Padding, bounds.Top - Padding);
             if (!Position.Equals(newPosition))
             {
                 Position = newPosition;
                 TriggerMoving();
             }
 
+            Size = new Size(bounds.Width + Padding * 2, bounds.Height + Padding * 2);
             return true;
         }
     }
