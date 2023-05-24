@@ -7,6 +7,7 @@ using Blazor.Diagrams.Core.Events;
 using System.Runtime.CompilerServices;
 using Blazor.Diagrams.Core.Options;
 using Blazor.Diagrams.Core.Controls;
+using Blazor.Diagrams.Core.Behaviors.Base;
 
 [assembly: InternalsVisibleTo("Blazor.Diagrams")]
 [assembly: InternalsVisibleTo("Blazor.Diagrams.Tests")]
@@ -44,6 +45,7 @@ public abstract class Diagram
         Links = new LinkLayer(this);
         Groups = new GroupLayer(this);
         Controls = new ControlsLayer();
+        BehaviorOptions = new DiagramBehaviorOptions();
 
         Nodes.Added += OnSelectableAdded;
         Links.Added += OnSelectableAdded;
@@ -53,21 +55,15 @@ public abstract class Diagram
         Links.Removed += OnSelectableRemoved;
         Groups.Removed += OnSelectableRemoved;
 
-        if (!registerDefaultBehaviors)
-            return;
+        RegisterDefaultBehaviors();
 
-        RegisterBehavior(new SelectionBehavior(this));
-        RegisterBehavior(new DragMovablesBehavior(this));
-        RegisterBehavior(new DragNewLinkBehavior(this));
-        RegisterBehavior(new PanBehavior(this));
-        RegisterBehavior(new ZoomBehavior(this));
-        RegisterBehavior(new EventsBehavior(this));
-        RegisterBehavior(new KeyboardShortcutsBehavior(this));
-        RegisterBehavior(new ControlsBehavior(this));
-        RegisterBehavior(new VirtualizationBehavior(this));
+        BehaviorOptions.DiagramDragBehavior ??= GetBehavior<PanBehavior>();
+        BehaviorOptions.DiagramShiftDragBehavior ??= GetBehavior<SelectionBoxBehavior>();
+        BehaviorOptions.DiagramWheelBehavior ??= GetBehavior<ZoomBehavior>();
     }
 
     public abstract DiagramOptions Options { get; }
+    public DiagramBehaviorOptions BehaviorOptions { get; }
     public NodeLayer Nodes { get; }
     public LinkLayer Links { get; }
     public GroupLayer Groups { get; }
@@ -169,17 +165,31 @@ public abstract class Diagram
     #endregion
 
     #region Behaviors
-
-    public void RegisterBehavior(Behavior behavior)
+    void RegisterDefaultBehaviors()
     {
-        var type = behavior.GetType();
-        if (_behaviors.ContainsKey(type))
-            throw new Exception($"Behavior '{type.Name}' already registered");
-
-        _behaviors.Add(type, behavior);
+        RegisterBehavior(new SelectionBehavior(this));
+        RegisterBehavior(new DragMovablesBehavior(this));
+        RegisterBehavior(new DragNewLinkBehavior(this));
+        RegisterBehavior(new PanBehavior(this));
+        RegisterBehavior(new ZoomBehavior(this));
+        RegisterBehavior(new EventsBehavior(this));
+        RegisterBehavior(new KeyboardShortcutsBehavior(this));
+        RegisterBehavior(new ControlsBehavior(this));
+        RegisterBehavior(new VirtualizationBehavior(this));
+        RegisterBehavior(new ScrollBehavior(this));
+        RegisterBehavior(new SelectionBoxBehavior(this));
     }
 
-    public T? GetBehavior<T>() where T : Behavior
+	public void RegisterBehavior(Behavior behavior)
+	{
+		var type = behavior.GetType();
+		if (_behaviors.ContainsKey(type))
+			throw new Exception($"Behavior '{type.Name}' already registered");
+
+		_behaviors.Add(type, behavior);
+	}
+
+	public T? GetBehavior<T>() where T : Behavior
     {
         var type = typeof(T);
         return (T?)(_behaviors.ContainsKey(type) ? _behaviors[type] : null);

@@ -1,5 +1,6 @@
 ﻿using Blazor.Diagrams.Components.Controls;
 using Blazor.Diagrams.Core;
+using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Controls.Default;
 using Blazor.Diagrams.Core.Models.Base;
 using Blazor.Diagrams.Options;
