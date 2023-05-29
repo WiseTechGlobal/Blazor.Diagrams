@@ -91,5 +91,14 @@ namespace Blazor.Diagrams.Core.Tests
             zoomChanges.Should().Be(1);
             panChanges.Should().Be(1);
         }
+        
+        [Fact]
+        public void SetContainer_ShouldAcceptNullGracefully()
+        {
+            // Arrange
+            var diagram = new Diagram();
+            var exception = Record.Exception(() => diagram.SetContainer(null));
+            exception.Should().BeNull();
+        }
     }
 }
