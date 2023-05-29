@@ -97,7 +97,11 @@ namespace Blazor.Diagrams.Core.Tests
         {
             // Arrange
             var diagram = new Diagram();
+            
+            //Act
             var exception = Record.Exception(() => diagram.SetContainer(null));
+            
+            // Assert
             exception.Should().BeNull();
         }
     }
