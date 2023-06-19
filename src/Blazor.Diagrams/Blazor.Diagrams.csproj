@@ -9,7 +9,7 @@
         <FileVersion>1.0</FileVersion>
         <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
         <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
-        <Version>1.0.7</Version>
+        <Version>1.0.8</Version>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
         <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
@@ -19,8 +19,8 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
-        <StaticWebAssetsEnabled>true</StaticWebAssetsEnabled>
-        <NuspecFile>Blazor.Diagrams.nuspec</NuspecFile>
+        <!--<StaticWebAssetsEnabled>true</StaticWebAssetsEnabled>-->
+        <!--<NuspecFile>Blazor.Diagrams.nuspec</NuspecFile>-->
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj"/>
+        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -55,7 +55,7 @@
         <Exec Command="webcompiler -r wwwroot" StandardOutputImportance="high" StandardErrorImportance="high" />
     </Target>
 
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
@@ -64,6 +64,6 @@
       <BuildOutputInPackage Include="$(OutputPath)Blazor.Diagrams.Core.dll;..\..\packages\svgpathproperties\1.1.2\lib\netstandard2.0\SvgPathProperties.dll">
       </BuildOutputInPackage>
     </ItemGroup>
-  </Target>-->
+  </Target>
 
 </Project>
