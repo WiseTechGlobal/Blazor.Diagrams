@@ -3,20 +3,22 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>zHaytam</Authors>
 		<Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
 		<AssemblyVersion>1.0</AssemblyVersion>
 		<FileVersion>1.0</FileVersion>
     <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
 		<PackageId>WTG.Z.Blazor.Diagrams.Core</PackageId>
 		<PackageTags>blazor diagrams diagramming svg drag</PackageTags>
 		<Product>WTG.Z.Blazor.Diagrams.Core</Product>
 		<PackageIcon>ZBD.png</PackageIcon>
 		<PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<ItemGroup>
