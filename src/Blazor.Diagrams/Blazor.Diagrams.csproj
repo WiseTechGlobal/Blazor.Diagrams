@@ -5,19 +5,18 @@
         <Nullable>enable</Nullable>
         <Authors>zHaytam</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <AssemblyVersion>1.0</AssemblyVersion>
-        <FileVersion>1.0</FileVersion>
-        <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
+        <AssemblyVersion>3.0.0</AssemblyVersion>
+        <FileVersion>3.0.0</FileVersion>
+        <RepositoryUrl>https://github.com/Blazor-Diagrams/Blazor.Diagrams</RepositoryUrl>
         <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
-        <Version>1.0.2</Version>
+        <Version>3.0.0-beta.7</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
-        <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
+        <PackageId>Z.Blazor.Diagrams</PackageId>
         <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
-        <Product>WTG.Z.Blazor.Diagrams</Product>
+        <Product>Z.Blazor.Diagrams</Product>
         <PackageIcon>ZBD.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <SignAssembly>False</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
