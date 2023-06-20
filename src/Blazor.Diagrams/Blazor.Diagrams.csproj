@@ -10,7 +10,7 @@
         <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
         <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
         <Version>1.0.8</Version>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
         <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
         <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
@@ -19,8 +19,6 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
-        <!--<StaticWebAssetsEnabled>true</StaticWebAssetsEnabled>-->
-        <!--<NuspecFile>Blazor.Diagrams.nuspec</NuspecFile>-->
     </PropertyGroup>
 
     <ItemGroup>
