@@ -25,6 +25,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
         <PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.3.3" PrivateAssets="All"/>
+        <PackageReference Include="SvgPathProperties" Version="1.1.2" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
