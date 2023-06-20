@@ -9,8 +9,8 @@
 		<Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
 		<AssemblyVersion>1.0</AssemblyVersion>
 		<FileVersion>1.0</FileVersion>
-    <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
-    <Version>1.0.6</Version>
+		<RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
+		<Version>1.0.2</Version>
 		<PackageId>WTG.Z.Blazor.Diagrams.Core</PackageId>
 		<PackageTags>blazor diagrams diagramming svg drag</PackageTags>
 		<Product>WTG.Z.Blazor.Diagrams.Core</Product>
@@ -31,7 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="SvgPathProperties" Version="1.1.2" />
+		<PackageReference Include="SvgPathProperties" Version="1.1.2" />
 	</ItemGroup>
 
 </Project>
