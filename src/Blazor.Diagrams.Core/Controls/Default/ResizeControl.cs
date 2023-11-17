@@ -1,7 +1,7 @@
 ﻿using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models.Base;
-using Blazor.Diagrams.Core.Positions;
+using Blazor.Diagrams.Core.Positions.Resizing;
 using System.Threading.Tasks;
 
 namespace Blazor.Diagrams.Core.Controls.Default

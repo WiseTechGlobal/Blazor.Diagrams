@@ -3,9 +3,9 @@ using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Models.Base;
 
-namespace Blazor.Diagrams.Core.Positions
+namespace Blazor.Diagrams.Core.Positions.Resizing
 {
-	public class BottomRightResizerProvider : IResizeProvider
+    public class BottomRightResizerProvider : IResizeProvider
     {
         private Size _originalSize = null!;
         private Point _originalPosition = null!;
@@ -72,7 +72,7 @@ namespace Blazor.Diagrams.Core.Positions
             _originalMousePosition = null!;
             _nodeModel = null!;
             _diagram = null!;
-    }
+        }
 
     }
 }
