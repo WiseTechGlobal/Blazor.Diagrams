@@ -22,8 +22,15 @@ namespace Blazor.Diagrams.Core.Controls.Default
             _resizeProvider.OnResizeStart(diagram, model, e);
             diagram.PointerMove += _resizeProvider.OnPointerMove;
             diagram.PointerUp += _resizeProvider.OnResizeEnd;
+            diagram.PointerUp += (_, _) => OnResizeEnd(diagram);
 
             return ValueTask.CompletedTask;
+        }
+
+        void OnResizeEnd(Diagram diagram)
+        {
+            diagram.PointerMove -= _resizeProvider.OnPointerMove;
+            diagram.PointerUp -= _resizeProvider.OnResizeEnd;
         }
     }
 }
