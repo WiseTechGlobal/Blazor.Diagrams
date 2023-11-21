@@ -67,12 +67,14 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
             // resize
             var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
             control.OnPointerDown(diagram, node, eventArgs);
-            eventArgs = new PointerEventArgs(-300, 300, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            eventArgs = new PointerEventArgs(-99, 199, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
             diagram.TriggerPointerMove(null, eventArgs);
+			eventArgs = new PointerEventArgs(-300, 300, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+			diagram.TriggerPointerMove(null, eventArgs);
 
-            // after resize
-            node.Position.X.Should().Be(0);
-            node.Position.Y.Should().Be(200);
+			// after resize
+			node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(199);
             node.Size.Width.Should().Be(0);
             node.Size.Height.Should().Be(0);
         }
