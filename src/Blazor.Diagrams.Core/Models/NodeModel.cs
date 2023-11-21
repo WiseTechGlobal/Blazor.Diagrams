@@ -11,6 +11,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
     private readonly List<PortModel> _ports = new();
     private readonly List<BaseLinkModel> _links = new();
     private Size? _size;
+    public Size MinimumDimensions { get; set; } = new Size(1, 1);
 
     public event Action<NodeModel>? SizeChanged;
     public event Action<NodeModel>? Moving;

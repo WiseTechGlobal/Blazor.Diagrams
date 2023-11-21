@@ -162,6 +162,9 @@ Diagram.Controls.AddFor(SomeModel)
 		_bDiagram.Controls.AddFor(bNode1, ControlsType.OnSelection).Add(new BoundaryControl());
 		_bDiagram.Controls.AddFor(bNode1).Add(new ResizeControl(new BottomRightResizerProvider()));
 		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new BottomRightResizerProvider()));
+		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new TopRightResizerProvider()));
+		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new BottomLeftResizerProvider()));
+		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new TopLeftResizerProvider()));
 		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnHover).Add(new BoundaryControl());
 		_bDiagram.Controls.AddFor(bLink1, ControlsType.OnSelection).Add(new BoundaryControl());
 		_bDiagram.SelectModel(bNode1, false);
