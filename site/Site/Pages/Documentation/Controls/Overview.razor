@@ -3,7 +3,6 @@
 @using Blazor.Diagrams.Core.Controls;
 @using Blazor.Diagrams.Core.PathGenerators;
 @using Blazor.Diagrams.Core.Positions;
-@using Blazor.Diagrams.Core.Positions.Resizing;
 @using Blazor.Diagrams.Core.Routers;
 @layout DocumentationLayout
 @inherits DocumentationPage
@@ -160,11 +159,6 @@ Diagram.Controls.AddFor(SomeModel)
 		bNode2.Title = "Hover on me";
 		bLink1.AddLabel("Select me", distance: 0.5);
 		_bDiagram.Controls.AddFor(bNode1, ControlsType.OnSelection).Add(new BoundaryControl());
-		_bDiagram.Controls.AddFor(bNode1).Add(new ResizeControl(new BottomRightResizerProvider()));
-		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new BottomRightResizerProvider()));
-		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new TopRightResizerProvider()));
-		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new BottomLeftResizerProvider()));
-		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnSelection).Add(new ResizeControl(new TopLeftResizerProvider()));
 		_bDiagram.Controls.AddFor(bNode2, ControlsType.OnHover).Add(new BoundaryControl());
 		_bDiagram.Controls.AddFor(bLink1, ControlsType.OnSelection).Add(new BoundaryControl());
 		_bDiagram.SelectModel(bNode1, false);
@@ -178,7 +172,6 @@ Diagram.Controls.AddFor(SomeModel)
 		rNode2.Title = "Select me";
 		rLink1.AddLabel("Select me", distance: 0.5);
 		_rDiagram.Controls.AddFor(rNode1, ControlsType.OnSelection).Add(new RemoveControl(0.5, 0));
-		_rDiagram.Controls.AddFor(rNode1, ControlsType.OnHover).Add(new ResizeControl(new BottomRightResizerProvider()));
 		_rDiagram.Controls.AddFor(rNode2, ControlsType.OnSelection).Add(new RemoveControl(0.5, 1));
 		_rDiagram.Controls.AddFor(rLink1, ControlsType.OnSelection).Add(new RemoveControl(new LinkPathPositionProvider(0.8, 0, -10)));
 		_rDiagram.SelectModel(rNode1, false);
