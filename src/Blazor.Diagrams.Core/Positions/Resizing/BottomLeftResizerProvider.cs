@@ -46,7 +46,10 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
             var positionY = _nodeModel.Position.Y;
 
             height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
-            width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
+            width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
+
+            positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X);
+            positionY = _originalPosition.Y;
 
             //if (width < model.MinimumDimensions.Width)
             //{
