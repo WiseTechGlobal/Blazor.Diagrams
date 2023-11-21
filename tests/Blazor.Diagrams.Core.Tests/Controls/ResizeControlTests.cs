@@ -3,11 +3,6 @@ using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Models.Base;
 using Blazor.Diagrams.Core.Positions.Resizing;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Controls
@@ -23,7 +18,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
 
             control.GetPosition(model.Object);
 
-            resizeProvider.Verify(m => m.GetPosition(model.Object), Times.Once());
+            resizeProvider.Verify(m => m.GetPosition(model.Object), Times.Once);
         }
 
         [Fact]
@@ -37,7 +32,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
 
             control.OnPointerDown(diagram, model, eventArgs);
 
-            resizeProvider.Verify(m => m.OnResizeStart(diagram, model, eventArgs), Times.Once());
+            resizeProvider.Verify(m => m.OnResizeStart(diagram, model, eventArgs), Times.Once);
         }
 
         [Fact]
@@ -52,10 +47,10 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             control.OnPointerDown(diagram, model, eventArgs);
             
             diagram.TriggerPointerMove(model, eventArgs);
-            resizeProvider.Verify(m => m.OnPointerMove(model, eventArgs), Times.Once());
+            resizeProvider.Verify(m => m.OnPointerMove(model, eventArgs), Times.Once);
 
             diagram.TriggerPointerUp(model, eventArgs);
-            resizeProvider.Verify(m => m.OnResizeEnd(model, eventArgs), Times.Once());
+            resizeProvider.Verify(m => m.OnResizeEnd(model, eventArgs), Times.Once);
         }
 
         [Fact]
@@ -71,10 +66,10 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             diagram.TriggerPointerUp(model, eventArgs);
 
             diagram.TriggerPointerMove(model, eventArgs);
-            resizeProvider.Verify(m => m.OnPointerMove(model, eventArgs), Times.Never());
+            resizeProvider.Verify(m => m.OnPointerMove(model, eventArgs), Times.Never);
 
             diagram.TriggerPointerUp(model, eventArgs);
-            resizeProvider.Verify(m => m.OnResizeEnd(model, eventArgs), Times.Once());
+            resizeProvider.Verify(m => m.OnResizeEnd(model, eventArgs), Times.Once);
         }
     }
 }
