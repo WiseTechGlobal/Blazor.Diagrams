@@ -27,7 +27,7 @@ public class GroupModel : NodeModel
     {
         _children.Add(child);
         child.Group = this;
-        child.SizeChanged += OnNodeChanged;
+        child.SizeChanging += OnNodeChanged;
         child.Moving += OnNodeChanged;
 
         if (UpdateDimensions())
@@ -42,7 +42,7 @@ public class GroupModel : NodeModel
             return;
 
         child.Group = null;
-        child.SizeChanged -= OnNodeChanged;
+        child.SizeChanging -= OnNodeChanged;
         child.Moving -= OnNodeChanged;
 
         if (UpdateDimensions())
@@ -83,7 +83,7 @@ public class GroupModel : NodeModel
         foreach (var child in Children)
         {
             child.Group = null;
-            child.SizeChanged -= OnNodeChanged;
+            child.SizeChanging -= OnNodeChanged;
             child.Moving -= OnNodeChanged;
         }
 
@@ -96,7 +96,7 @@ public class GroupModel : NodeModel
         {
             _children.Add(child);
             child.Group = this; 
-            child.SizeChanged += OnNodeChanged;
+            child.SizeChanging += OnNodeChanged;
             child.Moving += OnNodeChanged;
         }
 

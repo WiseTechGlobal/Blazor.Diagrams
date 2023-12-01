@@ -62,6 +62,7 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
 
         public void OnResizeEnd(Model? model, PointerEventArgs args)
         {
+            _nodeModel?.TriggerSizeChanged();
             _originalSize = null!;
             _originalPosition = null!;
             _originalMousePosition = null!;

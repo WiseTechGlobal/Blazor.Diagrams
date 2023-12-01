@@ -13,7 +13,8 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
     private Size? _size;
     public Size MinimumDimensions { get; set; } = new Size(0, 0);
 
-    public event Action<NodeModel>? SizeChanged;
+    public event Action<NodeModel>? SizeChanging;
+	public event Action<NodeModel>? SizeChanged;
 	public event Action<NodeModel>? Moving;
 
     public NodeModel(Point? position = null) : base(position)
@@ -33,7 +34,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
                 return;
 
             _size = value;
-            SizeChanged?.Invoke(this);
+            SizeChanging?.Invoke(this);
         }
     }
     public bool ControlledSize { get; init; }
@@ -112,6 +113,11 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
 		RefreshLinks();
 	}
 
+	public void TriggerSizeChanged()
+	{
+		SizeChanged?.Invoke(this);
+	}
+
 	public virtual void UpdatePositionSilently(double deltaX, double deltaY)
     {
         base.SetPosition(Position.X + deltaX, Position.Y + deltaY);
@@ -165,7 +171,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
         Moving?.Invoke(this);
     }
 
-    void ILinkable.AddLink(BaseLinkModel link) => _links.Add(link);
+	void ILinkable.AddLink(BaseLinkModel link) => _links.Add(link);
 
     void ILinkable.RemoveLink(BaseLinkModel link) => _links.Remove(link);
 }
