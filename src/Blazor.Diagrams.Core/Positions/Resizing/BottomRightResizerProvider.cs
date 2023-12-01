@@ -36,8 +36,6 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
             {
                 return;
             }
-            var positionX = _nodeModel.Position.X;
-            var positionY = _nodeModel.Position.Y;
 
             var height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
             var width = _originalSize.Width + (args.ClientX - _originalMousePosition.X);
@@ -45,16 +43,13 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
             if (width < _nodeModel.MinimumDimensions.Width)
             {
                 width = _nodeModel.MinimumDimensions.Width;
-                positionX = _nodeModel.Position.X;
             }
             if (height < _nodeModel.MinimumDimensions.Height)
             {
                 height = _nodeModel.MinimumDimensions.Height;
-                positionY = _nodeModel.Position.Y;
             }
 
-            _nodeModel.SetPosition(positionX, positionY);
-            _nodeModel.Size = new Size(width, height);
+            _nodeModel.SetSize(width, height);
         }
 
         public void OnResizeEnd(Model? model, PointerEventArgs args)

@@ -14,7 +14,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
     public Size MinimumDimensions { get; set; } = new Size(0, 0);
 
     public event Action<NodeModel>? SizeChanged;
-    public event Action<NodeModel>? Moving;
+	public event Action<NodeModel>? Moving;
 
     public NodeModel(Point? position = null) : base(position)
     {
@@ -104,7 +104,15 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
         Moving?.Invoke(this);
     }
 
-    public virtual void UpdatePositionSilently(double deltaX, double deltaY)
+	public void SetSize(double width, double height)
+	{
+		Size = new Size(width, height);
+
+		Refresh();
+		RefreshLinks();
+	}
+
+	public virtual void UpdatePositionSilently(double deltaX, double deltaY)
     {
         base.SetPosition(Position.X + deltaX, Position.Y + deltaY);
         UpdatePortPositions(deltaX, deltaY);

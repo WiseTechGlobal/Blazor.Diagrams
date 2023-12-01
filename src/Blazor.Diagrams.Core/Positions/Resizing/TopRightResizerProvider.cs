@@ -56,8 +56,8 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
             }
 
             _nodeModel.SetPosition(positionX, positionY);
-            _nodeModel.Size = new Size(width, height);
-        }
+			_nodeModel.SetSize(width, height);
+		}
 
         public void OnResizeEnd(Model? model, PointerEventArgs args)
         {
