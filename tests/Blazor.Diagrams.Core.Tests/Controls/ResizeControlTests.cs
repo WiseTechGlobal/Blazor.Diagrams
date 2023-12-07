@@ -12,7 +12,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
         [Fact]
         public void GetPosition_ShouldUseResizeProviderGetPosition()
         {
-            var resizeProvider = new Mock<IResizeProvider>();
+            var resizeProvider = new Mock<IResizerProvider>();
             var control = new ResizeControl(resizeProvider.Object);
             var model = new Mock<Model>();
 
@@ -24,7 +24,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
         [Fact]
         public void OnPointerDown_ShouldInvokeResizeStart()
         {
-            var resizeProvider = new Mock<IResizeProvider>();
+            var resizeProvider = new Mock<IResizerProvider>();
             var control = new ResizeControl(resizeProvider.Object);
             var diagram = Mock.Of<Diagram>();
             var model = Mock.Of<Model>();
@@ -38,7 +38,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
         [Fact]
         public void OnPointerDown_ShouldAddEventHandlers()
         {
-            var resizeProvider = new Mock<IResizeProvider>();
+            var resizeProvider = new Mock<IResizerProvider>();
             var control = new ResizeControl(resizeProvider.Object);
             var diagram = new TestDiagram();
             var model = Mock.Of<Model>();
@@ -56,7 +56,7 @@ namespace Blazor.Diagrams.Core.Tests.Controls
         [Fact]
         public void OnPointerUp_ShouldRemoveEventHandlers()
         {
-            var resizeProvider = new Mock<IResizeProvider>();
+            var resizeProvider = new Mock<IResizerProvider>();
             var control = new ResizeControl(resizeProvider.Object);
             var diagram = new TestDiagram();
             var model = Mock.Of<Model>();

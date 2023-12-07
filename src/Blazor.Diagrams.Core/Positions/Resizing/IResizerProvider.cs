@@ -4,7 +4,7 @@ using Blazor.Diagrams.Core.Models.Base;
 
 namespace Blazor.Diagrams.Core.Positions.Resizing
 {
-    public interface IResizeProvider : IPositionProvider
+    public interface IResizerProvider : IPositionProvider
     {
         public void OnResizeStart(Diagram diagram, Model model, PointerEventArgs eventArgs);
         public void OnPointerMove(Model? model, PointerEventArgs args);

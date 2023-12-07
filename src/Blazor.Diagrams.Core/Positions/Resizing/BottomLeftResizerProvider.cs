@@ -5,7 +5,7 @@ using Blazor.Diagrams.Core.Models.Base;
 
 namespace Blazor.Diagrams.Core.Positions.Resizing
 {
-    public class BottomLeftResizerProvider : IResizeProvider
+    public class BottomLeftResizerProvider : IResizerProvider
     {
         private Size _originalSize = null!;
         private Point _originalPosition = null!;
