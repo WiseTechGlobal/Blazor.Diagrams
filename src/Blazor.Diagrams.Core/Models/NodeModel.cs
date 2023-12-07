@@ -14,8 +14,8 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
     public Size MinimumDimensions { get; set; } = new Size(0, 0);
 
     public event Action<NodeModel>? SizeChanging;
-	public event Action<NodeModel>? SizeChanged;
-	public event Action<NodeModel>? Moving;
+    public event Action<NodeModel>? SizeChanged;
+    public event Action<NodeModel>? Moving;
 
     public NodeModel(Point? position = null) : base(position)
     {
@@ -30,11 +30,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
         get => _size;
         set
         {
-            if (value?.Equals(_size) == true)
-                return;
-
             _size = value;
-            SizeChanging?.Invoke(this);
         }
     }
     public bool ControlledSize { get; init; }
@@ -105,20 +101,24 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
         Moving?.Invoke(this);
     }
 
-	public void SetSize(double width, double height)
-	{
-		Size = new Size(width, height);
+    public void SetSize(double width, double height)
+    {
+        var newSize = new Size(width, height);
+        if (newSize.Equals(_size) == true)
+            return;
 
-		Refresh();
-		RefreshLinks();
-	}
+        Size = newSize;
+        Refresh();
+        RefreshLinks();
+        SizeChanging?.Invoke(this);
+    }
 
-	public void TriggerSizeChanged()
-	{
-		SizeChanged?.Invoke(this);
-	}
+    public void TriggerSizeChanged()
+    {
+        SizeChanged?.Invoke(this);
+    }
 
-	public virtual void UpdatePositionSilently(double deltaX, double deltaY)
+    public virtual void UpdatePositionSilently(double deltaX, double deltaY)
     {
         base.SetPosition(Position.X + deltaX, Position.Y + deltaY);
         UpdatePortPositions(deltaX, deltaY);
@@ -171,7 +171,7 @@ public class NodeModel : MovableModel, IHasBounds, IHasShape, ILinkable
         Moving?.Invoke(this);
     }
 
-	void ILinkable.AddLink(BaseLinkModel link) => _links.Add(link);
+    void ILinkable.AddLink(BaseLinkModel link) => _links.Add(link);
 
     void ILinkable.RemoveLink(BaseLinkModel link) => _links.Remove(link);
 }
