@@ -17,6 +17,8 @@ namespace Blazor.Diagrams.Core.Controls.Default
 
         public override Point? GetPosition(Model model) => _resizeProvider.GetPosition(model);
 
+        public string? Class => _resizeProvider.Class;
+
         public override ValueTask OnPointerDown(Diagram diagram, Model model, PointerEventArgs e)
         {
             _resizeProvider.OnResizeStart(diagram, model, e);

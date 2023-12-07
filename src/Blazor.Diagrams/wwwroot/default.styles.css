@@ -135,4 +135,20 @@ g.diagram-group.default.selected > rect {
     position: absolute;
 }
 
+.default-node-resizer.bottomright {
+    cursor: nwse-resize;
+}
+
+.default-node-resizer.topright {
+    cursor: nesw-resize;
+}
+
+.default-node-resizer.bottomleft {
+    cursor: nesw-resize;
+}
+
+.default-node-resizer.topleft {
+    cursor: nwse-resize;
+}
+
 /*# sourceMappingURL=wwwroot\default.styles.css.map */

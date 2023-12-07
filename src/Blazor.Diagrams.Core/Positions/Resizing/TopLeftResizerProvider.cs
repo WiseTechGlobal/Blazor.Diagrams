@@ -7,7 +7,9 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
 {
     public class TopLeftResizerProvider : IResizerProvider
     {
-        private Size _originalSize = null!;
+		public string? Class => "topleft";
+
+		private Size _originalSize = null!;
         private Point _originalPosition = null!;
         private Point _originalMousePosition = null!;
         private NodeModel _nodeModel = null!;
