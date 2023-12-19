@@ -1,14 +1,9 @@
-﻿using Blazor.Diagrams.Core.Controls.Default;
+﻿using Blazor.Diagrams.Core.Behaviors;
+using Blazor.Diagrams.Core.Controls.Default;
 using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Positions.Resizing;
-using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Positions.Resizing;
@@ -28,10 +23,10 @@ public class TopLeftResizerProviderTests
         diagram.SelectModel(node, false);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(100, node.Size.Width);
+        Assert.Equal(200, node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -40,14 +35,14 @@ public class TopLeftResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(10);
-        node.Position.Y.Should().Be(15);
-        node.Size.Width.Should().Be(90);
-        node.Size.Height.Should().Be(185);
+        Assert.Equal(10, node.Position.X);
+        Assert.Equal(15, node.Position.Y);
+        Assert.Equal(90, node.Size.Width);
+        Assert.Equal(185, node.Size.Height);
     }
 
     [Fact]
-    public void DragResizer_SmallerThanMinSize_SetsNodeToMinSize()
+    public void PanChanged_ShouldResizeNode()
     {
         // setup
         var diagram = new TestDiagram();
@@ -57,26 +52,60 @@ public class TopLeftResizerProviderTests
         var control = new ResizeControl(new TopLeftResizerProvider());
         diagram.Controls.AddFor(node).Add(control);
         diagram.SelectModel(node, false);
+        diagram.BehaviorOptions.DiagramWheelBehavior = diagram.GetBehavior<ScrollBehavior>();
+
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(100, node.Size.Width);
+        Assert.Equal(200, node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
         control.OnPointerDown(diagram, node, eventArgs);
-        eventArgs = new PointerEventArgs(99, 199, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+        diagram.TriggerWheel(new WheelEventArgs(100, 100, 0, 0, false, false, false, 10, -100, 0, 0));
+
+
+        // after resize
+        Assert.Equal(10, node.Position.X);
+        Assert.Equal(-100, node.Position.Y);
+        Assert.Equal(90, node.Size.Width);
+        Assert.Equal(300, node.Size.Height);
+    }
+
+    [Fact]
+    public void DragResizer_SmallerThanMinSize_SetsNodeToMinSize()
+    {
+        // setup
+        var diagram = new TestDiagram();
+        diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
+        var node = new NodeModel(position: new Point(0, 0));
+        node.Size = new Size(300, 300);
+        node.MinimumDimensions = new Size(50, 100);
+        var control = new ResizeControl(new TopLeftResizerProvider());
+        diagram.Controls.AddFor(node).Add(control);
+        diagram.SelectModel(node, false);
+
+        // before resize
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(300, node.Size.Width);
+        Assert.Equal(300, node.Size.Height);
+
+        // resize
+        var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+        control.OnPointerDown(diagram, node, eventArgs);
+        eventArgs = new PointerEventArgs(150, 150, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
         diagram.TriggerPointerMove(null, eventArgs);
-        eventArgs = new PointerEventArgs(300, 300, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+        eventArgs = new PointerEventArgs(400, 400, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(99);
-        node.Position.Y.Should().Be(199);
-        node.Size.Width.Should().Be(0);
-        node.Size.Height.Should().Be(0);
+        Assert.Equal(250, node.Position.X);
+        Assert.Equal(200, node.Position.Y);
+        Assert.Equal(50, node.Size.Width);
+        Assert.Equal(100, node.Size.Height);
     }
 
     [Fact]
@@ -93,10 +122,10 @@ public class TopLeftResizerProviderTests
         diagram.SetZoom(0.5);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(100, node.Size.Width);
+        Assert.Equal(200, node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -105,10 +134,10 @@ public class TopLeftResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(20);
-        node.Position.Y.Should().Be(30);
-        node.Size.Width.Should().Be(80);
-        node.Size.Height.Should().Be(170);
+        Assert.Equal(20, node.Position.X);
+        Assert.Equal(30, node.Position.Y);
+        Assert.Equal(80, node.Size.Width);
+        Assert.Equal(170, node.Size.Height);
     }
 
     [Fact]
@@ -125,10 +154,10 @@ public class TopLeftResizerProviderTests
         diagram.SetZoom(2);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(100, node.Size.Width);
+        Assert.Equal(200, node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -137,9 +166,9 @@ public class TopLeftResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(5);
-        node.Position.Y.Should().Be(7.5);
-        node.Size.Width.Should().Be(95);
-        node.Size.Height.Should().Be(192.5);
+        Assert.Equal(5, node.Position.X);
+        Assert.Equal(7.5, node.Position.Y);
+        Assert.Equal(95, node.Size.Width);
+        Assert.Equal(192.5, node.Size.Height);
     }
 }
