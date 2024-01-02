@@ -14,7 +14,7 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
         private NodeModel _nodeModel = null!;
         private Diagram _diagram = null!;
 
-		public Point? GetPosition(Model model)
+        public Point? GetPosition(Model model)
         {
             if (model is NodeModel nodeModel && nodeModel.Size is not null)
             {

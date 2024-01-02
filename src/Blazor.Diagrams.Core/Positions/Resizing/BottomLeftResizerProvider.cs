@@ -7,16 +7,16 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
 {
     public class BottomLeftResizerProvider : IResizerProvider
     {
-		public string? Class => "bottomleft";
+        public string? Class => "bottomleft";
 
-		private Size _originalSize = null!;
+        private Size _originalSize = null!;
         private Point _originalPosition = null!;
         private Point _originalMousePosition = null!;
         private NodeModel _nodeModel = null!;
-		private Diagram _diagram = null!;
+        private Diagram _diagram = null!;
 
 
-		public Point? GetPosition(Model model)
+        public Point? GetPosition(Model model)
         {
             if (model is NodeModel nodeModel && nodeModel.Size is not null)
             {
