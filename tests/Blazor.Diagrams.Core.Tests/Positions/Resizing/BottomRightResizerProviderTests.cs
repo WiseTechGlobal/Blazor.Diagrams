@@ -76,5 +76,69 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
             node.Size.Width.Should().Be(0);
             node.Size.Height.Should().Be(0);
         }
-    }
+
+        [Fact]
+        public void DragResizer_ShouldResizeNode_WhenDiagramZoomsIn()
+        {
+            // setup
+            var diagram = new TestDiagram();
+            diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
+            var node = new NodeModel(position: new Point(0, 0));
+            node.Size = new Size(100, 200);
+            var control = new ResizeControl(new BottomRightResizerProvider());
+            diagram.Controls.AddFor(node).Add(control);
+            diagram.SelectModel(node, false);
+            diagram.SetZoom(0.5);
+
+            // before resize
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(100);
+            node.Size.Height.Should().Be(200);
+
+            // resize
+            var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            control.OnPointerDown(diagram, node, eventArgs);
+            eventArgs = new PointerEventArgs(10, 15, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+            diagram.TriggerPointerMove(null, eventArgs);
+
+            // after resize
+            node.Position.X.Should().Be(0);
+            node.Position.Y.Should().Be(0);
+            node.Size.Width.Should().Be(120);
+            node.Size.Height.Should().Be(230);
+        }
+
+		[Fact]
+		public void DragResizer_ShouldResizeNode_WhenDiagramZoomsOut()
+		{
+			// setup
+			var diagram = new TestDiagram();
+			diagram.SetContainer(new Rectangle(0, 0, 1000, 400));
+			var node = new NodeModel(position: new Point(0, 0));
+			node.Size = new Size(100, 200);
+			var control = new ResizeControl(new BottomRightResizerProvider());
+			diagram.Controls.AddFor(node).Add(control);
+			diagram.SelectModel(node, false);
+			diagram.SetZoom(1.5);
+
+			// before resize
+			node.Position.X.Should().Be(0);
+			node.Position.Y.Should().Be(0);
+			node.Size.Width.Should().Be(100);
+			node.Size.Height.Should().Be(200);
+
+			// resize
+			var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+			control.OnPointerDown(diagram, node, eventArgs);
+			eventArgs = new PointerEventArgs(10, 15, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
+			diagram.TriggerPointerMove(null, eventArgs);
+
+			// after resize
+			node.Position.X.Should().Be(0);
+			node.Position.Y.Should().Be(0);
+			node.Size.Width.Should().Be(120);
+			node.Size.Height.Should().Be(230);
+		}
+	}
 }
