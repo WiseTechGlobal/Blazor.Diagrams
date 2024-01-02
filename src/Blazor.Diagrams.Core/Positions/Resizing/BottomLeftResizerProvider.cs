@@ -44,8 +44,8 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
                 return;
             }
 
-            var height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y);
-            var width = _originalSize.Width - (args.ClientX - _originalMousePosition.X);
+            var height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y) / _diagram.Zoom;
+            var width = _originalSize.Width - (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
 
             var positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
             var positionY = _originalPosition.Y;
