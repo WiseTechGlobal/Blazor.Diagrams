@@ -222,6 +222,7 @@ Diagram.Controls.AddFor(SomeModel).Add(new ResizeControl(new TopLeftResizerProvi
 		_dnlDiagram.SelectModel(dnlNode2, false);
 
 		// Resize Control
+		_resizerDiagram.Options.Zoom.Enabled = true;
 		var resizeNode1 = _resizerDiagram.Nodes.Add(new NodeModel(new Point(100, 100)));
 		var resizeNode2 = _resizerDiagram.Nodes.Add(new NodeModel(new Point(500, 150)));
 		resizeNode1.Title = "Title";
