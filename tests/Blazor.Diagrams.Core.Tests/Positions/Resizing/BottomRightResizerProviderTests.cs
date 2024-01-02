@@ -78,7 +78,7 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
         }
 
         [Fact]
-        public void DragResizer_ShouldResizeNode_WhenDiagramZoomsIn()
+        public void DragResizer_ShouldResizeNode_WhenDiagramZoomedOut()
         {
             // setup
             var diagram = new TestDiagram();
@@ -110,7 +110,7 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
         }
 
 		[Fact]
-		public void DragResizer_ShouldResizeNode_WhenDiagramZoomsOut()
+		public void DragResizer_ShouldResizeNode_WhenDiagramZoomedIn()
 		{
 			// setup
 			var diagram = new TestDiagram();
@@ -120,7 +120,7 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
 			var control = new ResizeControl(new BottomRightResizerProvider());
 			diagram.Controls.AddFor(node).Add(control);
 			diagram.SelectModel(node, false);
-			diagram.SetZoom(1.5);
+			diagram.SetZoom(2);
 
 			// before resize
 			node.Position.X.Should().Be(0);
@@ -137,8 +137,8 @@ namespace Blazor.Diagrams.Core.Tests.Positions.Resizing
 			// after resize
 			node.Position.X.Should().Be(0);
 			node.Position.Y.Should().Be(0);
-			node.Size.Width.Should().Be(120);
-			node.Size.Height.Should().Be(230);
+			node.Size.Width.Should().Be(105);
+			node.Size.Height.Should().Be(207.5);
 		}
 	}
 }
