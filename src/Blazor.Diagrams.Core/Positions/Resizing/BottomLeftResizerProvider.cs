@@ -9,11 +9,11 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
     {
         public string? Class => "bottomleft";
 
-        private Size _originalSize = null!;
-        private Point _originalPosition = null!;
-        private Point _originalMousePosition = null!;
-        private NodeModel _nodeModel = null!;
-        private Diagram _diagram = null!;
+        private Size? _originalSize = null;
+        private Point? _originalPosition = null;
+        private Point? _originalMousePosition = null;
+        private NodeModel? _nodeModel = null;
+        private Diagram? _diagram = null;
 
 
         public Point? GetPosition(Model model)
@@ -44,10 +44,10 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
                 return;
             }
 
-            var height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y) / _diagram.Zoom;
+            var height = _originalSize!.Height + (args.ClientY - _originalMousePosition!.Y) / _diagram!.Zoom;
             var width = _originalSize.Width - (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
 
-            var positionX = _originalPosition.X + (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
+            var positionX = _originalPosition!.X + (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
             var positionY = _originalPosition.Y;
 
             if (width < _nodeModel.MinimumDimensions.Width)
@@ -68,11 +68,11 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
         public void OnResizeEnd(Model? model, PointerEventArgs args)
         {
             _nodeModel?.TriggerSizeChanged();
-            _originalSize = null!;
-            _originalPosition = null!;
-            _originalMousePosition = null!;
-            _nodeModel = null!;
-            _diagram = null!;
+            _originalSize = null;
+            _originalPosition = null;
+            _originalMousePosition = null;
+            _nodeModel = null;
+            _diagram = null;
         }
 
     }
