@@ -32,11 +32,11 @@ public abstract class Diagram
 		public event Action<Model?, PointerEventArgs>? PointerClick;
 		public event Action<Model?, PointerEventArgs>? PointerDoubleClick;
 
-		public event Action<SelectableModel>? SelectionChanged;
-		public event Action? PanChanged;
-		public event Action? ZoomChanged;
-		public event Action? ContainerChanged;
-		public event Action? Changed;
+    public event Action<SelectableModel>? SelectionChanged;
+    public event Action<double, double>? PanChanged;
+    public event Action? ZoomChanged;
+    public event Action? ContainerChanged;
+    public event Action? Changed;
 
     protected Diagram(bool registerDefaultBehaviors = true)
     {
@@ -238,15 +238,18 @@ public abstract class Diagram
 
     public void SetPan(double x, double y)
     {
+        var oldPanX = Pan.X;
+        var oldPanY = Pan.Y;
+
         Pan = new Point(x, y);
-        PanChanged?.Invoke();
+        PanChanged?.Invoke(oldPanX - Pan.X, oldPanY - Pan.Y);
         Refresh();
     }
 
     public void UpdatePan(double deltaX, double deltaY)
     {
         Pan = Pan.Add(deltaX, deltaY);
-        PanChanged?.Invoke();
+        PanChanged?.Invoke(-deltaX, -deltaY);
         Refresh();
     }
 
