@@ -33,7 +33,7 @@ public abstract class Diagram
 		public event Action<Model?, PointerEventArgs>? PointerDoubleClick;
 
     public event Action<SelectableModel>? SelectionChanged;
-    public event Action<double, double>? PanChanged;
+    public event Action<double, double, double, double>? PanChanged;
     public event Action? ZoomChanged;
     public event Action? ContainerChanged;
     public event Action? Changed;
