@@ -9,10 +9,10 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
     {
         public string? Class => "bottomright";
 
-        private Size? _originalSize = null;
-        private Point? _originalMousePosition = null;
-        private NodeModel? _nodeModel = null;
-        private Diagram? _diagram = null;
+        private Size? _originalSize;
+        private Point? _originalMousePosition;
+        private NodeModel? _nodeModel;
+        private Diagram? _diagram;
 
         public Point? GetPosition(Model model)
         {
@@ -28,7 +28,7 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
             if (model is NodeModel nodeModel)
             {
                 _originalMousePosition = new Point(eventArgs.ClientX, eventArgs.ClientY);
-                _originalSize = nodeModel.Size!;
+                _originalSize = nodeModel.Size;
                 _nodeModel = nodeModel;
                 _diagram = diagram;
             }
@@ -36,12 +36,12 @@ namespace Blazor.Diagrams.Core.Positions.Resizing
 
         public void OnPointerMove(Model? model, PointerEventArgs args)
         {
-            if (_nodeModel is null)
+            if (_originalSize is null || _originalMousePosition is null || _nodeModel is null || _diagram is null)
             {
                 return;
             }
 
-            var height = _originalSize!.Height + (args.ClientY - _originalMousePosition!.Y) / _diagram!.Zoom;
+            var height = _originalSize.Height + (args.ClientY - _originalMousePosition.Y) / _diagram.Zoom;
             var width = _originalSize.Width + (args.ClientX - _originalMousePosition.X) / _diagram.Zoom;
 
             if (width < _nodeModel.MinimumDimensions.Width)
