@@ -1,0 +1,6 @@
+<Build xmlns="http://wisetechglobal.com/DevTools/Build.xsd" MSBuild="16">
+  <Solutions>
+    <Solution Filename="Blazor.Diagrams.sln" />
+  </Solutions>
+  <DatSettings />
+</Build>
