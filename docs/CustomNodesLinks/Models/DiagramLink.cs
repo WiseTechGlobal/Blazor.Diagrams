@@ -4,7 +4,7 @@ namespace CustomNodesLinks.Models;
 
 public sealed class DiagramLink : LinkModel
 {
-public DiagramLink(string name, NodeModel sourceNode, NodeModel? targetNode) :
+public DiagramLink(string name, NodeModel sourceNode, NodeModel targetNode) :
   base(name, sourceNode, targetNode)
 {
   Name = name;
