@@ -1,4 +1,18 @@
 <Build xmlns="http://wisetechglobal.com/DevTools/Build.xsd" MSBuild="16">
+<Dependencies>
+        <Dependency Repository="https://devops.wisetechglobal.com/wtg/Shared/_git/WTG.DeploymentUtils">
+            <Copy Source="WTG.DeploymentUtils.dll" RequiredForBuild="true" />
+        </Dependency>
+    </Dependencies>
+    <DatSettings BuildDeployerType="WTG.DeploymentUtils.NuGet.DotNetNuGetDeployer, WTG.DeploymentUtils">
+        <TestAdapter Type="Dat.Implementation.VSTest.VSTestAdapter, Dat.Implementation.VSTest"/>
+        <DeploymentTargets>
+            <DeploymentTarget Type="AutoDeployLatestBuild"
+                              BuildConfiguration="RELEASE"
+                              IsProduction="false"
+                        />
+        </DeploymentTargets>
+    </DatSettings>
   <Solutions>
     <Solution Filename="Blazor.Diagrams.sln" />
   </Solutions>
