@@ -93,7 +93,7 @@ public class DiagramTests
         panChanges.Should().Be(1);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Zoom_ShoulClampToMinimumValue")]
     [InlineData(0.001)]
     [InlineData(0.1)]
     public void Zoom_ShoulClampToMinimumValue(double zoomValue)
@@ -103,7 +103,7 @@ public class DiagramTests
         Assert.Equal(diagram.Zoom, diagram.Options.Zoom.Minimum);
     }
 
-    [Theory]
+    [Theory(DisplayName = "Zoom_ThrowExceptionWhenLessThan0")]
     [InlineData(0)]
     [InlineData(-0.1)]
     [InlineData(-0.00001)]
@@ -113,7 +113,7 @@ public class DiagramTests
         Assert.Throws<ArgumentException>(() => diagram.SetZoom(zoomValue));
     }
 
-    [Theory]
+    [Theory(DisplayName = "ZoomOptions_ThrowExceptionWhenLessThan0")]
     [InlineData(0)]
     [InlineData(-0.1)]
     [InlineData(-0.00001)]

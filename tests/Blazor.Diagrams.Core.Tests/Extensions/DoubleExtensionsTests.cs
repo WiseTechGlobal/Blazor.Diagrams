@@ -5,7 +5,7 @@ namespace Blazor.Diagrams.Core.Tests.Extensions;
 
 public class DoubleExtensionsTests
 {
-    [Theory]
+    [Theory(DisplayName = "AlmostEqualTo")]
     [InlineData(5, 10, 0.1, false)]
     [InlineData(1.1, 1.2, 0.01, false)]
     [InlineData(10, 10, 0.0001, true)]

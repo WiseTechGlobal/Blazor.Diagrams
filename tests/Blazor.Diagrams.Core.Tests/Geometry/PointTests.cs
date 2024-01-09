@@ -6,7 +6,7 @@ namespace Blazor.Diagrams.Core.Tests.Geometry;
 
 public class PointTests
 {
-    [Theory]
+    [Theory(DisplayName = "DistanceTo")]
     [InlineData(0, 0, 0, 0, 0)]
     [InlineData(-7, -4, 17, 6.5, 26.196374)]
     [InlineData(5, 10, 33, 98, 92.347171)]

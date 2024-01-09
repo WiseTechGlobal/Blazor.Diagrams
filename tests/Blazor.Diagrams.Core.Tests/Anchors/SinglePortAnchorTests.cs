@@ -76,7 +76,7 @@ public class SinglePortAnchorTests
         position.Y.Should().Be(mp.Y);
     }
 
-    [Theory]
+    [Theory(DisplayName = "GetPosition_ShouldReturnAlignmentBasedPosition_WhenUseShapeAndAlignmentIsFalse")]
     [InlineData(PortAlignment.Top, 110, 50)]
     [InlineData(PortAlignment.TopRight, 120, 50)]
     [InlineData(PortAlignment.Right, 120, 55)]
@@ -110,7 +110,7 @@ public class SinglePortAnchorTests
         position.Y.Should().Be(y);
     }
 
-    [Theory]
+    [Theory(DisplayName = "GetPosition_ShouldUsePointAtAngle_WhenUseShapeAndAlignmentIsTrue")]
     [InlineData(PortAlignment.Top, 270)]
     [InlineData(PortAlignment.TopRight, 315)]
     [InlineData(PortAlignment.Right, 0)]

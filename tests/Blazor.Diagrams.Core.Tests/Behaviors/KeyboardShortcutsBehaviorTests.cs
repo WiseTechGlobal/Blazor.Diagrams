@@ -8,7 +8,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors;
 
 public class KeyboardShortcutsBehaviorTests
 {
-    [Theory]
+    [Theory(DisplayName = "Behavior_ShouldExecuteAction_WhenCombinationIsPressed")]
     [InlineData("A", true, true, true)]
     [InlineData("B", true, false, false)]
     [InlineData("C", true, true, false)]
