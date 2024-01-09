@@ -5,27 +5,30 @@
         <Nullable>enable</Nullable>
         <Authors>zHaytam</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <AssemblyVersion>3.0.1</AssemblyVersion>
-        <FileVersion>3.0.1</FileVersion>
-        <RepositoryUrl>https://github.com/Blazor-Diagrams/Blazor.Diagrams</RepositoryUrl>
+        <AssemblyVersion>1.0</AssemblyVersion>
+        <FileVersion>1.0</FileVersion>
+        <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
         <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
-		<Version>3.0.1</Version>
+        <Version>1.0.8</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
-        <PackageId>Z.Blazor.Diagrams</PackageId>
+        <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
         <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
-        <Product>Z.Blazor.Diagrams</Product>
+        <Product>WTG.Z.Blazor.Diagrams</Product>
         <PackageIcon>ZBD.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.25" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25" />
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+        <PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.3.3" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" />
+        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -49,5 +52,16 @@
     <Target Name="CompileStaticAssets" AfterTargets="CoreCompile;TestWebCompiler" Condition="'$(ErrorCode)' == '0'">
         <Exec Command="webcompiler -r wwwroot" StandardOutputImportance="high" StandardErrorImportance="high" />
     </Target>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetSvgPathPropertiesForPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="GetSvgPathPropertiesForPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)Blazor.Diagrams.Core.dll;..\..\packages\svgpathproperties\1.1.2\lib\netstandard2.0\SvgPathProperties.dll">
+      </BuildOutputInPackage>
+    </ItemGroup>
+  </Target>
 
 </Project>
