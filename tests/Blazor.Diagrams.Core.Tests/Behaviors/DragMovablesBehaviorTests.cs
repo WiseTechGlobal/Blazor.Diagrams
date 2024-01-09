@@ -4,6 +4,7 @@ using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Options;
 using FluentAssertions;
 using Moq;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Behaviors;
@@ -29,11 +30,16 @@ public class DragMovablesBehaviorTests
         nodeMock.Verify(n => n.SetPosition(50, 50), Times.Once);
     }
 
+    public static IEnumerable<object[]> Behavior_SnapToGrid_ShouldCallSetPosition_TestData()
+    {
+        yield return new object[] { false, 0, 0, 45, 45  };
+        yield return new object[] { true, 0, 0, 35, 35 };
+        yield return new object[] { false, 3, 3, 45, 45 };
+        yield return new object[] { true, 3, 3, 50, 50 };
+    }
+
     [Theory(DisplayName = "Behavior_SnapToGrid_ShouldCallSetPosition")]
-    [InlineData(false, 0, 0, 45, 45)]
-    [InlineData(true, 0, 0, 35, 35)]
-    [InlineData(false, 3, 3, 45, 45)]
-    [InlineData(true, 3, 3, 50, 50)]
+    [MemberData(nameof(Behavior_SnapToGrid_ShouldCallSetPosition_TestData))]
     public void Behavior_SnapToGrid_ShouldCallSetPosition(bool gridSnapToCenter, double initialX, double initialY, double deltaX, double deltaY)
     {
         // Arrange

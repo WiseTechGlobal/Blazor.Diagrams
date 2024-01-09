@@ -2,6 +2,7 @@
 using Blazor.Diagrams.Core.Models;
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests;
@@ -93,9 +94,14 @@ public class DiagramTests
         panChanges.Should().Be(1);
     }
 
+    public static IEnumerable<object[]> Zoom_ShoulClampToMinimumValue_TestData()
+    {
+        yield return new object[] { 0.001 };
+        yield return new object[] { 0.1 };
+    }
+
     [Theory(DisplayName = "Zoom_ShoulClampToMinimumValue")]
-    [InlineData(0.001)]
-    [InlineData(0.1)]
+    [MemberData(nameof(Zoom_ShoulClampToMinimumValue_TestData))]
     public void Zoom_ShoulClampToMinimumValue(double zoomValue)
     {
         var diagram = new TestDiagram();
@@ -103,10 +109,15 @@ public class DiagramTests
         Assert.Equal(diagram.Zoom, diagram.Options.Zoom.Minimum);
     }
 
+    public static IEnumerable<object[]> ThrowExceptionWhenLessThan0_TestData()
+    {
+        yield return new object[] { 0 };
+        yield return new object[] { -0.1 };
+        yield return new object[] { -0.00001 };
+    }
+
     [Theory(DisplayName = "Zoom_ThrowExceptionWhenLessThan0")]
-    [InlineData(0)]
-    [InlineData(-0.1)]
-    [InlineData(-0.00001)]
+    [MemberData(nameof (ThrowExceptionWhenLessThan0_TestData))]
     public void Zoom_ThrowExceptionWhenLessThan0(double zoomValue)
     {
         var diagram = new TestDiagram();
@@ -114,9 +125,7 @@ public class DiagramTests
     }
 
     [Theory(DisplayName = "ZoomOptions_ThrowExceptionWhenLessThan0")]
-    [InlineData(0)]
-    [InlineData(-0.1)]
-    [InlineData(-0.00001)]
+    [MemberData(nameof(ThrowExceptionWhenLessThan0_TestData))]
     public void ZoomOptions_ThrowExceptionWhenLessThan0(double zoomValue)
     {
         var diagram = new TestDiagram();

@@ -3,6 +3,7 @@ using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using FluentAssertions;
 using Moq;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Anchors;
@@ -76,15 +77,20 @@ public class SinglePortAnchorTests
         position.Y.Should().Be(mp.Y);
     }
 
+    public static IEnumerable<object[]> GetPosition_ShouldReturnAlignmentBasedPosition_WhenUseShapeAndAlignmentIsFalse_TestData()
+    {
+        yield return new object[] { PortAlignment.Top, 110, 50 };
+        yield return new object[] { PortAlignment.TopRight, 120, 50 };
+        yield return new object[] { PortAlignment.Right, 120, 55 };
+        yield return new object[] { PortAlignment.BottomRight, 120, 60 };
+        yield return new object[] { PortAlignment.Bottom, 110, 60 };
+        yield return new object[] { PortAlignment.BottomLeft, 100, 60 };
+        yield return new object[] { PortAlignment.Left, 100, 55 };
+        yield return new object[] { PortAlignment.TopLeft, 100, 50 };
+    }
+
     [Theory(DisplayName = "GetPosition_ShouldReturnAlignmentBasedPosition_WhenUseShapeAndAlignmentIsFalse")]
-    [InlineData(PortAlignment.Top, 110, 50)]
-    [InlineData(PortAlignment.TopRight, 120, 50)]
-    [InlineData(PortAlignment.Right, 120, 55)]
-    [InlineData(PortAlignment.BottomRight, 120, 60)]
-    [InlineData(PortAlignment.Bottom, 110, 60)]
-    [InlineData(PortAlignment.BottomLeft, 100, 60)]
-    [InlineData(PortAlignment.Left, 100, 55)]
-    [InlineData(PortAlignment.TopLeft, 100, 50)]
+    [MemberData(nameof(GetPosition_ShouldReturnAlignmentBasedPosition_WhenUseShapeAndAlignmentIsFalse_TestData))]
     public void GetPosition_ShouldReturnAlignmentBasedPosition_WhenUseShapeAndAlignmentIsFalse(PortAlignment alignment, double x, double y)
     {
         // Arrange
@@ -110,15 +116,20 @@ public class SinglePortAnchorTests
         position.Y.Should().Be(y);
     }
 
+    public static IEnumerable<object[]> GetPosition_ShouldUsePointAtAngle_WhenUseShapeAndAlignmentIsTrue_TestData()
+    {
+        yield return new object[] { PortAlignment.Top, 270  };
+        yield return new object[] { PortAlignment.TopRight, 315 };
+        yield return new object[] { PortAlignment.Right, 0 };
+        yield return new object[] { PortAlignment.BottomRight, 45 };
+        yield return new object[] { PortAlignment.Bottom, 90 };
+        yield return new object[] { PortAlignment.BottomLeft, 135 };
+        yield return new object[] { PortAlignment.Left, 180 };
+        yield return new object[] { PortAlignment.TopLeft, 225 };
+    }
+
     [Theory(DisplayName = "GetPosition_ShouldUsePointAtAngle_WhenUseShapeAndAlignmentIsTrue")]
-    [InlineData(PortAlignment.Top, 270)]
-    [InlineData(PortAlignment.TopRight, 315)]
-    [InlineData(PortAlignment.Right, 0)]
-    [InlineData(PortAlignment.BottomRight, 45)]
-    [InlineData(PortAlignment.Bottom, 90)]
-    [InlineData(PortAlignment.BottomLeft, 135)]
-    [InlineData(PortAlignment.Left, 180)]
-    [InlineData(PortAlignment.TopLeft, 225)]
+    [MemberData(nameof(GetPosition_ShouldUsePointAtAngle_WhenUseShapeAndAlignmentIsTrue_TestData))]
     public void GetPosition_ShouldUsePointAtAngle_WhenUseShapeAndAlignmentIsTrue(PortAlignment alignment, double angle)
     {
         // Arrange

@@ -1,6 +1,8 @@
 ﻿using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Events;
+using Blazor.Diagrams.Core.Models;
 using FluentAssertions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -8,14 +10,19 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors;
 
 public class KeyboardShortcutsBehaviorTests
 {
+    public static IEnumerable<object[]> Behavior_ShouldExecuteAction_WhenCombinationIsPressed_TestData()
+    {
+        yield return new object[] { "A", true, true, true };
+        yield return new object[] { "B", true, false, false};
+        yield return new object[] { "C", true, true, false};
+        yield return new object[] { "D", true, false, true};
+        yield return new object[] { "E", false, false, true};
+        yield return new object[] { "F", false, true, true};
+        yield return new object[] { "G", false, false, false};
+    }
+
     [Theory(DisplayName = "Behavior_ShouldExecuteAction_WhenCombinationIsPressed")]
-    [InlineData("A", true, true, true)]
-    [InlineData("B", true, false, false)]
-    [InlineData("C", true, true, false)]
-    [InlineData("D", true, false, true)]
-    [InlineData("E", false, false, true)]
-    [InlineData("F", false, true, true)]
-    [InlineData("G", false, false, false)]
+    [MemberData(nameof(Behavior_ShouldExecuteAction_WhenCombinationIsPressed_TestData))]
     public void Behavior_ShouldExecuteAction_WhenCombinationIsPressed(string key, bool ctrl, bool shift, bool alt)
     {
         // Arrange
