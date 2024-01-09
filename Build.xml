@@ -10,11 +10,10 @@
             <DeploymentTarget Type="DeployOnDemand"
                               BuildConfiguration="RELEASE"
                               IsProduction="false"
-                        />
+            />
         </DeploymentTargets>
     </DatSettings>
   <Solutions>
     <Solution Filename="Blazor.Diagrams.sln" />
   </Solutions>
-  <DatSettings />
 </Build>
