@@ -7,7 +7,7 @@
     <DatSettings BuildDeployerType="WTG.DeploymentUtils.NuGet.DotNetNuGetDeployer, WTG.DeploymentUtils">
         <TestAdapter Type="Dat.Implementation.VSTest.VSTestAdapter, Dat.Implementation.VSTest"/>
         <DeploymentTargets>
-            <DeploymentTarget Type="AutoDeployLatestBuild"
+            <DeploymentTarget Type="DeployOnDemand"
                               BuildConfiguration="RELEASE"
                               IsProduction="false"
                         />
