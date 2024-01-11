@@ -2,8 +2,8 @@ name: Create release
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+  
 
 jobs:
   build:
@@ -55,6 +55,3 @@ jobs:
       with:
         files: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
         tag_name: ${{ steps.version.outputs.version }}
-        prerelease: true
-
-
