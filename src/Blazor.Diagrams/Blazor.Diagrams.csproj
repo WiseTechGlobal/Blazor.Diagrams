@@ -53,10 +53,10 @@
     </Target>
 
   <PropertyGroup>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetSvgPathPropertiesForPackage</TargetsForTfmSpecificBuildOutput>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetBinariesForPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
-  <Target Name="GetSvgPathPropertiesForPackage">
+  <Target Name="GetBinariesForPackage">
     <ItemGroup>
       <BuildOutputInPackage Include="$(OutputPath)Blazor.Diagrams.Core.dll;..\..\packages\svgpathproperties\1.1.2\lib\netstandard2.0\SvgPathProperties.dll">
       </BuildOutputInPackage>
