@@ -1,0 +1,48 @@
+name: Build and Test
+on:
+  push:
+    branches: [ master ]
+    tags:
+    - '*'
+  pull_request:
+    branches: [ master ]
+    tags:
+    - '*'
+
+jobs:
+  build:
+    name: Build - ${{ matrix.configuration }}
+  
+    strategy:
+      matrix:
+        configuration: [ Release ]
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+  
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+            6.0.x
+            3.1.x
+      
+    - name: Install version tool
+      run: dotnet tool install -g dotnetCampus.TagToVersion
+
+    - name: Set version
+      run: dotnet TagToVersion -t ${{ github.ref }}
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Upload packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: package
+        path: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
+        retention-days: 5
