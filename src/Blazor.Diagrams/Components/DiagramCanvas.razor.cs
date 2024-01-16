@@ -12,6 +12,7 @@ public partial class DiagramCanvas : IAsyncDisposable
 {
     private DotNetObjectReference<DiagramCanvas>? _reference;
     private bool _shouldRender;
+    private string? Style;
 
     protected ElementReference elementReference;
 
@@ -60,6 +61,7 @@ public partial class DiagramCanvas : IAsyncDisposable
 
         _reference = DotNetObjectReference.Create(this);
         BlazorDiagram.Changed += OnDiagramChanged;
+        Style = BlazorDiagram.Options.AllowPanning ? "cursor: grab;" : "cursor: default;";
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
