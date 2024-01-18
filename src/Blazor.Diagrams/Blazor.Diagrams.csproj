@@ -5,8 +5,6 @@
         <Nullable>enable</Nullable>
         <Authors>zHaytam</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <AssemblyVersion>1.0</AssemblyVersion>
-        <FileVersion>1.0</FileVersion>
         <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
         <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
