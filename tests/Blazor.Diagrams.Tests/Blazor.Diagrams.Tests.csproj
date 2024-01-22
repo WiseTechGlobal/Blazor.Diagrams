@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\src\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Blazor.Diagrams\Blazor.Diagrams.csproj" />
+    <ProjectReference Include="..\..\src\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" />
   </ItemGroup>
 
 </Project>

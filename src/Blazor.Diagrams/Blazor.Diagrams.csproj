@@ -25,10 +25,9 @@
 	  <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
+    </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\ZBD.png">

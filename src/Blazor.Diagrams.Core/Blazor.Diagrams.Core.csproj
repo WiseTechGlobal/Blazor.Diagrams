@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Authors>zHaytam</Authors>
-    <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
-    <AssemblyVersion>3.0.4</AssemblyVersion>
-    <FileVersion>3.0.4</FileVersion>
-    <RepositoryUrl>https://github.com/Blazor-Diagrams/Blazor.Diagrams</RepositoryUrl>
-    <Version>3.0.4</Version>
-    <PackageId>Z.Blazor.Diagrams.Core</PackageId>
-    <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
-    <Product>Z.Blazor.Diagrams.Core</Product>
-    <PackageIcon>ZBD.png</PackageIcon>
-    <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Authors>zHaytam, WiseTech Global</Authors>
+		<Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
+		<RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
+		<PackageId>WTG.Z.Blazor.Diagrams.Core</PackageId>
+		<PackageTags>blazor diagrams diagramming svg drag</PackageTags>
+		<Product>WTG.Z.Blazor.Diagrams.Core</Product>
+		<PackageIcon>ZBD.png</PackageIcon>
+		<PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\ZBD.png">
@@ -29,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SvgPathProperties" />
+	  <PackageReference Include="SvgPathProperties" />
+	  <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All"/>
   </ItemGroup>
 
 </Project>
