@@ -4,15 +4,13 @@ on:
   push:
     branches: [ master ]
   workflow_dispatch:
-  
+
+env:
+  PACKAGE_Path: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
 
 jobs:
   build:
-    name: Build - ${{ matrix.configuration }}
-  
-    strategy:
-      matrix:
-        configuration: [ Release ]
+    name: Build - Release
 
     runs-on: ubuntu-latest
     steps:
@@ -52,12 +50,12 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: package
-        path: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
+        path: $PACKAGE_PATH
         retention-days: 5
 
       # Create a new release and upload the package to the release
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
+        files: $PACKAGE_PATH
         tag_name: ${{ steps.version.outputs.version }}
