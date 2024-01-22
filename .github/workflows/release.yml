@@ -34,7 +34,7 @@ jobs:
         increment: patch
 
     - name: Install version tool
-      run: dotnet tool install -g dotnetCampus.TagToVersion
+      run: dotnet tool install dotnetCampus.TagToVersion -g --version 1.0.11
 
       # Writes the new version number to build/Version.props
     - name: Set version
