@@ -52,12 +52,12 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: package
-        path: $PACKAGE_PATH
+        path: "$PACKAGE_PATH"
         retention-days: 5
 
       # Create a new release and upload the package to the release
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: $PACKAGE_PATH
+        files: "$PACKAGE_PATH"
         tag_name: ${{ steps.version.outputs.version }}
