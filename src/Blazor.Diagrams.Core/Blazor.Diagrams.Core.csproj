@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Authors>zHaytam</Authors>
+		<Authors>zHaytam, WiseTech Global</Authors>
 		<Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
 		<RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
 		<PackageId>WTG.Z.Blazor.Diagrams.Core</PackageId>
