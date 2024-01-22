@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PACKAGE_Path: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
+  PACKAGE_PATH: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
 
 jobs:
   build:
