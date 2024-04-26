@@ -5,4 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+
+	<ItemGroup>
+		<PackageVersion Include="bunit" Version="1.4.15" />
+		<PackageVersion Include="FluentAssertions" Version="5.10.3" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+		<PackageVersion Include="xunit" Version="2.4.1" />
+		<PackageVersion Include="Moq" Version="[4.18.4]" />
+		<PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
+		<PackageVersion Include="coverlet.collector" Version="1.3.0" />  
+	</ItemGroup>
 </Project>
