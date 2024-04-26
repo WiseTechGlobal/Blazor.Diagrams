@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>zHaytam, WiseTech Global</Authors>
 		<Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
 		<RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
+		<Version>3.0.2</Version>
 		<PackageId>WTG.Z.Blazor.Diagrams.Core</PackageId>
 		<PackageTags>blazor diagrams diagramming svg drag</PackageTags>
 		<Product>WTG.Z.Blazor.Diagrams.Core</Product>
@@ -18,20 +18,20 @@
 		<AssemblyOriginatorKeyFile>..\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\ZBD.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\ZBD.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="SvgPathProperties" Version="1.1.2" />
-    <PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.3.3" PrivateAssets="All"/>
+		<PackageReference Include="SvgPathProperties" Version="1.1.2" />
+		<PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.3.3" PrivateAssets="All"/>
 	</ItemGroup>
 
 </Project>

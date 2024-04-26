@@ -41,7 +41,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
@@ -64,7 +63,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
@@ -114,7 +112,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
@@ -148,7 +145,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
@@ -208,7 +204,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
@@ -241,7 +236,6 @@ namespace Blazor.Diagrams.Core.Tests.Controls
             // Arrange
             RemoveControl removeControl = new(0, 0);
             Diagram diagram = new TestDiagram(
-                new DiagramOptions
                 {
                     Constraints =
                     {
