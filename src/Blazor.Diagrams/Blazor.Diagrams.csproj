@@ -20,7 +20,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.3.3" PrivateAssets="All"/>
+        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
