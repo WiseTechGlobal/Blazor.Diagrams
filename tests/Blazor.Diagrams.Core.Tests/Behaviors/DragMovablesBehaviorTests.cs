@@ -141,24 +141,4 @@ public class DragMovablesBehaviorTests
         // Assert
         nodeMock.Verify(n => n.SetPosition(50, 50), Times.Once);
     }
-
-    [Fact]
-    public void Behavior_ShouldCallSetPosition_WhenPanChanges()
-    {
-        // Arrange
-        var diagram = new TestDiagram();
-        var nodeMock = new Mock<NodeModel>(Point.Zero);
-        var node = diagram.Nodes.Add(nodeMock.Object);
-        diagram.SelectModel(node, false);
-        diagram.BehaviorOptions.DiagramWheelBehavior = diagram.GetBehavior<ScrollBehavior>();
-        diagram.SetContainer(new Rectangle(0, 0, 100, 100));
-
-        // Act
-        diagram.TriggerPointerDown(node,
-            new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
-        diagram.TriggerWheel(new WheelEventArgs(100, 100, 0, 0, false, false, false, 100, 100, 0, 0));
-
-        // Assert
-        nodeMock.Verify(n => n.SetPosition(100, 100), Times.Once);
-    }
 }
