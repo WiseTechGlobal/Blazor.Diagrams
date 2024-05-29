@@ -33,6 +33,7 @@ public class DragMovablesBehavior : Behavior
         Diagram.PointerDown += OnPointerDown;
         Diagram.PointerMove += OnPointerMove;
         Diagram.PointerUp += OnPointerUp;
+        Diagram.PanChanged += OnPanChanged;
     }
 
     private void OnPointerDown(Model? model, PointerEventArgs e)
@@ -114,6 +115,45 @@ public class DragMovablesBehavior : Behavior
         _lastClientY = e.ClientY;
     }
 
+    public void OnPanChanged(double deltaX, double deltaY)
+    {
+        if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
+            return;
+
+        _moved = true;
+
+        _totalMovedX += deltaX;
+        _totalMovedY += deltaY;
+
+        MoveNodesOnPan(null, _totalMovedX, _totalMovedY);
+    }
+
+    private void MoveNodesOnPan(Model? model, double deltaX, double deltaY)
+    {
+        foreach (var (movable, initialPosition) in _initialPositions)
+        {
+            var ndx = ApplyGridSize(deltaX + initialPosition.position.X);
+            var ndy = ApplyGridSize(deltaY + initialPosition.position.Y);
+            if (Diagram.Options.GridSnapToCenter && movable is NodeModel node)
+            {
+                node.SetPosition(ndx - (node.Size?.Width ?? 0) / 2, ndy - (node.Size?.Height ?? 0) / 2);
+            }
+            else
+            {
+                movable.SetPosition(ndx, ndy);
+            }
+        }
+    }
+
+    private double ApplyGridSize(double n)
+    {
+        if (Diagram.Options.GridSize == null)
+            return n;
+
+        var gridSize = Diagram.Options.GridSize.Value;
+        return gridSize * Math.Floor((n + gridSize / 2.0) / gridSize);
+    }
+
     void MoveNodes(Model? model, double deltaX, double deltaY)
     {
         foreach (var (node, positions) in _initialPositions)
@@ -143,8 +183,9 @@ public class DragMovablesBehavior : Behavior
             var parentH = nodeModel.ParentNode.Size?.Height - CHILD_NODE_MIN_OFFSET_TOP - CHILD_NODE_MIN_OFFSET_BOTTOM;
             y = Clamp(y, nodeModel.Size?.Height, parentY, parentH);
 
-            nodeModel.SetPosition(x, y);
         }
+
+        node.SetPosition(x, y);
     }
 
     double Clamp(double position, double? size, double? parentPosition, double? parentSize)
@@ -203,5 +244,6 @@ public class DragMovablesBehavior : Behavior
         Diagram.PointerDown -= OnPointerDown;
         Diagram.PointerMove -= OnPointerMove;
         Diagram.PointerUp -= OnPointerUp;
+        Diagram.PanChanged -= OnPanChanged;
     }
 }
