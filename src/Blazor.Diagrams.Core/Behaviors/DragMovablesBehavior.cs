@@ -37,6 +37,7 @@ public class DragMovablesBehavior : Behavior
 
     private void OnPointerDown(Model? model, PointerEventArgs e)
     {
+        Console.WriteLine("On Pointer Down...");
         if (model is not NodeModel)
             return;
 
