@@ -163,7 +163,7 @@ public class DragMovablesBehaviorTests
     }
 
     [Fact]
-    public void Behavior_ShouldCallSetPosition_WhenNodeWithChildDragged()
+    public void Behavior_ShouldCallSetPosition_WhenNodeWithAChildDragged()
     {
         // Arrange
         var diagram = new TestDiagram();
