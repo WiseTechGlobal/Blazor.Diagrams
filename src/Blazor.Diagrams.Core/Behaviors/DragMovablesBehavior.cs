@@ -38,6 +38,8 @@ public class DragMovablesBehavior : Behavior
         if (model is not NodeModel)
             return;
 
+        ResetPan();
+
         _initialPositions.Clear();
         foreach (var sm in Diagram.GetSelectedModels())
         {
@@ -67,7 +69,48 @@ public class DragMovablesBehavior : Behavior
         _moved = false;
     }
 
+   
     private void OnPointerMove(Model? model, PointerEventArgs e)
+    {
+        SelectChildShapes();
+
+        if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
+        {
+            return;
+        }
+
+        _moved = true;
+
+        var deltaX = (e.ClientX - _lastClientX.Value) / Diagram.Zoom;
+        var deltaY = (e.ClientY - _lastClientY.Value) / Diagram.Zoom;
+
+        _totalMovedX += deltaX;
+        _totalMovedY += deltaY;
+
+        MoveNodes(model, _totalMovedX, _totalMovedY);
+
+        _lastClientX = e.ClientX;
+        _lastClientY = e.ClientY;
+    }
+
+    public void OnPanChanged(double deltaX, double deltaY)
+    {
+        if (!_moved)
+        {
+            return;
+        }
+        SelectChildShapes();
+
+        if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
+            return;
+
+        _totalMovedX += deltaX / Diagram.Zoom; 
+        _totalMovedY += deltaY / Diagram.Zoom;
+
+        MoveNodes(null, _totalMovedX, _totalMovedY);
+    }
+
+    public void SelectChildShapes()
     {
         if (!_moved)
         {
@@ -105,38 +148,7 @@ public class DragMovablesBehavior : Behavior
                 }
             }
         }
-        if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
-        {
-            return;
-        }
-
-        _moved = true;
-
-        var deltaX = (e.ClientX - _lastClientX.Value) / Diagram.Zoom;
-        var deltaY = (e.ClientY - _lastClientY.Value) / Diagram.Zoom;
-
-        _totalMovedX += deltaX;
-        _totalMovedY += deltaY;
-
-        MoveNodes(model, _totalMovedX, _totalMovedY);
-
-        _lastClientX = e.ClientX;
-        _lastClientY = e.ClientY;
     }
-
-    public void OnPanChanged(double deltaX, double deltaY)
-    {
-        if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
-            return;
-
-        _moved = true;
-
-        _totalMovedX += deltaX;
-        _totalMovedY += deltaY;
-
-        MoveNodes(null, _totalMovedX, _totalMovedY);
-    }
-
     private void MoveNodes(Model? model, double deltaX, double deltaY)
     {
         foreach (var (node, positions) in _initialPositions)
@@ -228,6 +240,7 @@ public class DragMovablesBehavior : Behavior
         _totalMovedY = 0;
         _lastClientX = null;
         _lastClientY = null;
+        _moved = false;
     }
 
     private double ApplyGridSize(double n)
@@ -237,6 +250,11 @@ public class DragMovablesBehavior : Behavior
 
         var gridSize = Diagram.Options.GridSize.Value;
         return gridSize * Math.Floor((n + gridSize / 2.0) / gridSize);
+    }
+
+    void ResetPan()
+    {
+        Diagram.SetPan(0, 0);
     }
 
     public override void Dispose()
