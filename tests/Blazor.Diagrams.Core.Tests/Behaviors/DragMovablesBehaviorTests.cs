@@ -156,10 +156,12 @@ public class DragMovablesBehaviorTests
         // Act
         diagram.TriggerPointerDown(node,
             new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
-        diagram.TriggerWheel(new WheelEventArgs(100, 100, 0, 0, false, false, false, 100, 100, 0, 0));
+        diagram.TriggerPointerMove(null,
+            new PointerEventArgs(101, 101, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
+        diagram.TriggerWheel(new WheelEventArgs(101, 101, 0, 0, false, false, false, 100, 100, 0, 0));
 
         // Assert
-        nodeMock.Verify(n => n.SetPosition(100, 100), Times.Once);
+        nodeMock.Verify(n => n.SetPosition(101, 101), Times.Once);
     }
 
     [Fact]

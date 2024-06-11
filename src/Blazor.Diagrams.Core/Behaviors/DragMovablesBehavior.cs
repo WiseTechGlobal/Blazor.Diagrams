@@ -95,12 +95,15 @@ public class DragMovablesBehavior : Behavior
 
     public void OnPanChanged(double deltaX, double deltaY)
     {
+        if (!_moved)
+        {
+            return;
+        }
+
         SelectChildShapes();
 
         if (_initialPositions.Count == 0 || _lastClientX == null || _lastClientY == null)
             return;
-
-        _moved = true;
 
         _totalMovedX += deltaX / Diagram.Zoom; 
         _totalMovedY += deltaY / Diagram.Zoom;
