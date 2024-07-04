@@ -74,6 +74,7 @@ public partial class DiagramCanvas : IAsyncDisposable
             {
                 BlazorDiagram.SetContainer(await JSRuntime.GetBoundingClientRect(elementReference));
                 await JSRuntime.ObserveResizes(elementReference, _reference!);
+                await JSRuntime.AddDefaultPreventingHandler(elementReference);
             }
         }
         catch (Exception ex) when (ex is JSDisconnectedException || ex is OperationCanceledException)
@@ -117,7 +118,7 @@ public partial class DiagramCanvas : IAsyncDisposable
         BlazorDiagram.TriggerKeyDown(e.ToCore());
     }
 
-    private void OnWheel(WheelEventArgs e)
+    private async void OnWheel(WheelEventArgs e)
     {
         BlazorDiagram.TriggerWheel(e.ToCore());
     }
