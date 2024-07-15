@@ -7,7 +7,7 @@ This doc explains how the package we use at WTG is updated.
 ### Releases
 When a PR is **merged to master**, the GitHub Action 'Create release' should run. This action creates a GitHub Release and uploads the package to the release. The package created should contain Blazor.Diagrams.dll, Blazor.Diagrams.Core.dll and SvgPathProperties.dll.
 
-This action also pushes this release to NuGet, see [WTG.Z.Blazor.Diagrams on nuget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). We access this internally at WiseTech through ProGet, see [WTG.Z.Blazor.Diagrams on proget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). See [this article](https://inedo.com/proget/private-nuget-server) for more info about how and why proget is used as our source.
+This action also pushes this release to NuGet, see [WTG.Z.Blazor.Diagrams on nuget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). We access this internally at WiseTech through ProGet, see [WTG.Z.Blazor.Diagrams on proget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). See [this article](https://inedo.com/proget/private-nuget-server) for more info about how and why proget is used as a source for NuGet rather than accessing NuGet directly.
 
 ### Version Incrementing
 The version number is also handled by the release action. It is determined using the [@reecetech/version-increment](https://github.com/reecetech/version-increment) action. The semantic versioning scheme rules below are verbatim from [reecetech's README.md](https://github.com/reecetech/version-increment?tab=readme-ov-file#conventional-commits-semver-with-smarts-).
