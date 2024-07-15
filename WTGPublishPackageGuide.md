@@ -11,7 +11,7 @@ The package is created on build in the action and should contain Blazor.Diagrams
 This action also pushes this release to NuGet, see [WTG.Z.Blazor.Diagrams on nuget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). We access this internally at WiseTech through ProGet, see [WTG.Z.Blazor.Diagrams on proget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions). See [this article](https://inedo.com/proget/private-nuget-server) for more info about how and why proget is used as our source.
 
 ### Version Incrementing
-The version number is also handled by the action using [@reecetech/version-increment](https://github.com/reecetech/version-increment). The semantic versioning scheme rules below are verbatim from [reecetech's README.md](https://github.com/reecetech/version-increment?tab=readme-ov-file#conventional-commits-semver-with-smarts-).
+The version number is also handled by the release action. It is determined using the [@reecetech/version-increment](https://github.com/reecetech/version-increment) action. The semantic versioning scheme rules below are verbatim from [reecetech's README.md](https://github.com/reecetech/version-increment?tab=readme-ov-file#conventional-commits-semver-with-smarts-).
 
 > the action will parse the last commit message (usually the merge commit) to determine the increment type for a semver version.
 >
