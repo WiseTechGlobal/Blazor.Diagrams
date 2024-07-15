@@ -24,8 +24,10 @@ The version number is also handled by the release action. It is determined using
 For more info on semantic versioning, refer to the [semantic versioning spec](https://semver.org/spec/v2.0.0.html).
 
 > [!tip]
-> If you have a WTG workitem that requires a push to this repo, you will additionally need to update the WTG.Z.Blazor.Diagraqms version in the WTG Dev repo with the steps below.
+> If you have a WTG workitem that requires a push to this repo, you will additionally need to update the WTG.Z.Blazor.Diagrams version in the WTG Dev repo with the steps below.
 
 ## Updating WTG Dev Repo
 1. Go to [WTG.Z.Blazor.Diagrams on nuget](https://proget.wtg.zone/feeds/Gallery/WTG.Z.Blazor.Diagrams/versions) and find the latest version number.
 2. Navigate to [Directory.Packages.Props](https://devops.wisetechglobal.com/wtg/CargoWise/_git/Dev?path=%2FDirectory.Packages.props&version=GBmaster&line=113&lineEnd=113&lineStartColumn=1&lineEndColumn=72&lineStyle=plain&_a=contents) and update the version number in the line `<PackageVersion Include="WTG.Z.Blazor.Diagrams" Version="x.x.x" />` to the latest one.
+
+Refer to the Winzor.Content document [nuget-package](https://github.com/WiseTechGlobal/Winzor.Content/blob/main/NativeBlazor(ish)/NCN/blazor-diagrams/nuget-package.md) for more information.
