@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Blazor.Diagrams.Core.Behaviors;
+﻿using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Extensions;
 using Microsoft.AspNetCore.Components;
