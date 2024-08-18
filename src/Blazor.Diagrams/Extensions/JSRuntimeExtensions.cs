@@ -30,9 +30,9 @@ public static class JSRuntimeExtensions
         {
             await jsRuntime.InvokeVoidAsync("ZBlazorDiagrams.unobserve", element, element.Id);
         }
-        catch (ObjectDisposedException)
+        catch (JSDisconnectedException)
         {
-            // Ignore, DotNetObjectReference was likely disposed
+            // Ignore, JSRuntime was already disconnected
         }
     }
 
