@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Blazor.Diagrams.Core.Geometry;
+﻿using Blazor.Diagrams.Core.Geometry;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -28,7 +26,14 @@ public static class JSRuntimeExtensions
 
     public static async Task UnobserveResizes(this IJSRuntime jsRuntime, ElementReference element)
     {
-        await jsRuntime.InvokeVoidAsync("ZBlazorDiagrams.unobserve", element, element.Id);
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("ZBlazorDiagrams.unobserve", element, element.Id);
+        }
+        catch (JSDisconnectedException)
+        {
+            // Ignore, JSRuntime was already disconnected
+        }
     }
 
     public static async Task AddDefaultPreventingForWheelHandler(this IJSRuntime jsRuntime, ElementReference element)
