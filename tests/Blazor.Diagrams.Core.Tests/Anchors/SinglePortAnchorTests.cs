@@ -1,7 +1,6 @@
 using Blazor.Diagrams.Core.Anchors;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -26,8 +25,8 @@ public class SinglePortAnchorTests
 
         // Assert
         var mp = port.MiddlePosition;
-        position.X.Should().Be(mp.X);
-        position.Y.Should().Be(mp.Y);
+        Assert.Equal(mp.X, position.X);
+        Assert.Equal(mp.Y, position.Y);
     }
 
     [Fact]
@@ -47,7 +46,7 @@ public class SinglePortAnchorTests
         var position = anchor.GetPosition(link);
 
         // Assert
-        position.Should().BeNull();
+        Assert.Null(position);
     }
 
     [Fact]
@@ -72,8 +71,8 @@ public class SinglePortAnchorTests
 
         // Assert
         var mp = port.MiddlePosition;
-        position.X.Should().Be(mp.X);
-        position.Y.Should().Be(mp.Y);
+        Assert.Equal(mp.X, position.X);
+        Assert.Equal(mp.Y, position.Y);
     }
 
     [Theory]
@@ -106,8 +105,8 @@ public class SinglePortAnchorTests
         var position = anchor.GetPosition(link)!;
 
         // Assert
-        position.X.Should().Be(x);
-        position.Y.Should().Be(y);
+        Assert.Equal(x, position.X);
+        Assert.Equal(y, position.Y);    
     }
 
     [Theory]

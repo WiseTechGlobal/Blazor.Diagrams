@@ -2,7 +2,6 @@
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Positions;
-using FluentAssertions;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Anchors;
@@ -37,7 +36,7 @@ public class DynamicAnchorTests
         var position = anchor1.GetPosition(link);
 
         // Assert
-        position.Should().BeNull();
+        Assert.Null(position);
     }
 
     [Fact]
@@ -72,9 +71,9 @@ public class DynamicAnchorTests
         var position = anchor1.GetPosition(link);
 
         // Assert
-        position.Should().NotBeNull();
-        position!.X.Should().Be(220);
-        position.Y.Should().Be(95);
+        Assert.NotNull(position);
+        Assert.Equal(220,position!.X);
+        Assert.Equal(95, position.Y);
     }
 
     [Fact]
@@ -109,9 +108,9 @@ public class DynamicAnchorTests
         var position = anchor1.GetPosition(link);
 
         // Assert
-        position.Should().NotBeNull();
-        position!.X.Should().Be(230);
-        position.Y.Should().Be(85);
+        Assert.NotNull(position);
+        Assert.Equal(230, position!.X);
+        Assert.Equal(85, position.Y);
     }
 
     [Fact]
@@ -149,9 +148,9 @@ public class DynamicAnchorTests
         });
 
         // Assert
-        position.Should().NotBeNull();
-        position!.X.Should().Be(220);
-        position.Y.Should().Be(125);
+        Assert.NotNull(position);
+        Assert.Equal(220, position!.X);
+        Assert.Equal(125, position.Y);
     }
 
     [Fact]
@@ -189,8 +188,8 @@ public class DynamicAnchorTests
         });
 
         // Assert
-        position.Should().NotBeNull();
-        position!.X.Should().Be(300);
-        position.Y.Should().Be(120);
+        Assert.NotNull(position);
+        Assert.Equal(300, position!.X);
+        Assert.Equal(120, position.Y);
     }
 }

@@ -3,7 +3,6 @@ using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Options;
-using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -79,7 +78,7 @@ public class DragMovablesBehaviorTests
             new PointerEventArgs(150, 150, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        movedTrigger.Should().BeTrue();
+        Assert.True(movedTrigger);
     }
 
     [Fact]
@@ -99,7 +98,7 @@ public class DragMovablesBehaviorTests
             new PointerEventArgs(150, 150, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        movedTrigger.Should().BeFalse();
+        Assert.False(movedTrigger);
     }
 
     [Fact]
