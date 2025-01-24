@@ -1,6 +1,5 @@
 ﻿using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using System;
 using Xunit;
 
@@ -21,8 +20,8 @@ public class DiagramTests
         var pt = diagram.GetScreenPoint(100, 200);
 
         // Assert
-        pt.X.Should().Be(203.4); // 2*X + panX + left
-        pt.Y.Should().Be(361.8); // 2*Y + panY + top
+        Assert.Equal(203.4,pt.X);
+        Assert.Equal(361.8, pt.Y);
     }
 
     [Fact]
@@ -41,10 +40,10 @@ public class DiagramTests
         diagram.ZoomToFit(10);
 
         // Assert
-        diagram.Zoom.Should().BeApproximately(7.68, 0.001);
-        diagram.Pan.X.Should().Be(-307.2);
-        diagram.Pan.Y.Should().Be(-307.2);
-    }
+        Assert.InRange(diagram.Zoom, 7.679, 7.681);  
+        Assert.Equal(-307.2, diagram.Pan.X);         
+        Assert.Equal(-307.2, diagram.Pan.Y);         
+        }
 
     [Fact]
     public void ZoomToFit_ShouldUseNodesWhenNoneSelected()
@@ -61,9 +60,9 @@ public class DiagramTests
         diagram.ZoomToFit(10);
 
         // Assert
-        diagram.Zoom.Should().BeApproximately(7.68, 0.001);
-        diagram.Pan.X.Should().Be(-307.2);
-        diagram.Pan.Y.Should().Be(-307.2);
+        Assert.InRange(diagram.Zoom, 7.679, 7.681);  
+        Assert.Equal(-307.2, diagram.Pan.X);         
+        Assert.Equal(-307.2, diagram.Pan.Y);         
     }
 
     [Fact]
@@ -88,9 +87,9 @@ public class DiagramTests
         diagram.ZoomToFit(10);
 
         // Assert
-        refreshes.Should().Be(1);
-        zoomChanges.Should().Be(1);
-        panChanges.Should().Be(1);
+        Assert.Equal(1,refreshes);
+        Assert.Equal(1,zoomChanges);
+        Assert.Equal(1,panChanges);
     }
 
     [Theory]
@@ -133,6 +132,6 @@ public class DiagramTests
         var exception = Record.Exception(() => diagram.SetContainer(null));
 
         // Assert
-        exception.Should().BeNull();
+        Assert.Null(exception);
     }
 }

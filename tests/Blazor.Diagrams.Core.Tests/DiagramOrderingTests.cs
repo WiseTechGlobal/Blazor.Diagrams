@@ -1,5 +1,4 @@
 ﻿using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using System;
 using Xunit;
 
@@ -17,7 +16,7 @@ public class DiagramOrderingTests
         var minOrder = diagram.GetMinOrder();
 
         // Assert
-        minOrder.Should().Be(0);
+        Assert.Equal(0, minOrder);
     }
 
     [Fact]
@@ -33,7 +32,7 @@ public class DiagramOrderingTests
         var minOrder = diagram.GetMinOrder();
 
         // Assert
-        minOrder.Should().Be(1);
+        Assert.Equal(1, minOrder);
     }
 
     [Fact]
@@ -46,7 +45,7 @@ public class DiagramOrderingTests
         var maxOrder = diagram.GetMaxOrder();
 
         // Assert
-        maxOrder.Should().Be(0);
+        Assert.Equal(0, maxOrder);
     }
 
     [Fact]
@@ -62,7 +61,7 @@ public class DiagramOrderingTests
         var maxOrder = diagram.GetMaxOrder();
 
         // Assert
-        maxOrder.Should().Be(3);
+        Assert.Equal(3, maxOrder);
     }
 
     [Fact]
@@ -77,8 +76,8 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        diagram.OrderedSelectables[0].Should().Be(node2);
-        diagram.OrderedSelectables[1].Should().Be(node1);
+        Assert.Equal(node2, diagram.OrderedSelectables[0]);   
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);  
     }
 
     [Fact]
@@ -95,7 +94,7 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1,refreshes);
     }
 
     [Fact]
@@ -111,14 +110,14 @@ public class DiagramOrderingTests
         diagram.SendToBack(node3);
 
         // Assert
-        diagram.OrderedSelectables[0].Should().Be(node3);
-        diagram.OrderedSelectables[0].Order.Should().Be(1);
+        Assert.Equal(node3, diagram.OrderedSelectables[0]);       
+        Assert.Equal(1, diagram.OrderedSelectables[0].Order);      
 
-        diagram.OrderedSelectables[1].Should().Be(node1);
-        diagram.OrderedSelectables[1].Order.Should().Be(2);
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);       
+        Assert.Equal(2, diagram.OrderedSelectables[1].Order);      
 
-        diagram.OrderedSelectables[2].Should().Be(node2);
-        diagram.OrderedSelectables[2].Order.Should().Be(3);
+        Assert.Equal(node2, diagram.OrderedSelectables[2]);      
+        Assert.Equal(3, diagram.OrderedSelectables[2].Order); 
     }
 
     [Fact]
@@ -134,14 +133,14 @@ public class DiagramOrderingTests
         diagram.SendToFront(node1);
 
         // Assert
-        diagram.OrderedSelectables[0].Should().Be(node2);
-        diagram.OrderedSelectables[0].Order.Should().Be(2);
+        Assert.Equal(node2, diagram.OrderedSelectables[0]);       
+        Assert.Equal(2, diagram.OrderedSelectables[0].Order);      
 
-        diagram.OrderedSelectables[1].Should().Be(node3);
-        diagram.OrderedSelectables[1].Order.Should().Be(3);
+        Assert.Equal(node3, diagram.OrderedSelectables[1]);       
+        Assert.Equal(3, diagram.OrderedSelectables[1].Order);      
 
-        diagram.OrderedSelectables[2].Should().Be(node1);
-        diagram.OrderedSelectables[2].Order.Should().Be(4);
+        Assert.Equal(node1, diagram.OrderedSelectables[2]);       
+        Assert.Equal(4, diagram.OrderedSelectables[2].Order);    
     }
 
     [Fact]
@@ -159,7 +158,7 @@ public class DiagramOrderingTests
         diagram.Nodes.Remove(node1);
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1, refreshes);
     }
 
     [Fact]
@@ -175,8 +174,8 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        diagram.OrderedSelectables[0].Should().Be(node1);
-        diagram.OrderedSelectables[1].Should().Be(node2);
+        Assert.Equal(node1, diagram.OrderedSelectables[0]); 
+        Assert.Equal(node2, diagram.OrderedSelectables[1]);  
     }
 
     [Fact]
@@ -191,7 +190,7 @@ public class DiagramOrderingTests
         diagram.RefreshOrders();
 
         // Assert
-        diagram.OrderedSelectables[0].Should().Be(node2);
-        diagram.OrderedSelectables[1].Should().Be(node1);
+        Assert.Equal(node2, diagram.OrderedSelectables[0]); 
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);  
     }
 }

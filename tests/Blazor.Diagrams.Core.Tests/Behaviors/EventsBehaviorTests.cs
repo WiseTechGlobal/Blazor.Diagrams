@@ -1,6 +1,5 @@
 ﻿using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Events;
-using FluentAssertions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -22,7 +21,7 @@ public class EventsBehaviorTests
         diagram.TriggerPointerUp(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeFalse();
+        Assert.False(eventTriggered);
     }
 
     [Fact]
@@ -38,7 +37,7 @@ public class EventsBehaviorTests
         diagram.TriggerPointerUp(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeTrue();
+        Assert.True(eventTriggered);
     }
 
     [Fact]
@@ -55,7 +54,7 @@ public class EventsBehaviorTests
         diagram.TriggerPointerUp(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeFalse();
+        Assert.False(eventTriggered);
     }
 
     [Fact]
@@ -71,7 +70,7 @@ public class EventsBehaviorTests
         diagram.TriggerPointerClick(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeTrue();
+        Assert.True(eventTriggered);
     }
 
     [Fact]
@@ -88,7 +87,7 @@ public class EventsBehaviorTests
         diagram.TriggerPointerClick(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeFalse();
+        Assert.False(eventTriggered);
     }
 
     [Fact]
@@ -103,6 +102,6 @@ public class EventsBehaviorTests
         diagram.TriggerPointerUp(null, new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        eventTriggered.Should().BeFalse();
+        Assert.False(eventTriggered);
     }
 }
