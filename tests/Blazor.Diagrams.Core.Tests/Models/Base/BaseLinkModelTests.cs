@@ -4,7 +4,6 @@ using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Models.Base;
 using Blazor.Diagrams.Core.PathGenerators;
 using Blazor.Diagrams.Core.Routers;
-using FluentAssertions;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Models.Base;
@@ -36,12 +35,12 @@ public class BaseLinkModelTests
         link.SetSource(sp);
 
         // Assert
-        eventsTriggered.Should().Be(1);
-        link.Source.Should().BeSameAs(sp);
-        oldSp.Should().NotBeNull();
-        newSp.Should().BeSameAs(sp);
-        linkInstance.Should().BeSameAs(link);
-        link.Source.Model.Should().BeSameAs(port);
+        Assert.Equal(1,eventsTriggered);                           
+        Assert.Same(sp,link.Source);                                
+        Assert.NotNull(oldSp);                                       
+        Assert.Same(sp,newSp);                                      
+        Assert.Same(link,linkInstance);                             
+        Assert.Same(port,link.Source.Model);
     }
 
     [Fact]
@@ -69,12 +68,12 @@ public class BaseLinkModelTests
         link.SetTarget(tp);
 
         // Assert
-        eventsTriggered.Should().Be(1);
-        link.Target.Should().BeSameAs(tp);
-        oldTp.Should().BeOfType<PositionAnchor>();
-        newTp.Should().BeSameAs(tp);
-        linkInstance.Should().BeSameAs(link);
-        link.Target!.Model.Should().BeSameAs(port);
+        Assert.Equal(1,eventsTriggered);
+        Assert.Same(tp,link.Target);
+        Assert.IsType<PositionAnchor>(oldTp);
+        Assert.Same(tp,newTp);
+        Assert.Same(link,linkInstance);
+        Assert.Same(port,link.Target!.Model);
     }
 
     [Fact]
@@ -91,9 +90,9 @@ public class BaseLinkModelTests
         var bounds = link.GetBounds()!;
 
         // Assert
-        bounds.Left.Should().Be(10);
-        bounds.Top.Should().Be(5);
-        bounds.Width.Should().Be(90);
-        bounds.Height.Should().Be(75);
+        Assert.Equal(10,bounds.Left);
+        Assert.Equal(5,bounds.Top);
+        Assert.Equal(90,bounds.Width);
+        Assert.Equal(75,bounds.Height);
     }
 }

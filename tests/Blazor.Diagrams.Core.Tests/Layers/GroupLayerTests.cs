@@ -1,5 +1,4 @@
 ﻿using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using System;
 using Xunit;
 
@@ -24,7 +23,7 @@ public class GroupLayerTests
         diagram.Groups.Group(Array.Empty<NodeModel>());
 
         // Assert
-        factoryCalled.Should().BeTrue();
+        Assert.True(factoryCalled);
     }
 
     [Fact]
@@ -42,7 +41,7 @@ public class GroupLayerTests
         diagram.Groups.Remove(group);
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -58,7 +57,7 @@ public class GroupLayerTests
         diagram.Groups.Remove(group);
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -73,8 +72,8 @@ public class GroupLayerTests
         diagram.Groups.Remove(group1);
 
         // Assert
-        group2.Children.Should().BeEmpty();
-        group1.Group.Should().BeNull();
+        Assert.Empty(group2.Children);
+        Assert.Null(group1.Group);
     }
 
     [Fact]
@@ -89,8 +88,8 @@ public class GroupLayerTests
         diagram.Groups.Remove(group);
 
         // Assert
-        group.Children.Should().BeEmpty();
-        node.Group.Should().BeNull();
+        Assert.Empty(group.Children);
+        Assert.Null(node.Group);
     }
 
     [Fact]
@@ -105,7 +104,7 @@ public class GroupLayerTests
         diagram.Groups.Delete(group2);
 
         // Assert
-        diagram.Groups.Should().BeEmpty();
+        Assert.Empty(diagram.Groups);
     }
 
     [Fact]
@@ -120,8 +119,8 @@ public class GroupLayerTests
         diagram.Groups.Delete(group);
 
         // Assert
-        diagram.Groups.Should().BeEmpty();
-        diagram.Nodes.Should().BeEmpty();
+        Assert.Empty(diagram.Groups);
+        Assert.Empty(diagram.Nodes);
     }
 
     [Fact]
@@ -136,7 +135,7 @@ public class GroupLayerTests
         var group = diagram.Groups.Add(new GroupModel(Array.Empty<NodeModel>()));
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1, refreshes);
     }
 
     [Fact]
@@ -152,7 +151,7 @@ public class GroupLayerTests
         diagram.Groups.Remove(group);
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1,refreshes);
     }
 
     [Fact]
@@ -169,6 +168,6 @@ public class GroupLayerTests
         diagram.Groups.Delete(group);
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1,refreshes);
     }
 }

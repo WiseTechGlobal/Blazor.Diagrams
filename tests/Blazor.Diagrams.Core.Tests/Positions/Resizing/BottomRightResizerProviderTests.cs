@@ -4,7 +4,6 @@ using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Positions.Resizing;
-using FluentAssertions;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Positions.Resizing;
@@ -24,10 +23,10 @@ public class BottomRightResizerProviderTests
         diagram.SelectModel(node, false);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(100,node.Size.Width);
+        Assert.Equal(200,node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -36,10 +35,10 @@ public class BottomRightResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(110);
-        node.Size.Height.Should().Be(215);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(110,node.Size.Width);
+        Assert.Equal(215,node.Size.Height);
     }
 
     [Fact]
@@ -57,10 +56,10 @@ public class BottomRightResizerProviderTests
 
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(100,node.Size.Width);
+        Assert.Equal(200,node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -69,10 +68,10 @@ public class BottomRightResizerProviderTests
 
 
         // after resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(110);
-        node.Size.Height.Should().Be(300);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(110,node.Size.Width);
+        Assert.Equal(300,node.Size.Height);
     }
 
     [Fact]
@@ -88,10 +87,10 @@ public class BottomRightResizerProviderTests
         diagram.SelectModel(node, false);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(100,node.Size.Width);
+        Assert.Equal(200,node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -100,10 +99,10 @@ public class BottomRightResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(0);
-        node.Size.Height.Should().Be(0);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(0,node.Size.Width);
+        Assert.Equal(0,node.Size.Height);
     }
 
     [Fact]
@@ -120,10 +119,10 @@ public class BottomRightResizerProviderTests
         diagram.SetZoom(0.5);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(100,node.Size.Width);
+        Assert.Equal(200,node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -132,10 +131,10 @@ public class BottomRightResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(120);
-        node.Size.Height.Should().Be(230);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(120,node.Size.Width);
+        Assert.Equal(230,node.Size.Height);
     }
 
     [Fact]
@@ -152,10 +151,10 @@ public class BottomRightResizerProviderTests
         diagram.SetZoom(2);
 
         // before resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(100);
-        node.Size.Height.Should().Be(200);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(100,node.Size.Width);
+        Assert.Equal(200,node.Size.Height);
 
         // resize
         var eventArgs = new PointerEventArgs(0, 0, 0, 0, false, false, false, 1, 1, 1, 1, 1, 1, "arrow", true);
@@ -164,9 +163,9 @@ public class BottomRightResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        node.Position.X.Should().Be(0);
-        node.Position.Y.Should().Be(0);
-        node.Size.Width.Should().Be(105);
-        node.Size.Height.Should().Be(207.5);
+        Assert.Equal(0,node.Position.X);
+        Assert.Equal(0,node.Position.Y);
+        Assert.Equal(105,node.Size.Width);
+        Assert.Equal(207.5,node.Size.Height);
     }
 }
