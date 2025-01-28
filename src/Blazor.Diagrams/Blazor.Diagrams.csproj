@@ -23,7 +23,7 @@
         <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
         <!-- Reference the SvgPathProperties that we already strong name signed -->
 		<PackageReference Include="SvgPathProperties" PrivateAssets="All" />
-</ItemGroup>
+    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
