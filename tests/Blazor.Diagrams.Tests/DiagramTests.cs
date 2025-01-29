@@ -1,7 +1,6 @@
 ﻿using Blazor.Diagrams.Components;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Models.Base;
-using FluentAssertions;
 using Microsoft.AspNetCore.Components;
 using Xunit;
 
@@ -20,7 +19,7 @@ public class DiagramTests
         var componentType = diagram.GetComponent<NodeModel>();
 
         // Assert
-        componentType.Should().Be(typeof(NodeWidget));
+        Assert.Equal(typeof(NodeWidget), componentType);
     }
 
     [Fact]
@@ -33,7 +32,7 @@ public class DiagramTests
         var componentType = diagram.GetComponent<NodeModel>();
 
         // Assert
-        componentType.Should().BeNull();
+        Assert.Null(componentType);
     }
 
     [Fact]
@@ -47,7 +46,7 @@ public class DiagramTests
         var componentType = diagram.GetComponent<CustomModel>();
 
         // Assert
-        componentType.Should().Be(typeof(NodeWidget));
+        Assert.Equal(typeof(NodeWidget), componentType);
     }
 
     [Fact]
@@ -62,7 +61,7 @@ public class DiagramTests
         var componentType = diagram.GetComponent<CustomModel>();
 
         // Assert
-        componentType.Should().Be(typeof(CustomWidget));
+        Assert.Equal(typeof(CustomWidget), componentType);
     }
 
     [Fact]
@@ -76,7 +75,7 @@ public class DiagramTests
         var componentType = diagram.GetComponent<CustomModel>(false);
 
         // Assert
-        componentType.Should().BeNull();
+        Assert.Null(componentType);
     }
 
     private class CustomModel : Model { }

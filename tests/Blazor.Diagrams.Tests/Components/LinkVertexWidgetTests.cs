@@ -3,7 +3,6 @@ using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Tests.TestComponents;
 using Bunit;
-using FluentAssertions;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 using Xunit;
@@ -76,9 +75,9 @@ public class LinkVertexWidgetTests
             .Add(n => n.BlazorDiagram, new BlazorDiagram()));
 
         // Assert
-        cut.RenderCount.Should().Be(1);
+        Assert.Equal(1, cut.RenderCount);
         vertex.Refresh();
-        cut.RenderCount.Should().Be(2);
+        Assert.Equal(2, cut.RenderCount);
     }
 
     [Fact]
@@ -104,8 +103,8 @@ public class LinkVertexWidgetTests
         await cut.Find("circle").DoubleClickAsync(new MouseEventArgs());
 
         // Assert
-        link.Vertices.Should().BeEmpty();
-        linkRefreshes.Should().Be(1);
+        Assert.Empty(link.Vertices);
+        Assert.Equal(1,linkRefreshes);
     }
 
     [Fact]
