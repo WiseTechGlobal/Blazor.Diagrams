@@ -3,7 +3,6 @@ using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
-using System.Linq;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Behaviors;
@@ -35,7 +34,7 @@ public class DragNewLinkBehaviorTests
         Assert.Same(port, source!.Port);
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
         Assert.Equal(100, ongoingPosition.X);
-        Assert.Equal(100,ongoingPosition.Y);
+        Assert.Equal(100, ongoingPosition.Y);
     }
 
     [Fact]
@@ -70,7 +69,7 @@ public class DragNewLinkBehaviorTests
         Assert.Same(port, source!.Port);
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
         Assert.Equal(100, ongoingPosition.X);
-        Assert.Equal(100,ongoingPosition.Y);
+        Assert.Equal(100, ongoingPosition.Y);
     }
 
     [Fact]
@@ -131,7 +130,7 @@ public class DragNewLinkBehaviorTests
         // Assert
         var source = link.Source as SinglePortAnchor;
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        Assert.InRange(ongoingPosition.X, 107.6, 108.8); 
+        Assert.InRange(ongoingPosition.X, 107.6, 107.8);
         Assert.InRange(ongoingPosition.Y, 101.6, 101.8);
         Assert.True(linkRefreshed);
     }
@@ -251,7 +250,7 @@ public class DragNewLinkBehaviorTests
         var link = diagram.Links.Single();
         var target = link.Target as SinglePortAnchor;
         Assert.Null(target);
-        Assert.Equal(2,port2Refreshes);
+        Assert.Equal(2, port2Refreshes);
     }
 
     [Fact]
@@ -335,9 +334,9 @@ public class DragNewLinkBehaviorTests
         // Assert
         var link = diagram.Links.Single();
         var target = link.Target as SinglePortAnchor;
-        Assert.NotNull(target);                      
-        Assert.Same(port2, target!.Port);           
-        Assert.Equal(1, port2Refreshes);           
+        Assert.NotNull(target);
+        Assert.Same(port2, target!.Port);
+        Assert.Equal(1, port2Refreshes);
     }
 
     [Fact]
@@ -398,7 +397,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(105, 105, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        Assert.Equal(1,targetAttachedTriggers);
+        Assert.Equal(1, targetAttachedTriggers);
     }
 
     [Fact]
@@ -493,8 +492,8 @@ public class DragNewLinkBehaviorTests
         // Assert
         var source = link.Source as SinglePortAnchor;
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        Assert.InRange(ongoingPosition.X, 245, 247);   
-        Assert.InRange(ongoingPosition.Y, 245, 247);   
-        Assert.True(linkRefreshed);                    
+        Assert.InRange(ongoingPosition.X, 245, 247);
+        Assert.InRange(ongoingPosition.Y, 245, 247);
+        Assert.True(linkRefreshed);
     }
 }

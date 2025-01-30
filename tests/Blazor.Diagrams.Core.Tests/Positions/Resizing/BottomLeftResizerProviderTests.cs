@@ -23,10 +23,10 @@ public class BottomLeftResizerProviderTests
         diagram.SelectModel(node, false);
 
         // before resize
-        Assert.Equal(0, node.Position.X);       
-        Assert.Equal(0, node.Position.Y);      
-        Assert.Equal(100, node.Size.Width);     
-        Assert.Equal(200, node.Size.Height); 
+        Assert.Equal(0, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(100, node.Size.Width);
+        Assert.Equal(200, node.Size.Height);
 
 
         // resize
@@ -36,10 +36,10 @@ public class BottomLeftResizerProviderTests
         diagram.TriggerPointerMove(null, eventArgs);
 
         // after resize
-        Assert.Equal(10, node.Position.X);       
-        Assert.Equal(0, node.Position.Y);        
-        Assert.Equal(90, node.Size.Width);       
-        Assert.Equal(215, node.Size.Height);     
+        Assert.Equal(10, node.Position.X);
+        Assert.Equal(0, node.Position.Y);
+        Assert.Equal(90, node.Size.Width);
+        Assert.Equal(215, node.Size.Height);
     }
 
     [Fact]

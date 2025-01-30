@@ -1,5 +1,4 @@
 ﻿using Blazor.Diagrams.Core.Models;
-using System;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests;
@@ -76,8 +75,8 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        Assert.Equal(node2, diagram.OrderedSelectables[0]);   
-        Assert.Equal(node1, diagram.OrderedSelectables[1]);  
+        Assert.Equal(node2, diagram.OrderedSelectables[0]);
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);
     }
 
     [Fact]
@@ -94,7 +93,7 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        Assert.Equal(1,refreshes);
+        Assert.Equal(1, refreshes);
     }
 
     [Fact]
@@ -110,14 +109,14 @@ public class DiagramOrderingTests
         diagram.SendToBack(node3);
 
         // Assert
-        Assert.Equal(node3, diagram.OrderedSelectables[0]);       
-        Assert.Equal(1, diagram.OrderedSelectables[0].Order);      
+        Assert.Equal(node3, diagram.OrderedSelectables[0]);
+        Assert.Equal(1, diagram.OrderedSelectables[0].Order);
 
-        Assert.Equal(node1, diagram.OrderedSelectables[1]);       
-        Assert.Equal(2, diagram.OrderedSelectables[1].Order);      
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);
+        Assert.Equal(2, diagram.OrderedSelectables[1].Order);
 
-        Assert.Equal(node2, diagram.OrderedSelectables[2]);      
-        Assert.Equal(3, diagram.OrderedSelectables[2].Order); 
+        Assert.Equal(node2, diagram.OrderedSelectables[2]);
+        Assert.Equal(3, diagram.OrderedSelectables[2].Order);
     }
 
     [Fact]
@@ -133,14 +132,14 @@ public class DiagramOrderingTests
         diagram.SendToFront(node1);
 
         // Assert
-        Assert.Equal(node2, diagram.OrderedSelectables[0]);       
-        Assert.Equal(2, diagram.OrderedSelectables[0].Order);      
+        Assert.Equal(node2, diagram.OrderedSelectables[0]);
+        Assert.Equal(2, diagram.OrderedSelectables[0].Order);
 
-        Assert.Equal(node3, diagram.OrderedSelectables[1]);       
-        Assert.Equal(3, diagram.OrderedSelectables[1].Order);      
+        Assert.Equal(node3, diagram.OrderedSelectables[1]);
+        Assert.Equal(3, diagram.OrderedSelectables[1].Order);
 
-        Assert.Equal(node1, diagram.OrderedSelectables[2]);       
-        Assert.Equal(4, diagram.OrderedSelectables[2].Order);    
+        Assert.Equal(node1, diagram.OrderedSelectables[2]);
+        Assert.Equal(4, diagram.OrderedSelectables[2].Order);
     }
 
     [Fact]
@@ -174,8 +173,8 @@ public class DiagramOrderingTests
         node1.Order = 10;
 
         // Assert
-        Assert.Equal(node1, diagram.OrderedSelectables[0]); 
-        Assert.Equal(node2, diagram.OrderedSelectables[1]);  
+        Assert.Equal(node1, diagram.OrderedSelectables[0]);
+        Assert.Equal(node2, diagram.OrderedSelectables[1]);
     }
 
     [Fact]
@@ -190,7 +189,7 @@ public class DiagramOrderingTests
         diagram.RefreshOrders();
 
         // Assert
-        Assert.Equal(node2, diagram.OrderedSelectables[0]); 
-        Assert.Equal(node1, diagram.OrderedSelectables[1]);  
+        Assert.Equal(node2, diagram.OrderedSelectables[0]);
+        Assert.Equal(node1, diagram.OrderedSelectables[1]);
     }
 }

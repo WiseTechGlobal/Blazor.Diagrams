@@ -106,7 +106,7 @@ public class SinglePortAnchorTests
 
         // Assert
         Assert.Equal(x, position.X);
-        Assert.Equal(y, position.Y);    
+        Assert.Equal(y, position.Y);
     }
 
     [Theory]
@@ -138,7 +138,7 @@ public class SinglePortAnchorTests
 
         // Act
         var position = anchor.GetPosition(link)!;
-        
+
         // Assert
         shapeMock.Verify(s => s.GetPointAtAngle(angle), Times.Once);
     }

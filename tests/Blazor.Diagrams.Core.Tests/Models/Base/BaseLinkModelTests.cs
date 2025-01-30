@@ -35,12 +35,12 @@ public class BaseLinkModelTests
         link.SetSource(sp);
 
         // Assert
-        Assert.Equal(1,eventsTriggered);                           
-        Assert.Same(sp,link.Source);                                
-        Assert.NotNull(oldSp);                                       
-        Assert.Same(sp,newSp);                                      
-        Assert.Same(link,linkInstance);                             
-        Assert.Same(port,link.Source.Model);
+        Assert.Equal(1, eventsTriggered);
+        Assert.Same(sp, link.Source);
+        Assert.NotNull(oldSp);
+        Assert.Same(sp, newSp);
+        Assert.Same(link, linkInstance);
+        Assert.Same(port, link.Source.Model);
     }
 
     [Fact]
@@ -68,12 +68,12 @@ public class BaseLinkModelTests
         link.SetTarget(tp);
 
         // Assert
-        Assert.Equal(1,eventsTriggered);
-        Assert.Same(tp,link.Target);
+        Assert.Equal(1, eventsTriggered);
+        Assert.Same(tp, link.Target);
         Assert.IsType<PositionAnchor>(oldTp);
-        Assert.Same(tp,newTp);
-        Assert.Same(link,linkInstance);
-        Assert.Same(port,link.Target!.Model);
+        Assert.Same(tp, newTp);
+        Assert.Same(link, linkInstance);
+        Assert.Same(port, link.Target!.Model);
     }
 
     [Fact]
@@ -90,9 +90,9 @@ public class BaseLinkModelTests
         var bounds = link.GetBounds()!;
 
         // Assert
-        Assert.Equal(10,bounds.Left);
-        Assert.Equal(5,bounds.Top);
-        Assert.Equal(90,bounds.Width);
-        Assert.Equal(75,bounds.Height);
+        Assert.Equal(10, bounds.Left);
+        Assert.Equal(5, bounds.Top);
+        Assert.Equal(90, bounds.Width);
+        Assert.Equal(75, bounds.Height);
     }
 }

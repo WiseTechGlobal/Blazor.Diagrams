@@ -1,7 +1,5 @@
 ﻿using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Models;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Behaviors;
@@ -70,7 +68,7 @@ public class KeyboardShortcutsDefaultsTests
         await KeyboardShortcutsDefaults.DeleteSelection(diagram);
 
         // Assert
-        Assert.True(funcCalled);                  
+        Assert.True(funcCalled);
         Assert.Equal(1, diagram.Nodes.Count);
     }
 
@@ -99,7 +97,7 @@ public class KeyboardShortcutsDefaultsTests
         await KeyboardShortcutsDefaults.DeleteSelection(diagram);
 
         // Assert
-        Assert.True(funcCalled);                  
+        Assert.True(funcCalled);
         Assert.Equal(1, diagram.Links.Count);
     }
 
@@ -125,8 +123,8 @@ public class KeyboardShortcutsDefaultsTests
         await KeyboardShortcutsDefaults.DeleteSelection(diagram);
 
         // Assert
-        Assert.Equal(0, diagram.Nodes.Count);    
-        Assert.Equal(0, diagram.Links.Count);    
+        Assert.Equal(0, diagram.Nodes.Count);
+        Assert.Equal(0, diagram.Links.Count);
         Assert.Equal(1, refreshes);
     }
 }
