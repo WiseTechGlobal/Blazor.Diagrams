@@ -461,7 +461,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        Assert.Equal(0, diagram.Links.Count);
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]

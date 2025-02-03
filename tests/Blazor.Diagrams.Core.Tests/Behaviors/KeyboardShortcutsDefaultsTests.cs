@@ -21,7 +21,7 @@ public class KeyboardShortcutsDefaultsTests
         await KeyboardShortcutsDefaults.DeleteSelection(diagram);
 
         // Assert
-        Assert.Equal(1, diagram.Nodes.Count);
+        Assert.Single(diagram.Nodes);
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class KeyboardShortcutsDefaultsTests
 
         // Assert
         Assert.True(funcCalled);
-        Assert.Equal(1, diagram.Groups.Count);
+        Assert.Single(diagram.Groups);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class KeyboardShortcutsDefaultsTests
 
         // Assert
         Assert.True(funcCalled);
-        Assert.Equal(1, diagram.Nodes.Count);
+        Assert.Single(diagram.Nodes);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class KeyboardShortcutsDefaultsTests
 
         // Assert
         Assert.True(funcCalled);
-        Assert.Equal(1, diagram.Links.Count);
+        Assert.Single(diagram.Links);
     }
 
     [Fact]
@@ -123,8 +123,8 @@ public class KeyboardShortcutsDefaultsTests
         await KeyboardShortcutsDefaults.DeleteSelection(diagram);
 
         // Assert
-        Assert.Equal(0, diagram.Nodes.Count);
-        Assert.Equal(0, diagram.Links.Count);
+        Assert.Empty(diagram.Nodes);
+        Assert.Empty(diagram.Links);
         Assert.Equal(1, refreshes);
     }
 }
