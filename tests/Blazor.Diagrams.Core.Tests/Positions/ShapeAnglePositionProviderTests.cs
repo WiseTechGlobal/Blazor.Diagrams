@@ -1,7 +1,6 @@
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Positions;
-using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -39,7 +38,7 @@ public class ShapeAnglePositionProviderTests
         var position = provider.GetPosition(nodeMock.Object);
 
         // Assert
-        position!.X.Should().Be(105);
-        position.Y.Should().Be(40);
+        Assert.Equal(105, position!.X);
+        Assert.Equal(40, position.Y);
     }
 }

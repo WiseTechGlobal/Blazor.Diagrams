@@ -3,7 +3,6 @@ using System.Linq;
 using Blazor.Diagrams.Core.Anchors;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -27,8 +26,8 @@ public class ShapeIntersectionAnchorTests
 
         // Assert
         var center = node.GetBounds()!.Center;
-        position.X.Should().Be(center.X);
-        position.Y.Should().Be(center.Y);
+        Assert.Equal(center.X, position.X);
+        Assert.Equal(center.Y, position.Y);
     }
 
     [Fact]
@@ -43,7 +42,7 @@ public class ShapeIntersectionAnchorTests
         var position = anchor.GetPosition(link);
 
         // Assert
-        position.Should().BeNull();
+        Assert.Null(position);
     }
 
     [Fact]
@@ -67,8 +66,8 @@ public class ShapeIntersectionAnchorTests
 
         // Assert
         var line = args.Single();
-        line.Start.Should().BeEquivalentTo(route[0]);
-        line.End.Should().BeEquivalentTo(node.GetBounds()!.Center);
+        Assert.Equal(route[0],line.Start);
+        Assert.Equal(node.GetBounds()!.Center, line.End);
     }
 
     [Fact]
@@ -93,8 +92,8 @@ public class ShapeIntersectionAnchorTests
 
         // Assert
         var line = args.Single();
-        line.Start.Should().BeEquivalentTo(route[^1]);
-        line.End.Should().BeEquivalentTo(node.GetBounds()!.Center);
+        Assert.Equal(route[^1],line.Start);
+        Assert.Equal(node.GetBounds()!.Center,line.End);
     }
 
     [Fact]
@@ -120,8 +119,8 @@ public class ShapeIntersectionAnchorTests
 
         // Assert
         var line = args.Single();
-        line.Start.Should().BeEquivalentTo(pt);
-        line.End.Should().BeEquivalentTo(node.GetBounds()!.Center);
+        Assert.Equal(pt,line.Start);
+        Assert.Equal(node.GetBounds()!.Center, line.End);
     }
 
     [Fact]
@@ -145,7 +144,7 @@ public class ShapeIntersectionAnchorTests
         var position = source.GetPosition(link);
 
         // Assert
-        position.Should().BeNull();
+        Assert.Null(position);
     }
 
     private class CustomNodeModel : NodeModel

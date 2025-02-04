@@ -1,5 +1,4 @@
 ﻿using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Layers;
@@ -21,7 +20,7 @@ public class NodeLayerTests
         diagram.Nodes.Remove(node1);
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -37,7 +36,7 @@ public class NodeLayerTests
         diagram.Nodes.Remove(node1);
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -52,8 +51,8 @@ public class NodeLayerTests
         diagram.Nodes.Remove(node);
 
         // Assert
-        group.Children.Should().BeEmpty();
-        node.Group.Should().BeNull();
+        Assert.Empty(group.Children);
+        Assert.Null(node.Group);
     }
 
     [Fact]
@@ -68,7 +67,7 @@ public class NodeLayerTests
         var node = diagram.Nodes.Add(new NodeModel());
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1,refreshes);
     }
 
     [Fact]
@@ -86,7 +85,7 @@ public class NodeLayerTests
         diagram.Nodes.Remove(node1);
 
         // Assert
-        refreshes.Should().Be(1);
+        Assert.Equal(1,refreshes);
     }
 
     [Fact]
@@ -101,6 +100,6 @@ public class NodeLayerTests
         diagram.Nodes.Remove(node);
 
         // Assert
-        diagram.Controls.GetFor(node).Should().BeNull();
+        Assert.Null(diagram.Controls.GetFor(node));
     }
 }

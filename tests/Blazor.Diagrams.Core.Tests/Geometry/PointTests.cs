@@ -1,7 +1,5 @@
 ﻿using Blazor.Diagrams.Core.Geometry;
-using FluentAssertions;
 using Xunit;
-
 namespace Blazor.Diagrams.Core.Tests.Geometry;
 
 public class PointTests
@@ -15,6 +13,6 @@ public class PointTests
     {
         var pt1 = new Point(x1, y1);
         var pt2 = new Point(x2, y2);
-        pt1.DistanceTo(pt2).Should().BeApproximately(expected, 0.0001);
+        Assert.InRange(pt1.DistanceTo(pt2), expected - 0.0001, expected + 0.0001);
     }
 }
