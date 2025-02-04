@@ -1,6 +1,5 @@
 ﻿using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Events;
-using FluentAssertions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -33,7 +32,7 @@ public class KeyboardShortcutsBehaviorTests
         diagram.TriggerKeyDown(new KeyboardEventArgs(key, key, 0, ctrl, shift, alt));
 
         // Assert
-        executed.Should().BeTrue();
+        Assert.True(executed);
     }
 
     [Fact]
@@ -55,7 +54,7 @@ public class KeyboardShortcutsBehaviorTests
         diagram.TriggerKeyDown(new KeyboardEventArgs("A", "A", 0, false, false, false));
 
         // Assert
-        executed.Should().BeFalse();
+        Assert.False(executed);
     }
 
     [Fact]
@@ -83,7 +82,7 @@ public class KeyboardShortcutsBehaviorTests
         diagram.TriggerKeyDown(new KeyboardEventArgs("A", "A", 0, false, false, false));
 
         // Assert
-        executed1.Should().BeFalse();
-        executed2.Should().BeTrue();
+        Assert.False(executed1);
+        Assert.True(executed2);
     }
 }

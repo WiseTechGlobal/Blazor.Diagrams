@@ -3,8 +3,6 @@ using Blazor.Diagrams.Core.Behaviors;
 using Blazor.Diagrams.Core.Events;
 using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
-using FluentAssertions;
-using System.Linq;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Behaviors;
@@ -32,11 +30,11 @@ public class DragNewLinkBehaviorTests
         // Assert
         var link = diagram.Links.Single();
         var source = link.Source as SinglePortAnchor;
-        source.Should().NotBeNull();
-        source!.Port.Should().BeSameAs(port);
+        Assert.NotNull(source);
+        Assert.Same(port, source!.Port);
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        ongoingPosition.X.Should().Be(100);
-        ongoingPosition.Y.Should().Be(100);
+        Assert.Equal(100, ongoingPosition.X);
+        Assert.Equal(100, ongoingPosition.Y);
     }
 
     [Fact]
@@ -64,14 +62,14 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        factoryCalled.Should().BeTrue();
+        Assert.True(factoryCalled);
         var link = diagram.Links.Single();
         var source = link.Source as SinglePortAnchor;
-        source.Should().NotBeNull();
-        source!.Port.Should().BeSameAs(port);
+        Assert.NotNull(source);
+        Assert.Same(port, source!.Port);
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        ongoingPosition.X.Should().Be(100);
-        ongoingPosition.Y.Should().Be(100);
+        Assert.Equal(100, ongoingPosition.X);
+        Assert.Equal(100, ongoingPosition.Y);
     }
 
     [Fact]
@@ -100,9 +98,9 @@ public class DragNewLinkBehaviorTests
         // Assert
         var source = link.Source as SinglePortAnchor;
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        ongoingPosition.X.Should().BeGreaterThan(145);
-        ongoingPosition.Y.Should().BeGreaterThan(145);
-        linkRefreshed.Should().BeTrue();
+        Assert.True(ongoingPosition.X > 145);
+        Assert.True(ongoingPosition.Y > 145);
+        Assert.True(linkRefreshed);
     }
 
     [Fact]
@@ -132,9 +130,9 @@ public class DragNewLinkBehaviorTests
         // Assert
         var source = link.Source as SinglePortAnchor;
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        ongoingPosition.X.Should().BeApproximately(107.7, 0.1);
-        ongoingPosition.Y.Should().BeApproximately(101.7, 0.1);
-        linkRefreshed.Should().BeTrue();
+        Assert.InRange(ongoingPosition.X, 107.6, 107.8);
+        Assert.InRange(ongoingPosition.Y, 101.6, 101.8);
+        Assert.True(linkRefreshed);
     }
 
     [Fact]
@@ -172,9 +170,9 @@ public class DragNewLinkBehaviorTests
         // Assert
         var link = diagram.Links.Single();
         var target = link.Target as SinglePortAnchor;
-        target.Should().NotBeNull();
-        target!.Port.Should().BeSameAs(port2);
-        port2Refreshed.Should().BeTrue();
+        Assert.NotNull(target);
+        Assert.Same(port2, target!.Port);
+        Assert.True(port2Refreshed);
     }
 
     [Fact]
@@ -209,7 +207,7 @@ public class DragNewLinkBehaviorTests
 
         // Assert
         var link = diagram.Links.Single();
-        link.Target.Should().BeOfType<PositionAnchor>();
+        Assert.IsType<PositionAnchor>(link.Target);
     }
 
     [Fact]
@@ -251,8 +249,8 @@ public class DragNewLinkBehaviorTests
         // Assert
         var link = diagram.Links.Single();
         var target = link.Target as SinglePortAnchor;
-        target.Should().BeNull();
-        port2Refreshes.Should().Be(2);
+        Assert.Null(target);
+        Assert.Equal(2, port2Refreshes);
     }
 
     [Fact]
@@ -276,7 +274,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -300,7 +298,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(0, 0, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        diagram.Links.Should().BeEmpty();
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -336,9 +334,9 @@ public class DragNewLinkBehaviorTests
         // Assert
         var link = diagram.Links.Single();
         var target = link.Target as SinglePortAnchor;
-        target.Should().NotBeNull();
-        target!.Port.Should().BeSameAs(port2);
-        port2Refreshes.Should().Be(1);
+        Assert.NotNull(target);
+        Assert.Same(port2, target!.Port);
+        Assert.Equal(1, port2Refreshes);
     }
 
     [Fact]
@@ -363,7 +361,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        diagram.Links.Should().HaveCount(0);
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -399,7 +397,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(105, 105, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        targetAttachedTriggers.Should().Be(1);
+        Assert.Equal(1, targetAttachedTriggers);
     }
 
     [Fact]
@@ -440,7 +438,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(140, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        targetAttachedTriggers.Should().Be(1);
+        Assert.Equal(1, targetAttachedTriggers);
     }
 
     [Fact]
@@ -463,7 +461,7 @@ public class DragNewLinkBehaviorTests
             new PointerEventArgs(100, 100, 0, 0, false, false, false, 0, 0, 0, 0, 0, 0, string.Empty, true));
 
         // Assert
-        diagram.Links.Count.Should().Be(0);
+        Assert.Empty(diagram.Links);
     }
 
     [Fact]
@@ -494,8 +492,8 @@ public class DragNewLinkBehaviorTests
         // Assert
         var source = link.Source as SinglePortAnchor;
         var ongoingPosition = (link.Target as PositionAnchor)!.GetPlainPosition()!;
-        ongoingPosition.X.Should().BeApproximately(expectedValue: 246, 1);
-        ongoingPosition.Y.Should().BeApproximately(expectedValue: 246, 1);
-        linkRefreshed.Should().BeTrue();
+        Assert.InRange(ongoingPosition.X, 245, 247);
+        Assert.InRange(ongoingPosition.Y, 245, 247);
+        Assert.True(linkRefreshed);
     }
 }
