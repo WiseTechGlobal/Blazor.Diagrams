@@ -5,7 +5,6 @@ using Blazor.Diagrams.Core.Models;
 
 using Bunit;
 
-using FluentAssertions;
 
 using Xunit;
 
@@ -26,11 +25,11 @@ public class NodeWidgetTests
 
         // Assert
         var content = cut.Find("div.default-node");
-        content.ClassList.Should().ContainSingle();
-        content.ClassList[0].Should().Be("default-node");
-        content.TextContent.Trim().Should().Be("Title");
+        Assert.Single(content.ClassList);
+        Assert.Equal("default-node", content.ClassList[0]);
+        Assert.Equal("Title", content.TextContent.Trim());
 
         var ports = cut.FindComponents<PortRenderer>();
-        ports.Should().BeEmpty();
+        Assert.Empty(ports);
     }
 }

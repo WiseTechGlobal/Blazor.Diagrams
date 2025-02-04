@@ -2,7 +2,6 @@
 using Blazor.Diagrams.Components;
 using Blazor.Diagrams.Core.Geometry;
 using Bunit;
-using FluentAssertions;
 using Xunit;
 
 namespace Blazor.Diagrams.Core.Tests.Behaviors
@@ -24,7 +23,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             var diagramCanvas = cut.Find(".diagram-canvas");
 
             // Assert
-            diagramCanvas.ToMarkup().Should().Contain("cursor: grab; cursor: -webkit-grab;");
+            Assert.Contains("cursor: grab; cursor: -webkit-grab;", diagramCanvas.ToMarkup());
         }
 
         [Fact]
@@ -43,7 +42,7 @@ namespace Blazor.Diagrams.Core.Tests.Behaviors
             var canvasStyle = diagramCanvas.GetStyle().CssText;
 
             // Assert
-            canvasStyle.Should().Contain("cursor: default");
+            Assert.Contains("cursor: default", canvasStyle);
         }
     }
 }
