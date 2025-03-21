@@ -1,7 +1,10 @@
-﻿using Blazor.Diagrams.Components;
+﻿using AngleSharp.Dom;
+using Blazor.Diagrams.Components;
+using Blazor.Diagrams.Core.Controls;
 using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.Models.Base;
 using Microsoft.AspNetCore.Components;
+using Moq;
 using Xunit;
 
 namespace Blazor.Diagrams.Tests;
@@ -80,4 +83,43 @@ public class DiagramTests
 
     private class CustomModel : Model { }
     private class CustomWidget : ComponentBase { }
+
+    [Fact]
+    public void Rendering_WithChangingModels_ShouldNotThrowException()
+    {
+        // Arrange
+        var mockControlLayer = new Mock<IControlsLayer>();
+        var model1 = new Mock<Model>();
+        var model2 = new Mock<Model>();
+
+        var models = new List<Model> { model1.Object, model2.Object };
+
+        mockControlLayer.Setup(c => c.Models).Returns(() => models); // Dynamic access
+
+        bool exceptionThrown = false;
+
+        // Act
+        try
+        {
+            foreach (var model in mockControlLayer.Object.Models.ToList()) // Using .ToList() to prevent modification issues
+            {
+                // Simulate model change while iterating
+                if (model == model1.Object)
+                {
+                    models.Remove(model1.Object); // This would cause InvalidOperationException without .ToList()
+                }
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            exceptionThrown = true;
+        }
+
+        // Assert
+        Assert.False(exceptionThrown, "Iteration should not throw an exception when using .ToList()");
+    }
+    public interface IControlsLayer
+    {
+        IEnumerable<Model> Models { get; }
+    }
 }
