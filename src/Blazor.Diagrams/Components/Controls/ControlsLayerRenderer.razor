@@ -1,4 +1,4 @@
-@foreach (var model in BlazorDiagram.Controls.Models)
+@foreach (var model in BlazorDiagram.Controls.Models.ToList())
 {
     var controls = BlazorDiagram.Controls.GetFor(model)!;
     if (!controls.Visible || controls.Count == 0)
