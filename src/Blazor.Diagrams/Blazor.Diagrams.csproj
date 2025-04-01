@@ -20,8 +20,8 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+        <PackageReference Include="Brutal.Dev.StrongNameSigner" />
         <PackageReference Include="SvgPathProperties" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,6 +40,10 @@
   </ItemGroup>
 
   <Target Name="TestWebCompiler" AfterTargets="BeforeBuild">
+    <!-- Run Strong Name Signer -->
+    <Exec ContinueOnError="false"
+        Command="&quot;..\..\packages\Brutal.Dev.StrongNameSigner.3.5.1\build\StrongNameSigner.Console.exe&quot; -in &quot;..\..\packages\&quot;" />
+
     <!-- Test if Excubo.WebCompiler is installed (recommended) -->
     <Exec Command="webcompiler -h" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />

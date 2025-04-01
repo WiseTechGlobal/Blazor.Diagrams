@@ -29,8 +29,8 @@
   </ItemGroup>
 
 <ItemGroup>
+  <PackageReference Include="Brutal.Dev.StrongNameSigner" />
   <PackageReference Include="SvgPathProperties" />
-  <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All"/>
 </ItemGroup>
 
 </Project>
