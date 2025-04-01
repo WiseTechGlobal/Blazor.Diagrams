@@ -47,10 +47,6 @@
     <Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="high" />
     <Exec Command="echo NuGetPackageRoot: $(NuGetPackageRoot)" />
 
-    <!-- Run Strong Name Signer -->
-    <Exec ContinueOnError="false"
-        Command="&quot;$(NuGetPackageRoot)\Brutal.Dev.StrongNameSigner.3.5.1\build\StrongNameSigner.Console.exe&quot; -in &quot;$(NuGetPackageRoot)&quot;" />
-
     <!-- Test if Excubo.WebCompiler is installed (recommended) -->
     <Exec Command="webcompiler -h" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
