@@ -47,9 +47,6 @@
     <Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="high" />
     <Exec Command="echo NuGetPackageRoot: $(NuGetPackageRoot)" />
 
-    <Exec Command="FILE_PATH=$(find $(GITHUB_WORKSPACE) -type f -name &quot;StrongNameSigner.Console.exe&quot;) && echo &quot;Found file at: $FILE_PATH&quot;" />
-    <Message Text="StrongNameSigner file path: $(FILE_PATH)" Importance="high" />
-
     <!-- Run Strong Name Signer -->
     <Exec ContinueOnError="false"
         Command="mono &quot;$(NuGetPackageRoot)\Brutal.Dev.StrongNameSigner.3.5.1\build\StrongNameSigner.Console.exe&quot; -in &quot;$(NuGetPackageRoot)&quot;" />
