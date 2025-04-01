@@ -27,6 +27,9 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
+    - name: Debug NuGet Packages Path
+      run: dotnet nuget locals global-packages -l
+
     - name: Build
       run: dotnet build --configuration ${{ matrix.configuration }}
 
