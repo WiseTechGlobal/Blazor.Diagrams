@@ -30,13 +30,13 @@ jobs:
     - name: Debug NuGet Packages Path
       run: dotnet nuget locals global-packages -l
 
-    - name: Find File Recursively
-      run: |
-        FILE_PATH=$(find $GITHUB_WORKSPACE -type f -name "StrongNameSigner.Console.exe")
-        echo "Found file at: $FILE_PATH"
+    # - name: Find File Recursively
+    #   run: |
+    #     FILE_PATH=$(find $GITHUB_WORKSPACE -type f -name "StrongNameSigner.Console.exe")
+    #     echo "Found file at: $FILE_PATH"
 
-    - name: Install Mono
-      run: sudo apt-get update && sudo apt-get install -y mono-runtime
+    # - name: Install Mono
+    #   run: sudo apt-get update && sudo apt-get install -y mono-runtime
 
     - name: Build
       run: dotnet build --configuration ${{ matrix.configuration }}

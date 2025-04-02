@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\src\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
+    <!-- <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\src\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile> -->
   </PropertyGroup>
 
   <ItemGroup>

@@ -13,8 +13,8 @@
         <Product>WTG.Z.Blazor.Diagrams</Product>
         <PackageIcon>ZBD.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+        <!-- <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile> -->
     </PropertyGroup>
 
     <ItemGroup>
@@ -39,17 +39,17 @@
     </None>
   </ItemGroup>
 
-  <PropertyGroup>
+  <!-- <PropertyGroup>
     <NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(USERPROFILE)\.nuget\packages\</NuGetPackageRoot>
-  </PropertyGroup>
+  </PropertyGroup> -->
 
   <Target Name="TestWebCompiler" AfterTargets="BeforeBuild">
-    <Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="high" />
-    <Exec Command="echo NuGetPackageRoot: $(NuGetPackageRoot)" />
+    <!-- <Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="high" />
+    <Exec Command="echo NuGetPackageRoot: $(NuGetPackageRoot)" /> -->
 
     <!-- Run Strong Name Signer -->
-    <Exec ContinueOnError="false"
-        Command="mono &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/brutal.dev.strongnamesigner/3.5.1/build/StrongNameSigner.Console.exe&quot; -in &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/&quot;" />
+    <!-- <Exec ContinueOnError="false"
+        Command="mono &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/brutal.dev.strongnamesigner/3.5.1/build/StrongNameSigner.Console.exe&quot; -in &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/&quot;" /> -->
 
     <!-- Test if Excubo.WebCompiler is installed (recommended) -->
     <Exec Command="webcompiler -h" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
