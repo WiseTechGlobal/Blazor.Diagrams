@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Blazor.Diagrams.Core.Tests")]
+[assembly: InternalsVisibleTo("Blazor.Diagrams.Tests")]
 namespace Blazor.Diagrams.Core.Models.Base;
 
 public abstract class SelectableModel : Model
