@@ -64,6 +64,4 @@ jobs:
         tag_name: ${{ steps.version.outputs.version }}
 
     - name: Push NuGet Package to NuGet Gallery
-      run: |
-        nuget setapikey ${{ secrets.NUGET_API_KEY }}
-        nuget push ${{ env.PACKAGE_PATH }} -Source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ${{ env.PACKAGE_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
