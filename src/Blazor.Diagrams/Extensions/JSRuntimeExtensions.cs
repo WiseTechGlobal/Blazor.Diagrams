@@ -34,6 +34,10 @@ public static class JSRuntimeExtensions
         {
             // Ignore, JSRuntime was already disconnected
         }
+        catch (TaskCanceledException)
+        {
+            // Ignore, Task was canceled
+        }
     }
 
     public static async Task AddDefaultPreventingForWheelHandler(this IJSRuntime jsRuntime, ElementReference element)
