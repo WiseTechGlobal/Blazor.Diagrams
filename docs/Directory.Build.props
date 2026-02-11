@@ -4,5 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	<NoWarn>$(NoWarn);CS0618;CS8602;CS8603;CS8604;CS8618</NoWarn>
   </PropertyGroup>
 </Project>

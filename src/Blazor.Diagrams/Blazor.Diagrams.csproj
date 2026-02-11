@@ -1,33 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <PropertyGroup>
-        <Nullable>enable</Nullable>
-        <Authors>zHaytam, WiseTech Global</Authors>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
-        <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
-        <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
-        <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
-        <Product>WTG.Z.Blazor.Diagrams</Product>
-        <PackageIcon>ZBD.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <Authors>zHaytam, WiseTech Global</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/WiseTechGlobal/Blazor.Diagrams</RepositoryUrl>
+    <Description>A fully customizable and extensible all-purpose diagrams library for Blazor</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>blazor diagrams diagramming svg drag</PackageTags>
+    <PackageId>WTG.Z.Blazor.Diagrams</PackageId>
+    <PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
+    <Product>WTG.Z.Blazor.Diagrams</Product>
+    <PackageIcon>ZBD.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
-        <!-- Reference the SvgPathProperties that we already strong name signed -->
-        <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+    <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
+    <!-- Reference the SvgPathProperties that we already strong name signed -->
+    <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blazor.Diagrams.Core\Blazor.Diagrams.Core.csproj" PrivateAssets="All"/>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\ZBD.png">
