@@ -4,8 +4,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <PackageOutputPath Condition="'$(OutDir)' != ''">$(OutDir)</PackageOutputPath>
-    <PackageOutputPath Condition="'$(OutDir)' == ''">$(MSBuildThisFileDirectory)..\bin\</PackageOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\bin\</BaseOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\bin\</PackageOutputPath>
   </PropertyGroup>
 
   <Import Project="..\build\Version.props" />
