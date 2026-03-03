@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <PackageOutputPath Condition="'$(OutDir)' != ''">$(OutDir)</PackageOutputPath>
     <PackageOutputPath Condition="'$(OutDir)' == ''">$(MSBuildThisFileDirectory)..\bin\</PackageOutputPath>
   </PropertyGroup>
 
