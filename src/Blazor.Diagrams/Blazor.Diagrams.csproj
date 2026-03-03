@@ -17,6 +17,12 @@
         <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <PackageMinorPatchVersion Condition="$(Configuration) == 'Release'">0.18</PackageMinorPatchVersion>
+      <PackageMinorPatchVersion Condition="$(Configuration) == 'Debug'">$([System.DateTime]::Now.ToString("yyMMdd.HHmmss"))+debug</PackageMinorPatchVersion>
+      <PackageVersion>4.$(PackageMinorPatchVersion)</PackageVersion>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
