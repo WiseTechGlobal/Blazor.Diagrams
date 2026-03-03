@@ -2,6 +2,10 @@
 	<Solutions>
 		<Solution Filename="src\Blazor.Diagrams.sln" />
 	</Solutions>
+
+	<PreBuild>
+		<Command cacheable="false">powershell.exe -ExecutionPolicy Bypass .\DeploymentSetup.ps1</Command>
+	</PreBuild>
 	
 	<DatSettings BuildDeployerType="CargoWiseCloud.Deployment.DotNetNuGetDeployer, CargoWiseCloud.Deployment" BuildDeployerRuntime="DotNet64">
 		<TestAdapter Type="Dat.Implementation.VSTest.VSTestAdapter, Dat.Implementation.VSTest" />
