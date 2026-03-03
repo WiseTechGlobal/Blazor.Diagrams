@@ -28,7 +28,7 @@ jobs:
             6.0.x
 
     - name: Install dependencies
-      run: dotnet restore --ignore-failed-sources
+      run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration ${{ matrix.configuration }}
