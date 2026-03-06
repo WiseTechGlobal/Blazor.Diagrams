@@ -36,6 +36,10 @@ bld/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
+# Pre-compressed static web assets break .NET 10 SDK packaging (ApplyCompressionNegotiation)
+# The SDK handles compression automatically for consumers
+wwwroot/**/*.gz
+
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
