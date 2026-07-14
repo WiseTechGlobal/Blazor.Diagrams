@@ -13,8 +13,8 @@
 		<PackageIcon>ZBD.png</PackageIcon>
 		<PackageProjectUrl>https://blazor-diagrams.zhaytam.com/</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<SignAssembly>True</SignAssembly>
-		<AssemblyOriginatorKeyFile>..\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile>
+		<!-- <SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\Blazor.Diagrams\sgKey.snk</AssemblyOriginatorKeyFile> -->
 	</PropertyGroup>
 
   <ItemGroup>
@@ -29,8 +29,8 @@
   </ItemGroup>
 
 <ItemGroup>
+  <PackageReference Include="Brutal.Dev.StrongNameSigner" />
   <PackageReference Include="SvgPathProperties" />
-  <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All"/>
 </ItemGroup>
 
 </Project>
