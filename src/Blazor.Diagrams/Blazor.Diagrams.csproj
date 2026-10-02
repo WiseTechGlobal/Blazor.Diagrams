@@ -13,16 +13,15 @@
         <Product>WTG.Z.Blazor.Diagrams</Product>
         <PackageIcon>ZBD.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+        <!-- <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile> -->
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
-        <!-- Reference the SvgPathProperties that we already strong name signed -->
-        <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
+        <PackageReference Include="Brutal.Dev.StrongNameSigner" />
+        <PackageReference Include="SvgPathProperties" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,7 +39,18 @@
     </None>
   </ItemGroup>
 
+  <!-- <PropertyGroup>
+    <NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(USERPROFILE)\.nuget\packages\</NuGetPackageRoot>
+  </PropertyGroup> -->
+
   <Target Name="TestWebCompiler" AfterTargets="BeforeBuild">
+    <!-- <Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="high" />
+    <Exec Command="echo NuGetPackageRoot: $(NuGetPackageRoot)" /> -->
+
+    <!-- Run Strong Name Signer -->
+    <!-- <Exec ContinueOnError="false"
+        Command="mono &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/brutal.dev.strongnamesigner/3.5.1/build/StrongNameSigner.Console.exe&quot; -in &quot;/home/runner/work/Blazor.Diagrams/Blazor.Diagrams/packages/&quot;" /> -->
+
     <!-- Test if Excubo.WebCompiler is installed (recommended) -->
     <Exec Command="webcompiler -h" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
