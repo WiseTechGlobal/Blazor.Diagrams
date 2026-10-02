@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageVersion Include="AngleSharp" Version="1.5.0" />
     <PackageVersion Include="SvgPathProperties" Version="1.1.2" />
     <PackageVersion Include="System.Net.Http.Json" Version="8.0.0" />
     <PackageVersion Include="GraphShape" Version="1.2.1" />
