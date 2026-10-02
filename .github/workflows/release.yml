@@ -6,14 +6,19 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  id-token: write
+
 env:
-  PACKAGE_PATH: /home/runner/work/Blazor.Diagrams/Blazor.Diagrams/src/Blazor.Diagrams/bin/Release/*.nupkg
+  PACKAGE_PATH: src/Blazor.Diagrams/bin/Release/*.nupkg
 
 jobs:
   release:
     name: Build - Release
 
-    runs-on: ubuntu-latest
+    # WTG private runner, so the job can reach artifactory.wtg.zone.
+    runs-on: wtg-aue-linux-x64
     steps:
 
     - name: Checkout
@@ -34,19 +39,33 @@ jobs:
         scheme: semver
         increment: patch
 
-    - name: Install version tool
-      run: dotnet tool install dotnetCampus.TagToVersion -g --version 1.0.11
+    - name: Configure Artifactory with OIDC
+      uses: jfrog/setup-jfrog-cli@v5
+      env:
+        JF_URL: https://artifactory.wtg.zone
+      with:
+        version: latest
+        oidc-provider-name: github-wisetechglobal
+        oidc-audience: artifactory.wtg.zone
+        disable-auto-build-publish: true
+
+    - name: Configure NuGet repositories
+      run: jf dotnet-config --repo-resolve=cargowise-nuget-virtual
 
       # Writes the new version number to build/Version.props
     - name: Set version
-      run: dotnet TagToVersion -t ${{ steps.version.outputs.version }}
+      env:
+        VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        sed -i "s|<Version></Version>|<Version>${VERSION}</Version>|" build/Version.props
+        grep -q "<Version>${VERSION}</Version>" build/Version.props
 
     - name: Install dependencies
-      run: dotnet restore
+      run: jf dotnet restore
 
       # Pacakge is created on build
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --no-restore
 
       # Upload package as an atrifact to the GitHub action
     - name: Upload packages
@@ -56,12 +75,13 @@ jobs:
         path: ${{ env.PACKAGE_PATH }}
         retention-days: 5
 
+      # Publish before tagging, so a failed push doesn't use up a version number.
+    - name: Push NuGet package to Artifactory
+      run: jf rt upload "${{ env.PACKAGE_PATH }}" "cargowise-nuget-local/" --flat=true --fail-no-op=true
+
       # Create a new release and upload the package to the release
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: ${{ env.PACKAGE_PATH }}
         tag_name: ${{ steps.version.outputs.version }}
-
-    - name: Push NuGet Package to NuGet Gallery
-      run: dotnet nuget push ${{ env.PACKAGE_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
