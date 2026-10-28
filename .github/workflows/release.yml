@@ -69,7 +69,7 @@ jobs:
 
       # Upload package as an atrifact to the GitHub action
     - name: Upload packages
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: package
         path: ${{ env.PACKAGE_PATH }}
