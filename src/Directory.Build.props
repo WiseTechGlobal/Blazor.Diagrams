@@ -4,12 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!-- SvgPathProperties is not strong-named, so Directory.Build.targets signs a private copy of it
-         per project/TFM with this key. The package's own target is disabled because it signs the
-         shared packages folder copy in place, which races with the parallel per-TFM builds that
-         read it (MSB3246 + CS0246, or CS0012 when the keys differed). -->
-    <StrongNameKeyFile>$(MSBuildThisFileDirectory)Blazor.Diagrams\sgKey.snk</StrongNameKeyFile>
-    <EnableStrongNameSigner>false</EnableStrongNameSigner>
   </PropertyGroup>
 
   <Import Project="..\build\Version.props" />

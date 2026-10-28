@@ -1,9 +1,14 @@
 <Project>
 
-  <!-- Strong-name sign a private copy of SvgPathProperties.dll per project/TFM and compile against that, so
-       the file in the shared packages folder is never modified while parallel builds read it. See
-       StrongNameKeyFile in Directory.Build.props for why the package's in-place signing is disabled. -->
+  <!-- SvgPathProperties is not strong-named, but the strong-named Blazor.Diagrams.Core exposes its types, so every
+       project that references it (src, tests, samples, docs, site) must compile against the same signed identity.
+       Each project/TFM signs a private copy of SvgPathProperties.dll with sgKey.snk and compiles against that.
+       The signer package's own target is disabled because it signs the shared packages folder copy in place, which
+       races with the parallel per-TFM builds that read it (MSB3246 + CS0246, or CS0012 when the keys differed).
+       Brutal.Dev.StrongNameSigner is a GlobalPackageReference (Directory.Packages.props) so the task exists everywhere. -->
   <PropertyGroup>
+    <StrongNameKeyFile>$(MSBuildThisFileDirectory)src\Blazor.Diagrams\sgKey.snk</StrongNameKeyFile>
+    <EnableStrongNameSigner>false</EnableStrongNameSigner>
     <SignedSvgPathPropertiesDirectory>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'StrongNameSigned'))</SignedSvgPathPropertiesDirectory>
     <ResolveReferencesDependsOn>$(ResolveReferencesDependsOn);UseSignedSvgPathProperties</ResolveReferencesDependsOn>
   </PropertyGroup>

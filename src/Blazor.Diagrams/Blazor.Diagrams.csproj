@@ -20,8 +20,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
-        <!-- Compiled against a signed copy; see src/Directory.Build.targets -->
+        <!-- Compiled against a signed copy; see Directory.Build.targets -->
         <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
     </ItemGroup>
 
