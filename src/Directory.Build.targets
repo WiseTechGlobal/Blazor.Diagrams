@@ -1,0 +1,42 @@
+<Project>
+
+  <!-- Strong-name sign a private copy of SvgPathProperties.dll per project/TFM and compile against that, so
+       the file in the shared packages folder is never modified while parallel builds read it. See
+       StrongNameKeyFile in Directory.Build.props for why the package's in-place signing is disabled. -->
+  <PropertyGroup>
+    <SignedSvgPathPropertiesDirectory>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'StrongNameSigned'))</SignedSvgPathPropertiesDirectory>
+    <ResolveReferencesDependsOn>$(ResolveReferencesDependsOn);UseSignedSvgPathProperties</ResolveReferencesDependsOn>
+  </PropertyGroup>
+
+  <Target Name="_ComputeSignedSvgPathProperties">
+    <ItemGroup>
+      <_UnsignedSvgPathProperties Include="@(ReferencePath)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <_SignedSvgPathProperties Include="@(_UnsignedSvgPathProperties->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+      <_UnsignedSvgPathPropertiesCopyLocal Include="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Copy first and sign the copy in place: the signer task's OutputPath mode never repoints the reference
+       to its output, and the task skips anything under a NuGet package folder. -->
+  <Target Name="_SignSvgPathProperties"
+          Inputs="@(_UnsignedSvgPathProperties);$(StrongNameKeyFile)"
+          Outputs="@(_SignedSvgPathProperties)"
+          Condition="'@(_UnsignedSvgPathProperties)' != ''">
+    <Copy SourceFiles="@(_UnsignedSvgPathProperties)" DestinationFolder="$(SignedSvgPathPropertiesDirectory)" />
+    <Brutal.Dev.StrongNameSigner.AutomaticBuildTask References="@(_SignedSvgPathProperties)" KeyFile="$(StrongNameKeyFile)" />
+  </Target>
+
+  <Target Name="UseSignedSvgPathProperties"
+          DependsOnTargets="_ComputeSignedSvgPathProperties;_SignSvgPathProperties"
+          Condition="'$(StrongNameSignerDirectory)' != ''">
+    <ItemGroup Condition="'@(_UnsignedSvgPathProperties)' != ''">
+      <ReferencePath Remove="@(_UnsignedSvgPathProperties)" />
+      <ReferencePath Include="@(_SignedSvgPathProperties)" />
+    </ItemGroup>
+    <ItemGroup Condition="'@(_UnsignedSvgPathPropertiesCopyLocal)' != ''">
+      <ReferenceCopyLocalPaths Remove="@(_UnsignedSvgPathPropertiesCopyLocal)" />
+      <ReferenceCopyLocalPaths Include="@(_UnsignedSvgPathPropertiesCopyLocal->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+</Project>
