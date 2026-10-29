@@ -4,12 +4,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!-- Brutal.Dev.StrongNameSigner signs SvgPathProperties.dll in place in the shared packages
-         folder. Without a key file it generates a random key on every invocation, so the parallel
-         per-project/per-TFM builds race and Blazor.Diagrams can compile against a different
-         public key token than Blazor.Diagrams.Core did (CS0012). A fixed key makes every signing
-         produce the same identity. -->
-    <StrongNameKeyFile>$(MSBuildThisFileDirectory)Blazor.Diagrams\sgKey.snk</StrongNameKeyFile>
   </PropertyGroup>
 
   <Import Project="..\build\Version.props" />

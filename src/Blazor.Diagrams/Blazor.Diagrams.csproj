@@ -20,8 +20,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" PrivateAssets="All" />
-        <!-- Reference the SvgPathProperties that we already strong name signed -->
+        <!-- Compiled against a signed copy; see Directory.Build.targets -->
         <PackageReference Include="SvgPathProperties" PrivateAssets="All" />
     </ItemGroup>
 
@@ -57,7 +56,7 @@
 
   <Target Name="GetBinariesForPackage">
     <ItemGroup>
-      <BuildOutputInPackage Include="$(OutputPath)Blazor.Diagrams.Core.dll;..\..\packages\svgpathproperties\1.1.2\lib\netstandard2.0\SvgPathProperties.dll">
+      <BuildOutputInPackage Include="$(OutputPath)Blazor.Diagrams.Core.dll;$(SignedSvgPathPropertiesDirectory)SvgPathProperties.dll">
       </BuildOutputInPackage>
     </ItemGroup>
   </Target>

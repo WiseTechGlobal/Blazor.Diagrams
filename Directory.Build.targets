@@ -1,0 +1,65 @@
+<Project>
+
+  <!-- SvgPathProperties is not strong-named, but the strong-named Blazor.Diagrams.Core exposes its types, so every
+       project that references it (src, tests, samples, docs, site) must compile against the same signed identity.
+       Each project/TFM signs a private copy of SvgPathProperties.dll with sgKey.snk and compiles against that.
+       The signer package's own target is disabled because it signs the shared packages folder copy in place, which
+       races with the parallel per-TFM builds that read it (MSB3246 + CS0246, or CS0012 when the keys differed).
+       Brutal.Dev.StrongNameSigner is a GlobalPackageReference (Directory.Packages.props) so the task exists everywhere. -->
+  <PropertyGroup>
+    <StrongNameKeyFile>$(MSBuildThisFileDirectory)src\Blazor.Diagrams\sgKey.snk</StrongNameKeyFile>
+    <EnableStrongNameSigner>false</EnableStrongNameSigner>
+    <SignedSvgPathPropertiesDirectory>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'StrongNameSigned'))</SignedSvgPathPropertiesDirectory>
+    <ResolveReferencesDependsOn>$(ResolveReferencesDependsOn);UseSignedSvgPathProperties</ResolveReferencesDependsOn>
+  </PropertyGroup>
+
+  <Target Name="_ComputeSignedSvgPathProperties">
+    <ItemGroup>
+      <_UnsignedSvgPathProperties Include="@(ReferencePath)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <_SignedSvgPathProperties Include="@(_UnsignedSvgPathProperties->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+      <_UnsignedSvgPathPropertiesCopyLocal Include="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <_UnsignedSvgPathPropertiesRuntime Include="@(RuntimeCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Copy first and sign the copy in place: the signer task's OutputPath mode never repoints the reference
+       to its output, and the task skips anything under a NuGet package folder. -->
+  <Target Name="_SignSvgPathProperties"
+          Inputs="@(_UnsignedSvgPathProperties);$(StrongNameKeyFile)"
+          Outputs="@(_SignedSvgPathProperties)"
+          Condition="'@(_UnsignedSvgPathProperties)' != ''">
+    <Copy SourceFiles="@(_UnsignedSvgPathProperties)" DestinationFolder="$(SignedSvgPathPropertiesDirectory)" />
+    <Brutal.Dev.StrongNameSigner.AutomaticBuildTask References="@(_SignedSvgPathProperties)" KeyFile="$(StrongNameKeyFile)" />
+  </Target>
+
+  <Target Name="UseSignedSvgPathProperties"
+          DependsOnTargets="_ComputeSignedSvgPathProperties;_SignSvgPathProperties"
+          Condition="'$(StrongNameSignerDirectory)' != ''">
+    <ItemGroup Condition="'@(_UnsignedSvgPathProperties)' != ''">
+      <ReferencePath Remove="@(_UnsignedSvgPathProperties)" />
+      <ReferencePath Include="@(_SignedSvgPathProperties)" />
+    </ItemGroup>
+    <ItemGroup Condition="'@(_UnsignedSvgPathPropertiesCopyLocal)' != ''">
+      <ReferenceCopyLocalPaths Remove="@(_UnsignedSvgPathPropertiesCopyLocal)" />
+      <ReferenceCopyLocalPaths Include="@(_UnsignedSvgPathPropertiesCopyLocal->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <!-- Publish matches RuntimeCopyLocalItems against ResolvedFileToPublish by path to pick the assemblies to trim. -->
+    <ItemGroup Condition="'@(_UnsignedSvgPathProperties)' != '' and '@(_UnsignedSvgPathPropertiesRuntime)' != ''">
+      <RuntimeCopyLocalItems Remove="@(_UnsignedSvgPathPropertiesRuntime)" />
+      <RuntimeCopyLocalItems Include="@(_UnsignedSvgPathPropertiesRuntime->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Publish builds ResolvedFileToPublish from a copy of the package's runtime assets taken before the swap above, so
+       swap the signed copy in there too, before trimming (ILLink) and Blazor WebAssembly's Webcil conversion read it. -->
+  <Target Name="PublishSignedSvgPathProperties"
+          AfterTargets="ComputeResolvedFilesToPublishList"
+          Condition="'$(StrongNameSignerDirectory)' != '' and '@(_SignedSvgPathProperties)' != ''">
+    <ItemGroup>
+      <_UnsignedSvgPathPropertiesToPublish Include="@(ResolvedFileToPublish)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <ResolvedFileToPublish Remove="@(_UnsignedSvgPathPropertiesToPublish)" />
+      <ResolvedFileToPublish Include="@(_UnsignedSvgPathPropertiesToPublish->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+</Project>
