@@ -18,6 +18,7 @@
       <_UnsignedSvgPathProperties Include="@(ReferencePath)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
       <_SignedSvgPathProperties Include="@(_UnsignedSvgPathProperties->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
       <_UnsignedSvgPathPropertiesCopyLocal Include="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <_UnsignedSvgPathPropertiesRuntime Include="@(RuntimeCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
     </ItemGroup>
   </Target>
 
@@ -41,6 +42,23 @@
     <ItemGroup Condition="'@(_UnsignedSvgPathPropertiesCopyLocal)' != ''">
       <ReferenceCopyLocalPaths Remove="@(_UnsignedSvgPathPropertiesCopyLocal)" />
       <ReferenceCopyLocalPaths Include="@(_UnsignedSvgPathPropertiesCopyLocal->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <!-- Publish matches RuntimeCopyLocalItems against ResolvedFileToPublish by path to pick the assemblies to trim. -->
+    <ItemGroup Condition="'@(_UnsignedSvgPathProperties)' != '' and '@(_UnsignedSvgPathPropertiesRuntime)' != ''">
+      <RuntimeCopyLocalItems Remove="@(_UnsignedSvgPathPropertiesRuntime)" />
+      <RuntimeCopyLocalItems Include="@(_UnsignedSvgPathPropertiesRuntime->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Publish builds ResolvedFileToPublish from a copy of the package's runtime assets taken before the swap above, so
+       swap the signed copy in there too, before trimming (ILLink) and Blazor WebAssembly's Webcil conversion read it. -->
+  <Target Name="PublishSignedSvgPathProperties"
+          AfterTargets="ComputeResolvedFilesToPublishList"
+          Condition="'$(StrongNameSignerDirectory)' != '' and '@(_SignedSvgPathProperties)' != ''">
+    <ItemGroup>
+      <_UnsignedSvgPathPropertiesToPublish Include="@(ResolvedFileToPublish)" Condition="'%(Filename)%(Extension)' == 'SvgPathProperties.dll'" />
+      <ResolvedFileToPublish Remove="@(_UnsignedSvgPathPropertiesToPublish)" />
+      <ResolvedFileToPublish Include="@(_UnsignedSvgPathPropertiesToPublish->'$(SignedSvgPathPropertiesDirectory)%(Filename)%(Extension)')" />
     </ItemGroup>
   </Target>
 
